@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
         User::factory(1)
             ->state(['email' => 'admin@imtihan.tech'])
             ->create();
+        User::factory(1)
+            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['role' => User::Student])
+            ->create();
         Country::factory(1)->create();
         City::factory(1)->create();
         State::factory(1)->create();
