@@ -11,10 +11,11 @@ use App\Http\Controllers\API\Admin\Payment\PaymentMethodController;
 use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
 use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
+use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
 use App\Http\Controllers\API\Student\Exam\ExamController;
+use App\Http\Controllers\API\Student\Location\LocationController;
 use App\Http\Controllers\API\Student\Note\NoteController;
-use App\Http\Controllers\API\Student\Support\SupportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('lessons', LessonController::class);
         Route::apiResource('announcements', AnnouncementController::class);
-        Route::apiResource('supports', \App\Http\Controllers\API\Admin\Support\SupportController::class)->only(['index', 'show', 'update', 'destroy']);
+        Route::apiResource('supports', SupportController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::prefix('payment')->group(function () {
             Route::apiResource('coupons', PaymentCouponController::class);
             Route::apiResource('methods', PaymentMethodController::class);
@@ -57,9 +58,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('student')->group(function () {
         Route::apiResource('accounts', \App\Http\Controllers\API\Student\Account\AccountController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'storeAnswer']);
-        Route::apiResource('supports', SupportController::class)->only(['index', 'store', 'destroy']);
+        Route::apiResource('supports', \App\Http\Controllers\API\Student\Support\SupportController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('notes', NoteController::class);
         Route::apiResource('class-schedules', ClassScheduleController::class);
         Route::apiResource('announcements', \App\Http\Controllers\API\Student\Announcement\AnnouncementController::class)->only(['index', 'show']);
+        Route::get('countries', [LocationController::class, 'getCountry'])->name('country.list');
+        Route::get('cities/{countryId?}', [LocationController::class, 'getCity'])->name('city.list');
+        Route::get('states/{cityId?}', [LocationController::class, 'getState'])->name('state.list');
     });
 });
