@@ -21,7 +21,6 @@ class QuestionService extends BaseService
 
         if ($request->hasFile('src')) {
             $path = $request->file('src')->store('questions');
-            Log::info($path);
             $data = $request->safe()->merge(['src' => $path]);
         }
 
@@ -31,6 +30,11 @@ class QuestionService extends BaseService
             foreach ($request->options as $key => $option) {
                 $path = $option['src']->store('options');
                 $options[$key]['src'] = $path;
+                $options[$key]['is_correct'] = $option['is_correct'] ?? false;
+            }
+        } else {
+            foreach ($request->options as $key => $option) {
+                $options[$key]['description'] = $option['description'];
                 $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
         }
@@ -57,19 +61,27 @@ class QuestionService extends BaseService
             $data = $request->safe()->merge(['src' => $path]);
         }
 
+        $options = [];
+
         if ($request->is_image_option) {
             foreach ($request->options as $key => $option) {
                 $path = $option['src']->store('options');
-                $data = $request->safe()->merge(['options' => [$key => ['src' => $path]]]);
+                $options[$key]['src'] = $path;
+                $options[$key]['is_correct'] = $option['is_correct'] ?? false;
+            }
+        } else {
+            foreach ($request->options as $key => $option) {
+                $options[$key]['description'] = $option['description'];
+                $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
         }
 
-        DB::transaction(function () use ($data, $question) {
+        DB::transaction(function () use ($data, $question, $options) {
             $question->update($data->all());
 
             $question->options()->delete();
 
-            $question->options()->createMany($data->options);
+            $question->options()->createMany($options);
         });
 
         return $question;
@@ -85,6 +97,7 @@ class QuestionService extends BaseService
 
         if ($question->is_image_option) {
             foreach ($question->options as $option) {
+                Log::info($option->src);
                 Storage::delete($option->src);
             }
         }
