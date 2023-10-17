@@ -21,6 +21,7 @@ class ConditionCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'key' => $this->key,
+            'value' => $this->value,
             'language' => new LanguageResource($this->language),
         ];
     }
