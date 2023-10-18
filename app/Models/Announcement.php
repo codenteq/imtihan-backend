@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 
 class Announcement extends Model
 {
-    use HasFactory, SoftDeletes, Searchable;
+    use HasFactory, Searchable, SoftDeletes;
 
     /**
      * @var string[]
