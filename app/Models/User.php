@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Gender;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +22,10 @@ class User extends Authenticatable implements MustVerifyEmail
     const STATUS_ACTIVE = 1;
 
     const STATUS_INACTIVE = 0;
+
+    const MALE = 1;
+
+    const FEMALE = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -59,6 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'gender' => Gender::class,
     ];
 
     /*protected static function boot()
