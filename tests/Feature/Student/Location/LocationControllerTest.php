@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Student\Location;
 
-use App\Models\City;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

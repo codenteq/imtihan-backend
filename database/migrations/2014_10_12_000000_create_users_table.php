@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->integer('gender')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->integer('role')->default(\App\Models\User::Student);
             $table->rememberToken();
             $table->timestamps();

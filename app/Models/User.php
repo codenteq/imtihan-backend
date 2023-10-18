@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Gender;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +14,7 @@ use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Searchable;
+    use HasApiTokens, HasFactory, Notifiable, Searchable, SoftDeletes;
 
     const Admin = 1;
 
@@ -89,5 +90,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function searchableAs(): string
     {
         return 'user_index';
+    }
+
+    public function providers(): HasMany
+    {
+        return $this->hasMany(OAuthProvider::class);
     }
 }
