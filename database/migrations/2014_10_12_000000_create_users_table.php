@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->foreignId('language_id')->index()->default(true);
             $table->string('avatar')->nullable();
+            $table->integer('gender')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role')->default(\App\Models\User::Student);
