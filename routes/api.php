@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Admin\Payment\PaymentMethodController;
 use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
 use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
+use App\Http\Controllers\API\admin\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
 use App\Http\Controllers\API\Student\Exam\ExamController;
@@ -38,6 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::apiResource('accounts', AccountController::class);
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('lessons', LessonController::class);
+        Route::apiResource('static-pages', StaticPageController::class);
         Route::apiResource('announcements', AnnouncementController::class);
         Route::apiResource('supports', SupportController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::prefix('payment')->group(function () {
