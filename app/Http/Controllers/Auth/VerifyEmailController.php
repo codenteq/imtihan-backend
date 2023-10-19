@@ -21,6 +21,7 @@ class VerifyEmailController extends Controller
                     config('app.admin_frontend_url').RouteServiceProvider::HOME.'?verified=1'
                 );
             }
+
             return redirect()->intended(
                 config('app.frontend_url').RouteServiceProvider::HOME.'?verified=1'
             );
@@ -35,6 +36,7 @@ class VerifyEmailController extends Controller
                 config('app.admin_frontend_url').RouteServiceProvider::HOME.'?verified=1'
             );
         }
+
         return redirect()->intended(
             config('app.frontend_url').RouteServiceProvider::HOME.'?verified=1'
         );

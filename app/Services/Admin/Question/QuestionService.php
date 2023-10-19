@@ -91,7 +91,7 @@ class QuestionService extends BaseService
     {
         $question = $this->model::where($where)->with(['options'])->findOrFail($id);
 
-       if ($question->src) {
+        if ($question->src) {
             Storage::delete($question->src);
         }
 
@@ -102,7 +102,7 @@ class QuestionService extends BaseService
             }
         }
 
-       DB::transaction(function () use ($question) {
+        DB::transaction(function () use ($question) {
             $question->options()->delete();
             $question->delete();
         });
