@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\admin\StaticPage;
+namespace App\Http\Requests\Admin\StaticPage;
 
 use Illuminate\Foundation\Http\FormRequest;
 

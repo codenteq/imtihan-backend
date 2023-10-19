@@ -11,7 +11,7 @@ use App\Http\Controllers\API\Admin\Payment\PaymentMethodController;
 use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
 use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
-use App\Http\Controllers\API\admin\StaticPage\StaticPageController;
+use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
 use App\Http\Controllers\API\Student\Exam\ExamController;

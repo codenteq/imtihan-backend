@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\admin\StaticPage;
+namespace App\Http\Resources\Admin\StaticPage;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
