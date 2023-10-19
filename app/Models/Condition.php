@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class Condition extends Model
 {
-    use HasFactory, SoftDeletes, Searchable;
+    use HasFactory, Searchable, SoftDeletes;
 
     const STATUS_ACTIVE = 1;
 
