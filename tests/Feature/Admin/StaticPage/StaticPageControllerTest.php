@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\admin\StaticPage;
+namespace Tests\Feature\Admin\StaticPage;
 
 use App\Models\StaticPage;
 use App\Models\User;

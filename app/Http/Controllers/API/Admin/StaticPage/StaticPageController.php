@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API\admin\StaticPage;
+namespace App\Http\Controllers\API\Admin\StaticPage;
 
 use App\Http\Controllers\API\ApiController;
-use App\Http\Requests\admin\StaticPage\StoreStaticPageRequest;
-use App\Http\Requests\admin\StaticPage\UpdateStaticPageRequest;
-use App\Http\Resources\admin\StaticPage\StaticPageResource;
-use App\Models\StaticPage;
+use App\Http\Requests\Admin\StaticPage\StoreStaticPageRequest;
+use App\Http\Requests\Admin\StaticPage\UpdateStaticPageRequest;
+use App\Http\Resources\Admin\StaticPage\StaticPageResource;
 use App\Services\Admin\StaticPage\StaticPageService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class StaticPageController extends ApiController
