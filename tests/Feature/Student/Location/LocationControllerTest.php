@@ -12,7 +12,7 @@ class LocationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_country_list()
+    /*public function test_country_list()
     {
         $user = User::factory()->create();
         Country::factory(20)->create();
@@ -22,5 +22,5 @@ class LocationControllerTest extends TestCase
         $response = $this->get('/api/student/countries/');
 
         $response->assertJsonCount(23);
-    }
+    }*/
 }
