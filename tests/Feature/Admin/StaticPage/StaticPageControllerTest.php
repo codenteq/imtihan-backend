@@ -4,11 +4,14 @@ namespace Tests\Feature\Admin\StaticPage;
 
 use App\Models\StaticPage;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class StaticPageControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected string $apiUrl = '/api/admin/static-pages/';
 
     public function test_static_page_list()
