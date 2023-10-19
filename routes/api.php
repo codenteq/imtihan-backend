@@ -62,6 +62,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'storeAnswer']);
         Route::apiResource('supports', \App\Http\Controllers\API\Student\Support\SupportController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('notes', NoteController::class);
+        Route::apiResource('static-pages', \App\Http\Controllers\API\Student\StaticPage\StaticPageController::class)->only(['index', 'show']);
         Route::apiResource('class-schedules', ClassScheduleController::class);
         Route::apiResource('announcements', \App\Http\Controllers\API\Student\Announcement\AnnouncementController::class)->only(['index', 'show']);
         Route::get('countries', [LocationController::class, 'getCountry'])->name('country.list');
