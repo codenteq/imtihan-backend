@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Student\Support;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateSupportRequest extends FormRequest
 {
@@ -24,7 +26,7 @@ class UpdateSupportRequest extends FormRequest
         return [
             'subject' => 'string',
             'message' => 'string',
-            'is_active' => 'boolean',
+            'is_active' => [new Enum(Status::class)],
             'user_id' => 'numeric|exists:users,id',
         ];
     }

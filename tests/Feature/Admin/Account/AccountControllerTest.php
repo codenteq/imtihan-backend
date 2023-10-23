@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Account;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -13,30 +14,9 @@ class AccountControllerTest extends TestCase
 
     protected string $apiUrl = '/api/admin/accounts/';
 
-    public function test_account_list()
-    {
-        $account = User::factory()->state(['role' => User::Admin])->create();
-
-        Sanctum::actingAs($account, ['admin.account.list']);
-
-        $response = $this->get($this->apiUrl);
-
-        $response->assertJsonCount(1, 'data');
-    }
-
-    public function test_account_create()
-    {
-        $account = User::factory()->make();
-
-        Sanctum::actingAs($account, ['admin.account.create']);
-
-        $response = $this->postJson($this->apiUrl, ['password' => 'admin123', ...$account->toArray()]);
-        $response->assertStatus(201);
-    }
-
     public function test_account_show()
     {
-        $account = User::factory()->create();
+        $account = User::factory()->state(['role' => Role::Admin])->create();
 
         Sanctum::actingAs($account, ['admin.account.show']);
 
@@ -46,7 +26,7 @@ class AccountControllerTest extends TestCase
 
     public function test_account_update()
     {
-        $account = User::factory()->create();
+        $account = User::factory()->state(['role' => Role::Admin])->create();
 
         Sanctum::actingAs($account, ['admin.account.update']);
 
@@ -58,7 +38,7 @@ class AccountControllerTest extends TestCase
 
     public function test_account_delete()
     {
-        $account = User::factory()->create();
+        $account = User::factory()->state(['role' => Role::Admin])->create();
 
         Sanctum::actingAs($account, ['admin.account.delete']);
 

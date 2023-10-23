@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Support;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class SupportFactory extends Factory
         return [
             'subject' => $this->faker->title,
             'message' => $this->faker->text,
-            'is_active' => Support::STATUS_INACTIVE,
+            'is_active' => Status::Inactive,
             'user_id' => User::factory(),
         ];
     }

@@ -20,13 +20,13 @@ return new class extends Migration
             $table->foreignId('country_id')->index()->nullable();
             $table->foreignId('city_id')->index()->nullable();
             $table->foreignId('state_id')->index()->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->enum('is_active', ['0', '1'])->default(\App\Enums\Status::Active);
             $table->foreignId('language_id')->index()->default(true);
             $table->string('avatar')->nullable();
-            $table->integer('gender')->nullable();
+            $table->enum('gender', ['1', '2'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('role')->default(\App\Models\User::Student);
+            $table->enum('role', ['1', '2']);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\Support;
 
+use App\Enums\Role;
 use App\Models\Support;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +17,7 @@ class SupportControllerTest extends TestCase
 
     public function test_support_list()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         Support::factory(20)->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.support.list']);
@@ -28,7 +29,7 @@ class SupportControllerTest extends TestCase
 
     public function test_support_create()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $support = Support::factory()->make();
 
         Sanctum::actingAs($user, ['student.support.create']);
@@ -39,7 +40,7 @@ class SupportControllerTest extends TestCase
 
     public function test_support_delete()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $booking = Support::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.support.delete']);

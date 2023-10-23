@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Difficulty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,16 +13,6 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const STATUS_ACTIVE = 1;
-
-    const STATUS_INACTIVE = 0;
-
-    const Easy = 1;
-
-    const Medium = 2;
-
-    const Hard = 3;
-
     protected $fillable = [
         'name',
         'description',
@@ -29,7 +20,15 @@ class Question extends Model
         'is_image_option',
         'src',
         'language_id',
-        'difficulty',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'difficulty' => Difficulty::class,
     ];
 
     /**

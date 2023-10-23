@@ -19,6 +19,14 @@ class AccountResource extends JsonResource
             'full_name' => $this->full_name,
             'phone' => $this->phone,
             'email' => $this->email,
+            'address' => $this->address,
+            'avatar' => $this->avatar,
+            'gender' => $this->gender,
+            'country_id' => $this->country_id,
+            'city_id' => $this->city_id,
+            'state_id' => $this->state_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->text('message');
-            $table->boolean('is_active')->default(false);
+            $table->enum('is_active', ['0', '1'])->default(\App\Enums\Status::Inactive);
             $table->foreignId('user_id')->index();
             $table->timestamps();
             $table->softDeletes();

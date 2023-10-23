@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Language;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreLanguageRequest extends FormRequest
 {
@@ -24,7 +26,7 @@ class StoreLanguageRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:3',
-            'is_active' => 'boolean',
+            'is_active' => [new Enum(Status::class)],
         ];
     }
 }

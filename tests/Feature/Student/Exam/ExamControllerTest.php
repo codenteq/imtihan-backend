@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\Exam;
 
+use App\Enums\Role;
 use App\Models\Condition;
 use App\Models\ConditionCategory;
 use App\Models\Exam;
@@ -21,7 +22,7 @@ class ExamControllerTest extends TestCase
 
     public function test_exam_list()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         Exam::factory(20)->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.exam.list']);
@@ -33,7 +34,7 @@ class ExamControllerTest extends TestCase
 
     public function test_exam_create()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
 
         $category = QuestionCategory::factory()->create();
         $question = Question::factory()->state(['category_id' => $category->id])->create();

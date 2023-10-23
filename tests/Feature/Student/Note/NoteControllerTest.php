@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\Note;
 
+use App\Enums\Role;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +17,7 @@ class NoteControllerTest extends TestCase
 
     public function test_student_list()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         Note::factory(20)->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.note.list']);
@@ -28,7 +29,7 @@ class NoteControllerTest extends TestCase
 
     public function test_note_create()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $note = Note::factory()->state(['user_id' => $user->id])->make();
 
         Sanctum::actingAs($user, ['student.note.create']);
@@ -40,7 +41,7 @@ class NoteControllerTest extends TestCase
 
     public function test_note_show()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $note = Note::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.note.show']);
@@ -52,7 +53,7 @@ class NoteControllerTest extends TestCase
 
     public function test_note_update()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $note = Note::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.note.update']);
@@ -63,7 +64,7 @@ class NoteControllerTest extends TestCase
 
     public function test_note_delete()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $note = Note::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.note.delete']);

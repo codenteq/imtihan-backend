@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Payment;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StorePaymentMethodRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class StorePaymentMethodRequest extends FormRequest
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'is_active' => 'required|boolean',
+            'is_active' => [new Enum(Status::class)],
         ];
     }
 }

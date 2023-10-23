@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Question;
 
+use App\Enums\Difficulty;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreQuestionRequest extends FormRequest
 {
@@ -29,7 +31,7 @@ class StoreQuestionRequest extends FormRequest
             'src' => 'file',
             'language_id' => 'required|numeric|exists:languages,id',
             'options' => 'required|array',
-            'difficulty' => 'required|numeric',
+            'difficulty' => [new Enum(Difficulty::class)],
         ];
     }
 }
