@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('content');
-            $table->boolean('is_everyone')->default(false);
+            $table->enum('is_everyone', ['0', '1'])->default(\App\Enums\Status::Inactive);
             $table->foreignId('user_id')->index();
             $table->timestamps();
             $table->softDeletes();

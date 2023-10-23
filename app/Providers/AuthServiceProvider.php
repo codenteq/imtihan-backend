@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ClassSchedule;
 use App\Models\Note;
 use App\Models\Support;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -18,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Support::class => \App\Policies\Student\Support\SupportPolicy::class,
         Note::class => \App\Policies\Student\Note\NotePolicy::class,
+        ClassSchedule::class => \App\Policies\Student\ClassSchedule\ClassSchedulePolicy::class,
     ];
 
     /**

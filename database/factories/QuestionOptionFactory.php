@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class QuestionOptionFactory extends Factory
         return [
             'description' => $this->faker->text,
             'question_id' => Question::factory(),
-            'is_correct' => QuestionOption::STATUS_INACTIVE,
+            'is_correct' => Status::Inactive,
             'src' => $this->faker->imageUrl,
         ];
     }

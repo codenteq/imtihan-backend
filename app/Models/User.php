@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\Gender;
+use App\Enums\Role;
+use App\Enums\Status;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,18 +16,6 @@ use Laravel\Scout\Searchable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, Searchable, SoftDeletes;
-
-    const Admin = 1;
-
-    const Student = 2;
-
-    const STATUS_ACTIVE = 1;
-
-    const STATUS_INACTIVE = 0;
-
-    const MALE = 1;
-
-    const FEMALE = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -41,11 +30,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'country_id',
         'city_id',
         'state_id',
-        'is_active',
         'language_id',
         'avatar',
+        'gender',
         'password',
-        'role',
     ];
 
     /**
@@ -65,7 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'gender' => Gender::class,
+        'is_active' => Status::class,
+        'role' => Role::class,
     ];
 
     /*protected static function boot()

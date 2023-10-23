@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Language;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateLanguageRequest extends FormRequest
 {
@@ -24,7 +26,7 @@ class UpdateLanguageRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'code' => 'string|max:3',
-            'is_active' => 'boolean',
+            'is_active' => [new Enum(Status::class)],
         ];
     }
 }

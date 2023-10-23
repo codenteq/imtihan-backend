@@ -75,7 +75,7 @@ class NoteController extends ApiController
 
         $this->authorize('update', $this->noteService->show($note));
 
-        $note = $this->noteService->update($request, $note);
+        $note = $this->noteService->update($request, $note, ['user_id' => auth()->id()]);
 
         return $this->successResponse($note);
     }
@@ -91,7 +91,7 @@ class NoteController extends ApiController
 
         $this->authorize('delete', $this->noteService->show($note));
 
-        $note = $this->noteService->destroy($note);
+        $note = $this->noteService->destroy($note, ['user_id' => auth()->id()]);
 
         return $this->successResponse($note);
     }

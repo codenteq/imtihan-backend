@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('description')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->enum('is_active', ['0', '1'])->default(\App\Enums\Status::Active);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Notification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class NotificationFactory extends Factory
     {
         return [
             'message' => $this->faker->text,
-            'is_active' => Notification::STATUS_ACTIVE,
+            'is_active' => Status::Active,
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Difficulty;
+use App\Enums\Status;
 use App\Models\Language;
 use App\Models\Question;
 use App\Models\QuestionCategory;
@@ -24,10 +26,10 @@ class QuestionFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->name,
             'category_id' => QuestionCategory::factory(),
-            'is_image_option' => Question::STATUS_INACTIVE,
+            'is_image_option' => Status::Inactive,
             'src' => UploadedFile::fake()->image('question.png'),
             'language_id' => Language::factory(),
-            'difficulty' => Question::Easy,
+            'difficulty' => Difficulty::Easy,
         ];
     }
 }

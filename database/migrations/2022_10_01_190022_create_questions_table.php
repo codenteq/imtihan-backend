@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_image_option')->default(false);
             $table->string('src')->nullable();
             $table->foreignId('language_id')->index();
-            $table->enum('difficulty', [Question::Easy, Question::Medium, Question::Hard]);
+            $table->enum('difficulty', ['1', '2', '3']);
             $table->timestamps();
             $table->softDeletes();
         });

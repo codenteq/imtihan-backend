@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Payment;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdatePaymentMethodRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class UpdatePaymentMethodRequest extends FormRequest
             'name' => 'string|max:255',
             'code' => 'string|max:3',
             'description' => 'string|max:255',
-            'is_active' => 'boolean',
+            'is_active' => [new Enum(Status::class)],
         ];
     }
 }

@@ -19,24 +19,6 @@ class AccountController extends ApiController
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): JsonResponse
-    {
-        abort_unless(auth()->user()->tokenCan('student.account.list'),
-            Response::HTTP_FORBIDDEN
-        );
-
-        $query = request()->query('query');
-
-        if ($query) {
-            return $this->successResponse($this->accountService->search($query, 10, ['id' => auth()->id()]));
-        }
-
-        return $this->successResponse($this->accountService->paginate([], ['id' => auth()->id()]));
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(int $account): JsonResponse
@@ -57,7 +39,7 @@ class AccountController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $account = $this->accountService->update($request, $account);
+        $account = $this->accountService->update($request, $account, ['id' => auth()->id()]);
 
         return $this->successResponse($account);
     }
@@ -71,7 +53,7 @@ class AccountController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $account = $this->accountService->destroy($account);
+        $account = $this->accountService->destroy($account, ['id' => auth()->id()]);
 
         return $this->successResponse($account);
     }
