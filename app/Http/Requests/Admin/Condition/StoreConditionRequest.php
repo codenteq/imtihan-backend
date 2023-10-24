@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Admin\Condition;
 
-use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class StoreConditionRequest extends FormRequest
 {
@@ -28,7 +26,7 @@ class StoreConditionRequest extends FormRequest
             'question_category_id' => 'required|numeric|exists:question_categories,id',
             'condition_category_id' => 'required|numeric|exists:condition_categories,id',
             'value' => 'required|numeric',
-            'is_active' => [new Enum(Status::class)],
+            'is_active' => 'required|boolean',
         ];
     }
 }

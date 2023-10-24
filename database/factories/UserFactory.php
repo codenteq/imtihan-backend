@@ -9,7 +9,6 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Language;
 use App\Models\State;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
