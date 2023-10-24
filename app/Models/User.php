@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Role;
-use App\Enums\Status;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -34,6 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'gender',
         'password',
+        'is_active',
+        'role',
     ];
 
     /**
@@ -53,8 +53,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_active' => Status::class,
-        'role' => Role::class,
     ];
 
     /*protected static function boot()

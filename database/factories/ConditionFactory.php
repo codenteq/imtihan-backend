@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\Status;
-use App\Models\Condition;
 use App\Models\ConditionCategory;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;

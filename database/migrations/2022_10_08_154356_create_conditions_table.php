@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('question_category_id')->index();
             $table->foreignId('condition_category_id')->index();
             $table->float('value');
-            $table->enum('is_active', ['0', '1'])->default(\App\Enums\Status::Active);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

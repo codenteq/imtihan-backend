@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Difficulty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,17 +17,9 @@ class Question extends Model
         'description',
         'category_id',
         'is_image_option',
+        'difficulty',
         'src',
         'language_id',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'difficulty' => Difficulty::class,
     ];
 
     /**
