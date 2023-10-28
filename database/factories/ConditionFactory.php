@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Condition;
+use App\Enums\Status;
 use App\Models\ConditionCategory;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,7 +24,7 @@ class ConditionFactory extends Factory
             'question_category_id' => QuestionCategory::factory(),
             'condition_category_id' => ConditionCategory::factory(),
             'value' => $this->faker->randomFloat(1, 0, 100),
-            'is_active' => Condition::STATUS_ACTIVE,
+            'is_active' => Status::Active,
         ];
     }
 }

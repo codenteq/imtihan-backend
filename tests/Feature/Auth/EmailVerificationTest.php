@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Enums\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
@@ -32,7 +33,7 @@ class EmailVerificationTest extends TestCase
 
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        if ($user->role === User::Admin) {
+        if ($user->role === Role::Admin) {
             $response->assertRedirect(config('app.admin_frontend_url').RouteServiceProvider::HOME.'?verified=1');
         } else {
             $response->assertRedirect(config('app.frontend_url').RouteServiceProvider::HOME.'?verified=1');

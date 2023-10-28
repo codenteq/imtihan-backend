@@ -12,10 +12,6 @@ class Condition extends Model
 {
     use HasFactory, Searchable, SoftDeletes;
 
-    const STATUS_ACTIVE = 1;
-
-    const STATUS_INACTIVE = 0;
-
     protected $fillable = [
         'name',
         'question_category_id',

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class NoteFactory extends Factory
         return [
             'name' => $this->faker->name,
             'content' => $this->faker->paragraph,
-            'is_everyone' => User::STATUS_INACTIVE,
+            'is_everyone' => Status::Inactive,
             'user_id' => User::factory(),
         ];
     }

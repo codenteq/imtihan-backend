@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\Announcement;
 
+use App\Enums\Role;
 use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +18,7 @@ class AnnouncementControllerTest extends TestCase
     public function test_announcement_list()
     {
         Announcement::factory(20)->create();
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
 
         Sanctum::actingAs($user, ['student.announcement.list']);
 

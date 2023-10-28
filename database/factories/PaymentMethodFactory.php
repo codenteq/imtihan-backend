@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\PaymentMethod;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class PaymentMethodFactory extends Factory
             'name' => $this->faker->name,
             'code' => $this->faker->creditCardType,
             'description' => $this->faker->text,
-            'is_active' => PaymentMethod::STATUS_ACTIVE,
+            'is_active' => Status::Active,
         ];
     }
 }

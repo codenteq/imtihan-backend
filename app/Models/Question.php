@@ -12,24 +12,14 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const STATUS_ACTIVE = 1;
-
-    const STATUS_INACTIVE = 0;
-
-    const Easy = 1;
-
-    const Medium = 2;
-
-    const Hard = 3;
-
     protected $fillable = [
         'name',
         'description',
         'category_id',
         'is_image_option',
+        'difficulty',
         'src',
         'language_id',
-        'difficulty',
     ];
 
     /**

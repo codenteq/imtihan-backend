@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\PaymentSetting;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +19,7 @@ class PaymentSettingFactory extends Factory
     {
         return [
             'price' => $this->faker->randomFloat(2, 1, 100),
-            'is_default' => PaymentSetting::STATUS_ACTIVE,
+            'is_default' => Status::Active,
         ];
     }
 }

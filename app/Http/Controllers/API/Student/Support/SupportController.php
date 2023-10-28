@@ -63,7 +63,7 @@ class SupportController extends ApiController
 
         $this->authorize('delete', $this->supportService->show($support));
 
-        $support = $this->supportService->destroy($support);
+        $support = $this->supportService->destroy($support, ['user_id' => auth()->id()]);
 
         return $this->successResponse($support);
     }

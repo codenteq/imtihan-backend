@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Language;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLanguageRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,14 +17,16 @@ class StoreLanguageRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:3',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'phone' => 'required|string|max:255',
             'is_active' => 'required|boolean',
+            'role' => 'required|numeric|in:1,2',
         ];
     }
 }

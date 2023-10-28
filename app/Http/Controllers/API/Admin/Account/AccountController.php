@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\API\Admin\Account;
 
 use App\Http\Controllers\API\ApiController;
-use App\Http\Requests\Admin\Account\StoreAccountRequest;
 use App\Http\Requests\Admin\Account\UpdateAccountRequest;
 use App\Http\Resources\Admin\Account\AccountResource;
-use App\Models\User;
 use App\Services\Admin\Account\AccountService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,42 +19,6 @@ class AccountController extends ApiController
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): JsonResponse
-    {
-        abort_unless(auth()->user()->tokenCan('admin.account.list'),
-            Response::HTTP_FORBIDDEN
-        );
-
-        $query = request()->query('query');
-
-        if ($query) {
-            return $this->successResponse($this->accountService->search($query));
-        }
-
-        return $this->successResponse($this->accountService->paginate());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAccountRequest $request): JsonResponse
-    {
-        abort_unless(auth()->user()->tokenCan('admin.account.create'),
-            Response::HTTP_FORBIDDEN
-        );
-
-        $request->merge([
-            'role' => User::Admin,
-        ]);
-
-        $account = $this->accountService->create($request);
-
-        return $this->successResponse($account, Response::HTTP_CREATED);
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(int $account): JsonResponse
@@ -65,7 +27,7 @@ class AccountController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse(new AccountResource($this->accountService->show($account)));
+        return $this->successResponse(new AccountResource($this->accountService->show($account, [], ['id' => auth()->id()])));
     }
 
     /**
@@ -77,7 +39,7 @@ class AccountController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $account = $this->accountService->update($request, $account);
+        $account = $this->accountService->update($request, $account, ['id' => auth()->id()]);
 
         return $this->successResponse($account);
     }
@@ -91,7 +53,7 @@ class AccountController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $account = $this->accountService->destroy($account);
+        $account = $this->accountService->destroy($account, ['id' => auth()->id()]);
 
         return $this->successResponse($account);
     }

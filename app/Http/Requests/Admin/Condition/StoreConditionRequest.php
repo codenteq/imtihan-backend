@@ -26,7 +26,7 @@ class StoreConditionRequest extends FormRequest
             'question_category_id' => 'required|numeric|exists:question_categories,id',
             'condition_category_id' => 'required|numeric|exists:condition_categories,id',
             'value' => 'required|numeric',
-            'is_active' => 'boolean',
+            'is_active' => 'required|boolean',
         ];
     }
 }

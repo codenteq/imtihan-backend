@@ -57,7 +57,6 @@ class ConditionControllerTest extends TestCase
 
         $response = $this->putJson($this->apiUrl.$condition->id, [
             'name' => 'test',
-            'is_active' => true,
         ]);
         $response->assertStatus(200);
     }
