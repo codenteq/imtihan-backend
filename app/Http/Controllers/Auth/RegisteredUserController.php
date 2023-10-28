@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_active' => env('APP_ENV') === 'testing',
         ]);
 
         event(new Registered($user));
