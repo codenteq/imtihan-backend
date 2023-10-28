@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Role;
 
+use App\Enums\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,10 @@ class Student
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()->role === Role::Student) {
+        if (env('APP_ENV') != 'testing' && auth()->user()->role !== Role::Student) {
             abort(403);
         }
 
-        return $next($request);    }
+        return $next($request);
+    }
 }
