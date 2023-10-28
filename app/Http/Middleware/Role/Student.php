@@ -16,7 +16,7 @@ class Student
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (env('APP_ENV') != 'testing' && auth()->user()->role !== Role::Student) {
+        if (env('APP_ENV') != 'testing' && auth()->user()->role !== Role::Student->value) {
             abort(403);
         }
 
