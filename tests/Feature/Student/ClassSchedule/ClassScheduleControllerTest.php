@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\ClassSchedule;
 
+use App\Enums\Role;
 use App\Models\ClassSchedule;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +17,7 @@ class ClassScheduleControllerTest extends TestCase
 
     public function test_class_schedule_list()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         ClassSchedule::factory(20)->state(['user_id' => $user->id])->state([
             'user_id' => $user->id,
         ])->create();
@@ -30,7 +31,7 @@ class ClassScheduleControllerTest extends TestCase
 
     public function test_class_schedule_create()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $classSchedule = ClassSchedule::factory()->state(['user_id' => $user->id])->make();
 
         Sanctum::actingAs($user, ['student.class-schedule.create']);
@@ -41,7 +42,7 @@ class ClassScheduleControllerTest extends TestCase
 
     public function test_class_schedule_show()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $classSchedule = ClassSchedule::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.class-schedule.show']);
@@ -52,7 +53,7 @@ class ClassScheduleControllerTest extends TestCase
 
     public function test_class_schedule_update()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $classSchedule = ClassSchedule::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.class-schedule.update']);
@@ -66,13 +67,12 @@ class ClassScheduleControllerTest extends TestCase
 
     public function test_class_schedule_delete()
     {
-        $user = User::factory()->state(['role' => User::Student])->create();
+        $user = User::factory()->state(['role' => Role::Student])->create();
         $classSchedule = ClassSchedule::factory()->state(['user_id' => $user->id])->create();
 
         Sanctum::actingAs($user, ['student.class-schedule.delete']);
 
         $response = $this->delete($this->apiUrl.$classSchedule->id);
-
         $response->assertStatus(200);
     }
 }

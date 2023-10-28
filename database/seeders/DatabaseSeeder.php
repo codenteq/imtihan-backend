@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\Role;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
@@ -18,10 +19,11 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(1)
             ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['role' => Role::Admin])
             ->create();
         User::factory(1)
             ->state(['email' => 'student@imtihan.tech'])
-            ->state(['role' => User::Student])
+            ->state(['role' => Role::Student])
             ->create();
         Country::factory(1)->create();
         City::factory(1)->create();

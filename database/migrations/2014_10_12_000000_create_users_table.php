@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('gender')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('role')->default(\App\Models\User::Student);
+            $table->integer('role')->default(\App\Enums\Role::Student);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -2,11 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enums\Gender;
+use App\Enums\Role;
+use App\Enums\Status;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Language;
 use App\Models\State;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -30,13 +32,13 @@ class UserFactory extends Factory
             'country_id' => Country::factory(),
             'city_id' => City::factory(),
             'state_id' => State::factory(),
-            'is_active' => User::STATUS_ACTIVE,
+            'is_active' => Status::Active,
             'language_id' => Language::factory(),
             'avatar' => $this->faker->imageUrl,
-            'gender' => User::MALE or User::FEMALE,
+            'gender' => Gender::Male,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => User::Admin,
+            'role' => Role::Admin,
             'remember_token' => Str::random(10),
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Language;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class LanguageFactory extends Factory
         return [
             'name' => $this->faker->name,
             'code' => $this->faker->languageCode,
-            'is_active' => Language::STATUS_ACTIVE,
+            'is_active' => Status::Active,
         ];
     }
 }

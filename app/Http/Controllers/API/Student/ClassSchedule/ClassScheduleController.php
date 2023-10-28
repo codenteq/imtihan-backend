@@ -7,6 +7,7 @@ use App\Http\Requests\Student\ClassSchedule\StoreClassScheduleRequest;
 use App\Http\Requests\Student\ClassSchedule\UpdateClassScheduleRequest;
 use App\Http\Resources\Student\ClassSchedule\ClassScheduleResource;
 use App\Services\Student\ClassSchedule\ClassScheduleService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -66,13 +67,15 @@ class ClassScheduleController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $class_schedule = $this->classScheduleService->update($request, $class_schedule);
+        $class_schedule = $this->classScheduleService->update($request, $class_schedule, ['user_id' => auth()->id()]);
 
         return $this->successResponse($class_schedule);
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @throws AuthorizationException
      */
     public function destroy(int $class_schedule): JsonResponse
     {
@@ -80,7 +83,9 @@ class ClassScheduleController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $class_schedule = $this->classScheduleService->destroy($class_schedule);
+        $this->authorize('delete', $this->classScheduleService->show($class_schedule));
+
+        $class_schedule = $this->classScheduleService->destroy($class_schedule, ['user_id' => auth()->id()]);
 
         return $this->successResponse($class_schedule);
     }

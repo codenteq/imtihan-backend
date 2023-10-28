@@ -13,6 +13,7 @@ use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
 use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Admin\Support\SupportController;
+use App\Http\Controllers\API\Admin\User\UserController;
 use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
 use App\Http\Controllers\API\Student\Exam\ExamController;
 use App\Http\Controllers\API\Student\Location\LocationController;
@@ -35,8 +36,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return request()->user();
     });
 
-    Route::prefix('admin')->group(function () {
-        Route::apiResource('accounts', AccountController::class);
+    Route::prefix('admin')->middleware('auth.admin')->group(function () {
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('accounts', AccountController::class)->only(['show', 'update', 'destroy']);
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('lessons', LessonController::class);
         Route::apiResource('static-pages', StaticPageController::class);
@@ -57,8 +59,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ]);
     });
 
-    Route::prefix('student')->group(function () {
-        Route::apiResource('accounts', \App\Http\Controllers\API\Student\Account\AccountController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::prefix('student')->middleware('auth.student')->group(function () {
+        Route::apiResource('accounts', \App\Http\Controllers\API\Student\Account\AccountController::class)->only(['show', 'update', 'destroy']);
         Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'storeAnswer']);
         Route::apiResource('supports', \App\Http\Controllers\API\Student\Support\SupportController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('notes', NoteController::class);
