@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Student\Note;
 
-use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class UpdateNoteRequest extends FormRequest
 {
@@ -26,7 +24,7 @@ class UpdateNoteRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'content' => 'string',
-            'is_everyone' => [new Enum(Status::class)],
+            'is_everyone' => 'boolean',
             'user_id' => 'numeric',
         ];
     }

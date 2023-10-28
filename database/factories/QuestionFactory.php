@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\Difficulty;
 use App\Enums\Status;
 use App\Models\Language;
-use App\Models\Question;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;

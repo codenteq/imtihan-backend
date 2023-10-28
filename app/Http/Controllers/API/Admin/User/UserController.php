@@ -47,8 +47,6 @@ class UserController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $request->merge(['role' => Role::Admin]);
-
         $user = $this->userService->create($request);
 
         return $this->successResponse($user, Response::HTTP_CREATED);
