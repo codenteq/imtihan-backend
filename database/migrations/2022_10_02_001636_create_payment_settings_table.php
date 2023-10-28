@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment_settings', function (Blueprint $table) {
             $table->id();
             $table->float('price');
-            $table->enum('is_default', ['0', '1'])->default(\App\Enums\Status::Active);
+            $table->boolean('is_default')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

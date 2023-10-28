@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Enums\Status;
 use App\Models\Question;
-use App\Models\QuestionOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

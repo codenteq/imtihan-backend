@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests\Admin\User;
 
-use App\Enums\Role;
-use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class StoreUserRequest extends FormRequest
 {
@@ -28,8 +25,8 @@ class StoreUserRequest extends FormRequest
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'phone' => 'required|string|max:255',
-            'is_active' => [new Enum(Status::class)],
-            'role' => [new Enum(Role::class)],
+            'is_active' => 'required|boolean',
+            'role' => 'required|numeric|in:1,2',
         ];
     }
 }
