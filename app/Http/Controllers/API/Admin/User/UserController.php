@@ -35,7 +35,7 @@ class UserController extends ApiController
             return $this->successResponse($this->userService->search($query));
         }
 
-        return $this->successResponse($this->userService->paginate([], ['role' => Role::Admin]));
+        return $this->successResponse($this->userService->paginate());
     }
 
     /**
