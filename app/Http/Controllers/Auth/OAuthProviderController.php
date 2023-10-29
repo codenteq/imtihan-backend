@@ -30,6 +30,7 @@ class OAuthProviderController extends Controller
         ], [
             'full_name' => $socialite->getName(),
             'avatar' => $socialite->getAvatar(),
+            'is_active' => false,
         ]);
 
         $user->providers()->updateOrCreate([
