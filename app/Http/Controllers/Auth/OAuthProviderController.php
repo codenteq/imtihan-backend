@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Enums\OAuthProviderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -30,12 +31,15 @@ class OAuthProviderController extends Controller
         ], [
             'full_name' => $socialite->getName(),
             'avatar' => $socialite->getAvatar(),
+            'is_active' => false,
         ]);
 
         $user->providers()->updateOrCreate([
             'provider' => $provider,
             'provider_id' => $socialite->getId(),
         ]);
+
+        event(new Registered($user));
 
         Auth::login($user);
 
