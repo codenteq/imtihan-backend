@@ -6,7 +6,6 @@
     "keywords": ["laravel", "nextjs", "framework", "e-exam"],
     "license": "MIT",
     "require": {
-        "ext-swoole": "*",
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "hafael/azure-mailer-driver": "^0.2.1",
