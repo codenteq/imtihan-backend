@@ -23,7 +23,7 @@ class UpdateAccountRequest extends FormRequest
     {
         return [
             'full_name' => 'string|max:255',
-            'phone' => 'string|max:255',
+            'phone' => 'string|max:12',
             'address' => 'string|max:255',
             'avatar' => 'file',
             'gender' => 'numeric|in:1,2',

@@ -20,7 +20,7 @@ class AccountControllerTest extends TestCase
 
         Sanctum::actingAs($account, ['admin.account.show']);
 
-        $response = $this->get($this->apiUrl.$account->id);
+        $response = $this->get($this->apiUrl);
         $response->assertJsonFragment(['id' => $account->id]);
     }
 
@@ -30,7 +30,7 @@ class AccountControllerTest extends TestCase
 
         Sanctum::actingAs($account, ['admin.account.update']);
 
-        $response = $this->putJson($this->apiUrl.$account->id, [
+        $response = $this->putJson($this->apiUrl, [
             'full_name' => 'Test',
         ]);
         $response->assertStatus(200);
@@ -42,7 +42,7 @@ class AccountControllerTest extends TestCase
 
         Sanctum::actingAs($account, ['admin.account.delete']);
 
-        $response = $this->deleteJson($this->apiUrl.$account->id);
+        $response = $this->deleteJson($this->apiUrl);
         $response->assertStatus(200);
     }
 }

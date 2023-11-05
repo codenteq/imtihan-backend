@@ -4,7 +4,11 @@ namespace App\Services\Admin\Account;
 
 use App\Models\User;
 use App\Services\Base\BaseService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AccountService extends BaseService
 {
@@ -23,11 +27,11 @@ class AccountService extends BaseService
      */
     public function update(object $request, int $id, array $where = []): object
     {
-        $avatar = $this->model::findOrFail($id);
+        $user = $this->model::findOrFail($id);
 
         if ($request->hasFile('avatar')) {
-            if (Storage::exists($avatar->avatar)) {
-                Storage::delete($avatar->avatar);
+            if (!Str::startsWith($user->avatar, 'https://lh3.googleusercontent.com')) {
+                Storage::delete($user->avatar);
             }
             $path = $request->file('avatar')->store('avatars');
             $data = $request->safe()->merge(['avatar' => $path]);
@@ -35,8 +39,18 @@ class AccountService extends BaseService
             $data = $request->safe();
         }
 
-        $avatar->update($data->all());
+        $user->update($data->all());
 
-        return $avatar;
+        return $user;
+    }
+
+    public function passwordUpdate(object $request): object | bool
+    {
+        if (Hash::check($request->input('current_password'), Auth::user()->password)) {
+            return $this->model::find(auth()->id())
+                ->update(['password' => Hash::make($request->password)]);
+        }
+
+        return response()->json(['message' => 'Eski şifreniz eşleşmiyor'], 400);
     }
 }
