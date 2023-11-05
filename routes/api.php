@@ -38,7 +38,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('admin')->middleware(['auth.admin', 'auth.is.active'])->group(function () {
         Route::apiResource('users', UserController::class);
-        Route::apiResource('accounts', AccountController::class)->only(['show', 'update', 'destroy']);
+        Route::prefix('accounts')->group(function () {
+            Route::get('/', [AccountController::class, 'show']);
+            Route::put('/', [AccountController::class, 'update']);
+            Route::put('/update-password', [AccountController::class, 'passwordUpdate']);
+            Route::delete('/', [AccountController::class, 'destroy']);
+        });
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('lessons', LessonController::class);
         Route::apiResource('static-pages', StaticPageController::class);
@@ -60,7 +65,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::prefix('student')->middleware(['auth.student', 'auth.is.active'])->group(function () {
-        Route::apiResource('accounts', \App\Http\Controllers\API\Student\Account\AccountController::class)->only(['show', 'update', 'destroy']);
+        Route::prefix('accounts')->group(function () {
+            Route::get('/', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'show']);
+            Route::put('/', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'update']);
+            Route::put('/update-password', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'passwordUpdate']);
+            Route::delete('/', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'destroy']);
+        });
         Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'storeAnswer']);
         Route::apiResource('supports', \App\Http\Controllers\API\Student\Support\SupportController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('notes', NoteController::class);
