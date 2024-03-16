@@ -29,7 +29,7 @@ class AccountService extends BaseService
         $user = $this->model::findOrFail($id);
 
         if ($request->hasFile('avatar')) {
-            if (!Str::startsWith($user->avatar, 'https://lh3.googleusercontent.com')) {
+            if (! Str::startsWith($user->avatar, 'https://lh3.googleusercontent.com')) {
                 Storage::delete($user->avatar);
             }
             $path = $request->file('avatar')->store('avatars');
@@ -43,7 +43,7 @@ class AccountService extends BaseService
         return $user;
     }
 
-    public function passwordUpdate(object $request): object | bool
+    public function passwordUpdate(object $request): object|bool
     {
         if (Hash::check($request->input('current_password'), Auth::user()->password)) {
             return $this->model::find(auth()->id())

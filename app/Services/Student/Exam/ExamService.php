@@ -12,7 +12,6 @@ use App\Models\ExamUserAnswer;
 use App\Models\Question;
 use App\Services\Base\BaseService;
 use Illuminate\Support\Facades\DB;
-use Laravel\Octane\Facades\Octane;
 
 class ExamService extends BaseService
 {
@@ -25,7 +24,7 @@ class ExamService extends BaseService
     {
         return DB::transaction(function () use ($request) {
             $exam = $this->model::create([
-                'name' => 'Exam ' . now()->format('Y-m-d H:i:s'),
+                'name' => 'Exam '.now()->format('Y-m-d H:i:s'),
                 'user_id' => $request->user_id,
                 'exam_type_id' => $request->type === 'normal' ? $request->id : null,
             ]);
@@ -72,7 +71,7 @@ class ExamService extends BaseService
             return [
                 'exam_id' => $exam->id,
                 'time' => $this->getExamTime($request),
-                'questions' => $questionData
+                'questions' => $questionData,
             ];
         });
     }

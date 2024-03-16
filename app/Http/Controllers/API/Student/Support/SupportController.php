@@ -31,13 +31,13 @@ class SupportController extends ApiController
 
         if ($query) {
             return $this->successResponse($this->supportService->search(query: $query, where: [
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
             ]));
         }
 
         return $this->successResponse($this->supportService->paginate(where: [
             'user_id' => auth()->id(),
-            'is_active' => false
+            'is_active' => false,
         ]));
     }
 

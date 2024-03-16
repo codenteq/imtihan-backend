@@ -2,10 +2,6 @@
 
 namespace App\Services\Base;
 
-use App\Models\Support;
-use Illuminate\Support\Facades\Log;
-use PhpParser\Builder;
-
 class BaseService
 {
     protected string $model;
@@ -41,7 +37,7 @@ class BaseService
     {
         $search = $this->model::search($query);
 
-        if (!empty($where)) {
+        if (! empty($where)) {
             foreach ($where as $field => $value) {
                 $search->where($field, $value);
             }

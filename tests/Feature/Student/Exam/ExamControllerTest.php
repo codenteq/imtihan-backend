@@ -15,7 +15,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use function Symfony\Component\String\s;
 
 class ExamControllerTest extends TestCase
 {
@@ -51,12 +50,12 @@ class ExamControllerTest extends TestCase
 
         $examTypeCategory = ExamTypeCategory::factory()->state([
             'exam_type_id' => $examType->id,
-            'question_category_id' => $category->id
+            'question_category_id' => $category->id,
         ])->create();
 
-        $examTypeCategoryTwo =ExamTypeCategory::factory()->state([
+        $examTypeCategoryTwo = ExamTypeCategory::factory()->state([
             'exam_type_id' => $examType->id,
-            'question_category_id' => $categoryTwo->id
+            'question_category_id' => $categoryTwo->id,
         ])->create();
 
         Condition::factory()->state([
@@ -87,7 +86,7 @@ class ExamControllerTest extends TestCase
 
         $response = $this->postJson($this->apiUrl, [
             'type' => 'normal',
-            'id' => $examType->id
+            'id' => $examType->id,
         ]);
 
         $response->assertStatus(201);
@@ -105,12 +104,11 @@ class ExamControllerTest extends TestCase
 
         $response = $this->postJson($this->apiUrl, [
             'type' => 'custom',
-            'id' => $category->id
+            'id' => $category->id,
         ]);
 
         $response->assertStatus(201);
     }
-
 
     /*
      * Exam type is normal
@@ -125,12 +123,12 @@ class ExamControllerTest extends TestCase
 
         $examTypeCategory = ExamTypeCategory::factory()->state([
             'exam_type_id' => $examType->id,
-            'question_category_id' => $category->id
+            'question_category_id' => $category->id,
         ])->create();
 
         $exam = Exam::factory()->state([
             'user_id' => $user->id,
-            'exam_type_id' => $examType->id
+            'exam_type_id' => $examType->id,
         ])->create();
 
         Condition::factory()->state([
@@ -204,10 +202,9 @@ class ExamControllerTest extends TestCase
 
         Log::info([$answers]);
 
-        $response = $this->postJson($this->apiUrl . $exam->id . '/answer', [
-            'answers' => $answers
+        $response = $this->postJson($this->apiUrl.$exam->id.'/answer', [
+            'answers' => $answers,
         ]);
-
 
         $response->assertStatus(201);
     }
@@ -223,7 +220,7 @@ class ExamControllerTest extends TestCase
 
         $exam = Exam::factory()->state([
             'user_id' => $user->id,
-            'exam_type_id' => null
+            'exam_type_id' => null,
         ])->create();
 
         $answers = collect();
@@ -259,8 +256,8 @@ class ExamControllerTest extends TestCase
 
         Sanctum::actingAs($user, ['student.exam.answer']);
 
-        $response = $this->postJson($this->apiUrl . $exam->id . '/answer', [
-            'answers' => $answers
+        $response = $this->postJson($this->apiUrl.$exam->id.'/answer', [
+            'answers' => $answers,
         ]);
 
         $response->assertStatus(201);
@@ -273,10 +270,8 @@ class ExamControllerTest extends TestCase
 
         Sanctum::actingAs($user);
 
-        $response = $this->delete($this->apiUrl . $exam->id);
+        $response = $this->delete($this->apiUrl.$exam->id);
 
         $response->assertStatus(200);
     }
 }
-
-
