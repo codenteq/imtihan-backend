@@ -2,6 +2,10 @@
 
 namespace App\Services\Base;
 
+use App\Models\Support;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Builder;
+
 class BaseService
 {
     protected string $model;
@@ -35,13 +39,21 @@ class BaseService
      */
     public function search(string $query, int $perPage = 10, array $where = []): mixed
     {
-        return $this->model::search($query)->where($where)->paginate($perPage);
+        $search = $this->model::search($query);
+
+        if (!empty($where)) {
+            foreach ($where as $field => $value) {
+                $search->where($field, $value);
+            }
+        }
+
+        return $search->paginate($perPage);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function create(object $request): object
+    public function create(object $request): object|array
     {
         return $this->model::create($request->validated());
     }

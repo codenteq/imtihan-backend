@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\EducationLevel;
 use App\Enums\Role;
 use App\Models\City;
 use App\Models\Country;
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
         User::factory(1)
             ->state(['email' => 'admin@imtihan.tech'])
             ->state(['role' => Role::Admin])
@@ -24,6 +26,7 @@ class DatabaseSeeder extends Seeder
         User::factory(1)
             ->state(['email' => 'student@imtihan.tech'])
             ->state(['role' => Role::Student])
+            ->state(['education_level' => EducationLevel::High->value])
             ->create();
         Country::factory(1)->create();
         City::factory(1)->create();

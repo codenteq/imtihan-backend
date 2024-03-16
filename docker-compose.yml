@@ -17,6 +17,7 @@ services:
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            PHP_IDE_CONFIG: serverName=sail
             CHOKIDAR_USEPOLLING: 'true'
         volumes:
             - '.:/var/www/html'
@@ -71,7 +72,7 @@ services:
     minio:
         image: 'minio/minio:latest'
         ports:
-            - '${FORWARD_MINIO_PORT:-9000}:9000'
+            - '${FORWARD_MINIO_PORT:-9001}:9001'
             - '${FORWARD_MINIO_CONSOLE_PORT:-8900}:8900'
         environment:
             MINIO_ROOT_USER: sail

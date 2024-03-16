@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('exam_user_answers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('exam_id');
+            $table->foreignId('question_id');
+            $table->foreignId('user_id');
+            $table->foreignId('answer_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

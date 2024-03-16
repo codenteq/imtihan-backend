@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('exam_id')->index();
             $table->foreignId('question_id')->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

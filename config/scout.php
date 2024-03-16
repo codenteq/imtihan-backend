@@ -133,6 +133,9 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY', null),
         'index-settings' => [
+            \App\Models\Support::class => [
+                'filterableAttributes' => ['id', 'subject', 'message', 'is_active', 'user_id'],
+            ],
             // 'users' => [
             //     'filterableAttributes'=> ['id', 'name', 'email'],
             // ],

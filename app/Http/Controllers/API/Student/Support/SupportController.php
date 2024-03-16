@@ -30,10 +30,15 @@ class SupportController extends ApiController
         $query = request()->query('query');
 
         if ($query) {
-            return $this->successResponse($this->supportService->search($query, 10, ['user_id' => auth()->id()]));
+            return $this->successResponse($this->supportService->search(query: $query, where: [
+                'user_id' => auth()->id()
+            ]));
         }
 
-        return $this->successResponse($this->supportService->paginate([], ['user_id' => auth()->id()]));
+        return $this->successResponse($this->supportService->paginate(where: [
+            'user_id' => auth()->id(),
+            'is_active' => false
+        ]));
     }
 
     /**

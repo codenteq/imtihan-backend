@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EducationLevel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,12 +26,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone',
         'address',
+        'birth_date',
         'country_id',
         'city_id',
         'state_id',
         'language_id',
         'avatar',
         'gender',
+        'education_level',
         'password',
         'is_active',
         'role',
@@ -53,6 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'education_level' => EducationLevel::class
     ];
 
     /*protected static function boot()

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('condition_categories', function (Blueprint $table) {
+        Schema::create('exam_type_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('key')->unique();
-            $table->string('value');
-            $table->foreignId('language_id')->index();
+            $table->foreignId('exam_type_id')->index();
+            $table->foreignId('question_category_id')->index();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('condition_categories');
+        Schema::dropIfExists('exam_type_categories');
     }
 };
