@@ -23,6 +23,7 @@ class StoreExamRequest extends FormRequest
     {
         return [
             'type' => 'required|in:normal,custom',
+            'id' => 'required|numeric'
         ];
     }
 }

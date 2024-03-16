@@ -20,6 +20,7 @@ class ExamFactory extends Factory
         return [
             'name' => $this->faker->name,
             'user_id' => User::factory(),
+            'exam_type_id' => null,
         ];
     }
 }

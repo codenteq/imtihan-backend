@@ -20,6 +20,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "meilisearch/meilisearch-php": "^1.0",
         "predis/predis": "^2.1",
+        "sentry/sentry-laravel": "^4.1",
         "symfony/http-client": "6.0"
     },
     "require-dev": {

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\API\Admin\Account\AccountController;
 use App\Http\Controllers\API\Admin\Announcement\AnnouncementController;
-use App\Http\Controllers\API\Admin\Condition\ConditionCategoryController;
 use App\Http\Controllers\API\Admin\Condition\ConditionController;
 use App\Http\Controllers\API\Admin\Language\LanguageController;
 use App\Http\Controllers\API\Admin\Lesson\LessonController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Admin\User\UserController;
 use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
 use App\Http\Controllers\API\Student\Exam\ExamController;
+use App\Http\Controllers\API\Student\ExamType\ExamTypeController;
 use App\Http\Controllers\API\Student\Location\LocationController;
 use App\Http\Controllers\API\Student\Note\NoteController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user', function () {
@@ -56,7 +57,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         });
         Route::prefix('condition')->group(function () {
             Route::apiResource('conditions', ConditionController::class);
-            Route::apiResource('categories', ConditionCategoryController::class);
         });
         Route::apiResources([
             'questions' => QuestionController::class,
@@ -71,7 +71,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::put('/update-password', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'passwordUpdate']);
             Route::delete('/', [\App\Http\Controllers\API\Student\Account\AccountController::class, 'destroy']);
         });
-        Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'storeAnswer']);
+
+        Route::post('exams/{exam}/answer', [ExamController::class, 'storeAnswer']);
+        Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'destroy']);
+        Route::get('exam-types', [ExamTypeController::class, 'index']);
+
         Route::apiResource('supports', \App\Http\Controllers\API\Student\Support\SupportController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('notes', NoteController::class);
         Route::apiResource('static-pages', \App\Http\Controllers\API\Student\StaticPage\StaticPageController::class)->only(['index', 'show']);
