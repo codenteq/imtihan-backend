@@ -16,7 +16,7 @@ return new class extends Migration
             ConditionCategory::Length->value,
             ConditionCategory::MaxScore->value,
             ConditionCategory::Time->value,
-            ConditionCategory::PenaltyRatio->value
+            ConditionCategory::PenaltyRatio->value,
         ];
 
         Schema::create('conditions', function (Blueprint $table) use (&$conditionCategory) {

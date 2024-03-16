@@ -6,7 +6,6 @@ use App\Enums\ConditionCategory;
 use App\Enums\Status;
 use App\Models\ExamType;
 use App\Models\ExamTypeCategory;
-use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

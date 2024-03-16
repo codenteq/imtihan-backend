@@ -18,7 +18,6 @@ class Support extends Model
         'user_id',
     ];
 
-
     /**
      * Get the name of the index associated with the model.
      */

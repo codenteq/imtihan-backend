@@ -8,12 +8,10 @@ use App\Http\Resources\Student\Exam\ExamResource;
 use App\Services\Student\Exam\ExamService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Laravel\Horizon\Horizon;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExamController extends ApiController
 {
-
     public function __construct(private readonly ExamService $examService)
     {
     }
