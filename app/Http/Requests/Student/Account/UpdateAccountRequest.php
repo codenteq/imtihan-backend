@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Student\Account;
 
+use App\Enums\EducationLevel;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAccountRequest extends FormRequest
 {
@@ -25,6 +27,9 @@ class UpdateAccountRequest extends FormRequest
             'full_name' => 'string|max:255',
             'phone' => 'string|max:12',
             'address' => 'string|max:255',
+            'education_level' => [
+                Rule::enum(EducationLevel::class)
+            ],
             'avatar' => 'file',
             'gender' => 'numeric|in:1,2',
             'country_id' => 'numeric|exists:countries,id',
