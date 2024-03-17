@@ -30,7 +30,7 @@ class QuestionFactory extends Factory
             'is_image_option' => Status::Inactive,
             'src' => UploadedFile::fake()->image('question.png'),
             'language_id' => Language::factory(),
-            'difficulty' => Difficulty::Easy,
+            'difficulty' => Difficulty::Easy->value,
         ];
     }
 }
