@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Question;
 
+use App\Enums\QuestionStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateQuestionCategoryRequest extends FormRequest
 {
@@ -26,6 +28,9 @@ class UpdateQuestionCategoryRequest extends FormRequest
             'description' => 'string|max:255',
             'parent_id' => 'numeric|exists:question_categories,id',
             'language_id' => 'numeric|exists:languages,id',
+            'status' => [
+                Rule::enum(QuestionStatus::class)
+            ]
         ];
     }
 }

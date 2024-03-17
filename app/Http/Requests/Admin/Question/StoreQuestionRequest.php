@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Question;
 
+use App\Enums\QuestionStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreQuestionRequest extends FormRequest
 {
@@ -30,6 +32,10 @@ class StoreQuestionRequest extends FormRequest
             'language_id' => 'required|numeric|exists:languages,id',
             'options' => 'required|array',
             'difficulty' => 'required|numeric',
+            'status' => [
+                'required',
+                Rule::enum(QuestionStatus::class)
+            ],
         ];
     }
 }
