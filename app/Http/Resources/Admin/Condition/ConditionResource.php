@@ -19,8 +19,9 @@ class ConditionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'question_category_id' => $this->question_category_id,
-            'condition_category_id' => $this->condition_category_id,
+            'exam_type_id' => $this->exam_type_id,
+            'exam_type_category_id' => $this->exam_type_category_id,
+            'condition_category' => $this->condition_category,
             'value' => $this->value,
             'is_active' => $this->is_active,
         ];

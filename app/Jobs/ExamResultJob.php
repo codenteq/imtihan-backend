@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\Student\ExamResult\ExamResultService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -11,19 +12,13 @@ class ExamResultJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $userId;
-
-    protected $testId;
-
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($userId, $testId)
+    public function __construct(protected int $exam_id)
     {
-        $this->userId = $userId;
-        $this->testId = $testId;
     }
 
     /**
@@ -31,6 +26,6 @@ class ExamResultJob
      */
     public function handle(): void
     {
-
+        new ExamResultService($this->exam_id);
     }
 }

@@ -12,11 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ExamController extends ApiController
 {
-    private ExamService $examService;
-
-    public function __construct(ExamService $service)
+    public function __construct(private readonly ExamService $examService)
     {
-        $this->examService = $service;
     }
 
     /**
@@ -49,14 +46,22 @@ class ExamController extends ApiController
     /*
      * Store a user answer to exam
      */
-    public function storeAnswer(Request $request): JsonResponse
+    public function storeAnswer(Request $request, int $exam): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('student.exam.create.answer'),
+        abort_unless(auth()->user()->tokenCan('student.exam.answer'),
             Response::HTTP_FORBIDDEN
         );
 
-        $answer = $this->examService->storeUserAnswer($request);
+        $answer = $this->examService->storeUserAnswer($exam, $request);
 
         return $this->successResponse($answer, Response::HTTP_CREATED);
+    }
+
+    /**
+     * Delete the exam
+     */
+    public function destroy(int $exam_id): JsonResponse
+    {
+        return $this->successResponse($this->examService->destroy($exam_id));
     }
 }

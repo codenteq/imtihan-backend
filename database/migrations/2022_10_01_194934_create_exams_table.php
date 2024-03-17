@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('user_id')->index();
+            $table->foreignId('user_id');
+            $table->foreignId('exam_type_id')->nullable();
+            $table->index(['exam_type_id', 'user_id']);
             $table->timestamps();
             $table->softDeletes();
         });

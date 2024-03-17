@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('in_correct');
             $table->integer('blank');
             $table->float('point', 8, 5);
-            $table->foreignId('exam_id')->constrained('exams')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('exam_id');
+            $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -46,10 +46,10 @@ return [
         ],
 
         'azure' => [
-            'transport'             => 'azure',
-            'endpoint'              => env('AZURE_MAIL_ENDPOINT', 'https://{communicatonServiceName}.communication.azure.com'),
-            'access_key'            => env('AZURE_MAIL_KEY'),
-            'api_version'           => env('AZURE_MAIL_API_VERSION', '2023-03-31'),
+            'transport' => 'azure',
+            'endpoint' => env('AZURE_MAIL_ENDPOINT', 'https://{communicatonServiceName}.communication.azure.com'),
+            'access_key' => env('AZURE_MAIL_KEY'),
+            'api_version' => env('AZURE_MAIL_API_VERSION', '2023-03-31'),
             'disable_user_tracking' => env('AZURE_MAIL_DISABLE_TRACKING', false),
         ],
 

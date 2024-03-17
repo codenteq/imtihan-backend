@@ -24,9 +24,10 @@ return new class extends Migration
             $table->foreignId('language_id')->index()->default(true);
             $table->string('avatar')->nullable();
             $table->integer('gender')->nullable();
+            $table->tinyInteger('education_level')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('role')->default(\App\Enums\Role::Student);
+            $table->integer('role')->default(\App\Enums\Role::Student->value);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

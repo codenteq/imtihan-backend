@@ -2,6 +2,8 @@
 
 namespace App\Services\Student\Exam;
 
+use App\Enums\ConditionCategory;
+use App\Enums\CustomExam;
 use App\Jobs\ExamResultJob;
 use App\Models\Condition;
 use App\Models\Exam;
@@ -18,20 +20,34 @@ class ExamService extends BaseService
         parent::__construct(Exam::class);
     }
 
-    public function create(object $request): object
+    public function create(object $request): array
     {
-        $exam = null;
-        DB::transaction(function () use ($request, &$exam) {
+        return DB::transaction(function () use ($request) {
             $exam = $this->model::create([
                 'name' => 'Exam '.now()->format('Y-m-d H:i:s'),
                 'user_id' => $request->user_id,
+                'exam_type_id' => $request->type === 'normal' ? $request->id : null,
             ]);
 
+            $questionData = collect();
+
             if ($request->type === 'normal') {
-                $conditions = Condition::where('is_active', true)->with('category')->whereRelation('category', 'key', 'length')->get();
-                $conditions->each(function ($condition) use ($exam) {
-                    $questions = Question::where('category_id', $condition->question_category_id)->inRandomOrder()->get();
-                    $questions->each(function ($question) use ($exam) {
+                $conditions = Condition::whereIsActive(true)
+                    ->whereExamTypeId($request->id)
+                    ->whereConditionCategory(ConditionCategory::Length->value)
+                    ->with('examTypeCategory')
+                    ->get();
+
+                $conditions->each(function ($condition) use ($exam, &$questionData) {
+                    $questions = Question::where('category_id', $condition->examTypeCategory->question_category_id)
+                        ->with(['options', 'category'])
+                        ->limit($condition->id)
+                        ->inRandomOrder()->get();
+
+                    $questions->each(function ($question) use ($exam, &$questionData) {
+
+                        $questionData->push($question);
+
                         ExamQuestion::create([
                             'exam_id' => $exam->id,
                             'question_id' => $question->id,
@@ -39,35 +55,59 @@ class ExamService extends BaseService
                     });
                 });
             } else {
-                $request->categories->each(function ($category) use ($exam) {
-                    $questions = Question::where('category_id', $category)->inRandomOrder()->get();
-                    $questions->each(function ($quetion) use ($exam) {
-                        ExamQuestion::create([
-                            'exam_id' => $exam->id,
-                            'question_id' => $quetion->id,
-                        ]);
-                    });
+                $questions = Question::where('category_id', $request->id)
+                    ->limit(CustomExam::ExamQuestionLength->value)->inRandomOrder()->get();
+
+                $questions->each(function ($question) use ($exam, &$questionData) {
+                    $questionData->push($question);
+
+                    ExamQuestion::create([
+                        'exam_id' => $exam->id,
+                        'question_id' => $question->id,
+                    ]);
                 });
             }
-        });
 
-        return $exam;
+            return [
+                'exam_id' => $exam->id,
+                'time' => $this->getExamTime($request),
+                'questions' => $questionData,
+            ];
+        });
     }
 
-    public function storeUserAnswer(object $request): array
+    private function getExamTime($request): int
     {
-        $answers[] = null;
-        $request->answers->each(function ($answer) use ($request, &$answers) {
+        return $request->type == 'normal'
+            ? Condition::whereExamTypeId($request->id)->whereConditionCategory(ConditionCategory::Time)->first()->value
+            : CustomExam::ExamQuestionLength->value;
+    }
+
+    public function storeUserAnswer(int $exam, object $request): array
+    {
+        $answers = [];
+
+        foreach ($request->answers as $answer) {
             $answers[] = ExamUserAnswer::create([
-                'exam_id' => $request->exam_id,
-                'question_id' => $answer->question_id,
-                'answer_id' => $answer->answer_id,
+                'exam_id' => $exam,
+                'question_id' => $answer['question_id'],
+                'answer_id' => $answer['answer_id'],
                 'user_id' => auth()->id(),
             ]);
-        });
+        }
 
-        ExamResultJob::dispatch($request->exam_id)->onQueue('exam_result');
+        ExamResultJob::dispatch($exam)->onQueue('exam_result');
 
         return $answers;
+    }
+
+    public function destroy(int $id, array $where = []): mixed
+    {
+        $exam = $this->model::findOrFail($id);
+
+        ExamQuestion::whereExamId($id)->delete();
+        $exam->delete();
+
+        return $exam;
     }
 }
