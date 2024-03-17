@@ -2,8 +2,9 @@
 
 namespace App\Enums;
 
-enum QuestionStatus: int
+enum QuestionStatus: string
 {
-    case Draft = 1;
-    case Published = 2;
+    case Draft = 'draft';
+    case Pending = 'pending';
+    case Published = 'published';
 }
