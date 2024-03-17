@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API\Admin\User;
 
-use App\Enums\Role;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\Admin\User\StoreUserRequest;
 use App\Http\Requests\Admin\User\UpdateUserRequest;

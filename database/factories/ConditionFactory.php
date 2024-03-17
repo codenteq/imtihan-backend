@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\ConditionCategory;
 use App\Enums\Status;
-use App\Models\ConditionCategory;
-use App\Models\QuestionCategory;
+use App\Models\ExamType;
+use App\Models\ExamTypeCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +22,9 @@ class ConditionFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'question_category_id' => QuestionCategory::factory(),
-            'condition_category_id' => ConditionCategory::factory(),
+            'exam_type_id' => ExamType::factory(),
+            'exam_type_category_id' => ExamTypeCategory::factory(),
+            'condition_category' => ConditionCategory::Time,
             'value' => $this->faker->randomFloat(1, 0, 100),
             'is_active' => Status::Active,
         ];

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->boolean('is_image_option')->default(false);
             $table->string('src')->nullable();
             $table->foreignId('language_id')->index();
-            $table->enum('difficulty', [1, 2, 3]);
+            $table->tinyInteger('difficulty');
+            $table->tinyInteger('status')->default(\App\Enums\QuestionStatus::Draft->value);
             $table->timestamps();
             $table->softDeletes();
         });

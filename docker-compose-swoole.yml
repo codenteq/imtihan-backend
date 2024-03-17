@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - imtihan_nw
+    environment:
+      - PHP_OPCACHE_ENABLE=1
+      - APP_KEY=base64:eRnWaRE112ymJI/ph28XRub+PskFJbMeMu/M0hd92ps=
+    ports:
+      - "8000:8000"
+
+networks:
+  imtihan_nw:

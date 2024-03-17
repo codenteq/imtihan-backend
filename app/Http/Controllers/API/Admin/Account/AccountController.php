@@ -63,11 +63,11 @@ class AccountController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function passwordUpdate(Request $request): JsonResponse | bool
+    public function passwordUpdate(Request $request): JsonResponse|bool
     {
         $request->validate([
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'current_password' => ['required']
+            'current_password' => ['required'],
         ]);
 
         return $this->accountService->passwordUpdate($request);

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: imtihantech/imtihan-backend-app
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_KEY
+              value: base64:eRnWaRE112ymJI/ph28XRub+PskFJbMeMu/M0hd92ps=

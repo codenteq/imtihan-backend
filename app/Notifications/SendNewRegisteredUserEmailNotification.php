@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -40,9 +39,9 @@ class SendNewRegisteredUserEmailNotification extends Notification
             ->line('İmtihan, geleceğin eğitimini şekillendirmeye yardımcı olacak bir araç ve sizinle bu yolculuğa çıkmayı dört gözle bekliyoruz.')
             ->line("Şu an için, İmtihan'ı denemeye başlamak için bir davetiye beklemek durumundasınız. Ancak merak etmeyin, beklerken şunları yapabilirsiniz:")
             ->line("- İmtihan'ın resmi web sitesini ziyaret ederek projelerimiz, özelliklerimiz ve geliştirdiğimiz eğitim araçları hakkında daha fazla bilgi edinebilirsiniz.")
-            ->line("- Eğitim teknolojileri dünyasındaki en son gelişmeleri ve İmtihan ile ilgili güncellemeleri öğrenmek için bizi sosyal medya platformlarında takip edebilirsiniz.")
+            ->line('- Eğitim teknolojileri dünyasındaki en son gelişmeleri ve İmtihan ile ilgili güncellemeleri öğrenmek için bizi sosyal medya platformlarında takip edebilirsiniz.')
             ->action('imtihan.tech', url('https://imtihan.tech'))
-            ->line("İmtihan Ekibi 😉");
+            ->line('İmtihan Ekibi 😉');
     }
 
     /**

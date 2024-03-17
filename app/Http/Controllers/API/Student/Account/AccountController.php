@@ -7,8 +7,8 @@ use App\Http\Requests\Student\Account\UpdateAccountRequest;
 use App\Http\Resources\Student\Account\AccountResource;
 use App\Services\Student\Account\AccountService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\Rules;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends ApiController
@@ -63,11 +63,11 @@ class AccountController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function passwordUpdate(Request $request): JsonResponse | bool
+    public function passwordUpdate(Request $request): JsonResponse|bool
     {
         $request->validate([
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'current_password' => ['required']
+            'current_password' => ['required'],
         ]);
 
         return $this->accountService->passwordUpdate($request);
