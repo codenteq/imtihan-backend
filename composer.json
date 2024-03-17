@@ -2,7 +2,7 @@
     "name": "codenteq/imtihan",
     "type": "project",
     "description": "The Laravel E-Exam.",
-    "version": "0.21.4",
+    "version": "0.22.0",
     "keywords": ["laravel", "nextjs", "framework", "e-exam"],
     "license": "MIT",
     "require": {
