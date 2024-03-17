@@ -27,6 +27,7 @@ class UpdateAccountRequest extends FormRequest
             'address' => 'string|max:255',
             'avatar' => 'file',
             'gender' => 'numeric|in:1,2',
+            'birth_date' => 'date',
         ];
     }
 }
