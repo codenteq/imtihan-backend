@@ -15,7 +15,7 @@ services:
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-on}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             PHP_IDE_CONFIG: serverName=sail
             CHOKIDAR_USEPOLLING: 'true'
@@ -87,7 +87,7 @@ services:
                 - CMD
                 - curl
                 - '-f'
-                - 'http://localhost:9000/minio/health/live'
+                - 'http://localhost:9001/minio/health/live'
             retries: 3
             timeout: 5s
     meilisearch:
