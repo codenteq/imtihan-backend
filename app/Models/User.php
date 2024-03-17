@@ -55,6 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
+        'birth_date' => 'date:d-m-Y',
         'email_verified_at' => 'datetime',
         'education_level' => EducationLevel::class,
     ];
