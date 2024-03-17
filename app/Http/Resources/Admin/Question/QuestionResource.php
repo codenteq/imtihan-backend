@@ -21,6 +21,7 @@ class QuestionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'status' => $this->status,
             'category' => new QuestionCategoryResource($this->category),
             'is_image_option' => $this->is_image_option,
             'options' => QuestionOptionResource::collection($this->options),
