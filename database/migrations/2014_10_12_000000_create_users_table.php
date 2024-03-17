@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\EducationLevel;
+use App\Enums\Gender;
 use App\Enums\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -25,7 +26,12 @@ return new class extends Migration
             Role::Admin->value,
         ];
 
-        Schema::create('users', function (Blueprint $table) use ($educationLevel, $role) {
+       $gender = [
+           Gender::Male->value,
+           Gender::Female->value,
+       ];
+
+        Schema::create('users', function (Blueprint $table) use ($educationLevel, $role, $gender) {
             $table->id();
             $table->string('full_name');
             $table->string('email')->unique();
@@ -38,7 +44,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->foreignId('language_id')->index()->default(true);
             $table->string('avatar')->nullable();
-            $table->integer('gender')->nullable();
+            $table->enum('gender', $gender)->nullable();
             $table->enum('education_level', $educationLevel)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

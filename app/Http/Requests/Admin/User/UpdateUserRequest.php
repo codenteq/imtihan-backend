@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Admin\User;
 
+use App\Enums\EducationLevel;
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -24,6 +27,13 @@ class UpdateUserRequest extends FormRequest
         return [
             'full_name' => 'string|max:255',
             'phone' => 'string|max:255',
+            'gender' => [
+                Rule::enum(Gender::class),
+            ],
+            'education_level' => [
+                Rule::enum(EducationLevel::class)
+            ],
+            'birth_date' => 'date',
             'is_active' => 'boolean',
             'role' => 'numeric|in:1,2',
         ];
