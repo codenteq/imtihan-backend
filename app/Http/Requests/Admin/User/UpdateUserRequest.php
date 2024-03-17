@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\User;
 
 use App\Enums\EducationLevel;
 use App\Enums\Gender;
+use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -35,7 +36,9 @@ class UpdateUserRequest extends FormRequest
             ],
             'birth_date' => 'date',
             'is_active' => 'boolean',
-            'role' => 'numeric|in:1,2',
+            'role' => [
+                Rule::enum(Role::class),
+            ],
         ];
     }
 }
