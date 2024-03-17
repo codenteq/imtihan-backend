@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\User;
 
 use App\Enums\EducationLevel;
 use App\Enums\Gender;
+use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,11 +33,14 @@ class StoreUserRequest extends FormRequest
                 Rule::enum(Gender::class),
             ],
             'education_level' => [
-                Rule::enum(EducationLevel::class)
+                Rule::enum(EducationLevel::class),
             ],
             'birth_date' => 'date',
             'is_active' => 'required|boolean',
-            'role' => 'required|numeric|in:1,2',
+            'role' => [
+                'required',
+                Rule::enum(Role::class),
+            ],
         ];
     }
 }
