@@ -32,7 +32,6 @@ class StoreUserRequest extends FormRequest
                 Rule::enum(Gender::class),
             ],
             'education_level' => [
-                'required',
                 Rule::enum(EducationLevel::class)
             ],
             'birth_date' => 'date',
