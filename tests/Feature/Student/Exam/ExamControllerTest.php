@@ -63,7 +63,7 @@ class ExamControllerTest extends TestCase
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'condition_category' => \App\Enums\ConditionCategory::Time->value,
-            'value' => 120,
+            'value' => 15,
         ])->create();
 
         Condition::factory()->state([
