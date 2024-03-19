@@ -31,4 +31,9 @@ class QuestionCategory extends Model
     {
         return $this->hasMany(QuestionCategory::class, 'parent_id');
     }
+
+    public function childrenTree(): HasMany
+    {
+        return $this->hasMany(QuestionCategory::class, 'parent_id')->with('childrenTree');
+    }
 }
