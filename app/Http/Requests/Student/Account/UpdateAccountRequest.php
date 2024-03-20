@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Student\Account;
 
 use App\Enums\EducationLevel;
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -30,8 +31,10 @@ class UpdateAccountRequest extends FormRequest
             'education_level' => [
                 Rule::enum(EducationLevel::class)
             ],
+            'gender' => [
+                Rule::enum(Gender::class)
+            ],
             'avatar' => 'file',
-            'gender' => 'numeric|in:1,2',
             'country_id' => 'numeric|exists:countries,id',
             'city_id' => 'numeric|exists:cities,id',
             'state_id' => 'numeric|exists:states,id',
