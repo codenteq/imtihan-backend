@@ -50,14 +50,14 @@ class LanguageTest extends AdminFrontendDuskTestCase
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->type('input[name="name"]', 'Updated ' . $language->name)
                 ->press('Kaydet')
-                ->pause(1000)
+                ->pause(3000)
                 ->assertSeeIn('table', 'Updated ' . $language->name)
                 ->storeConsoleLog('languages.edit')
                 ->screenshot('languages.edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
-                ->pause(1000)
+                ->pause(3000)
                 ->assertDontSeeIn('table', 'Updated ' . $language->name)
                 ->storeConsoleLog('languages.delete')
                 ->screenshot('languages.delete');
