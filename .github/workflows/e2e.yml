@@ -13,7 +13,7 @@ env:
   FRONTEND_URL: "http://localhost:3001"
   ADMIN_FRONTEND_URL: "http://localhost:3000"
   DB_CONNECTION: sqlite
-  DB_DATABASE: database/database.sqlite
+  DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
   NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
 
 jobs:
