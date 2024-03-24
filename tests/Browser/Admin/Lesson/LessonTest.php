@@ -31,7 +31,7 @@ class LessonTest extends AdminFrontendDuskTestCase
 
             $browser->clickLink('Dersler')
                 ->storeConsoleLog('lessons.index')
-                ->screenshot('lessons.index')
+                ->screenshot('lessons/index')
                 ->waitForLocation('/lessons', 3);
 
             $browser->press('Oluştur')
@@ -42,30 +42,30 @@ class LessonTest extends AdminFrontendDuskTestCase
 
             $browser->script("document.querySelector('.ql-editor > p').innerHTML = '" . $lesson->content . "';");
 
-            $browser->screenshot('lessons.create')
+            $browser->screenshot('lessons/create')
                 ->press('Kaydet')
                 ->pause(3000)
                 ->assertSeeIn('table', $lesson->name)
                 ->storeConsoleLog('lessons.last')
-                ->screenshot('lessons.create.index');
+                ->screenshot('lessons/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->waitFor('input[name="name"]', 10)
                 ->type('input[name="name"]', 'Updated ' . $lesson->name)
                 ->press('Kaydet')
-                ->screenshot("lessons.edit")
-                ->clickLink('Dersler')
+                ->screenshot("lessons/edit")
+                ->back()
                 ->waitForText('Updated ' . $lesson->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $lesson->name)
                 ->storeConsoleLog('lessons.edit')
-                ->screenshot('lessons.edit.index');
+                ->screenshot('lessons/edit.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
                 ->assertDontSeeIn('table', 'Updated ' . $lesson->name)
                 ->storeConsoleLog('lessons.delete')
-                ->screenshot('lessons.delete');
+                ->screenshot('lessons/delete');
         });
     }
 }

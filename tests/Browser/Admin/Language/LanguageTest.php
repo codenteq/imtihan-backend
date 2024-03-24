@@ -33,19 +33,19 @@ class LanguageTest extends AdminFrontendDuskTestCase
 
             $browser->clickLink('Diller')
                 ->storeConsoleLog('languages.index')
-                ->screenshot('languages.index')
+                ->screenshot('languages/index')
                 ->waitForLocation('/languages');
 
             $browser->pressAndWaitFor('Oluştur')
                 ->type('input[name="name"]', $language->name)
                 ->type('input[name="code"]', $language->code)
                 ->storeConsoleLog('languages.create')
-                ->screenshot('languages.create')
+                ->screenshot('languages/create')
                 ->press('Kaydet')
                 ->pause(1000)
                 ->assertSeeIn('table', $language->name)
                 ->storeConsoleLog('languages.last')
-                ->screenshot('languages.create.index');
+                ->screenshot('languages/create.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
@@ -54,14 +54,14 @@ class LanguageTest extends AdminFrontendDuskTestCase
                 ->waitForText('Updated ' . $language->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $language->name)
                 ->storeConsoleLog('languages.edit')
-                ->screenshot('languages.edit');
+                ->screenshot('languages/edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
                 ->pause(3000)
                 ->assertDontSeeIn('table', 'Updated ' . $language->name)
                 ->storeConsoleLog('languages.delete')
-                ->screenshot('languages.delete');
+                ->screenshot('languages/delete');
         });
     }
 }
