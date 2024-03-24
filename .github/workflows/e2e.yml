@@ -61,7 +61,7 @@ jobs:
         run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
 
       - name: Sleep
-        run: sleep 10
+        run: sleep 20
 
       - name: Run Dusk Tests
         run: php artisan dusk
