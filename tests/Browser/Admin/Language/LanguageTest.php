@@ -48,9 +48,10 @@ class LanguageTest extends AdminFrontendDuskTestCase
                 ->screenshot('languages.create.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
+                ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated ' . $language->name)
                 ->press('Kaydet')
-                ->pause(3000)
+                ->waitForText('Updated ' . $language->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $language->name)
                 ->storeConsoleLog('languages.edit')
                 ->screenshot('languages.edit');
