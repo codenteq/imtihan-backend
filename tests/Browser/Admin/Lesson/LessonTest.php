@@ -55,7 +55,7 @@ class LessonTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot("lessons.edit")
                 ->clickLink('Dersler')
-                ->pause(3000)
+                ->waitForText('Updated ' . $lesson->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $lesson->name)
                 ->storeConsoleLog('lessons.edit')
                 ->screenshot('lessons.edit.index');
