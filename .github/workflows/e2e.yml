@@ -19,6 +19,12 @@ jobs:
   dusk-php:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
       - uses: actions/checkout@v4
       - name: Prepare The Environment
         run: cp .env.example .env
