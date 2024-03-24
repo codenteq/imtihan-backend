@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Admin Frontend
-        run: docker run -d --rm --name admin-frontend -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
+        run: docker run -d --rm --name admin-frontend -p 3000:3000 ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
 
       - name: Run Dusk Tests
         run: php artisan dusk
