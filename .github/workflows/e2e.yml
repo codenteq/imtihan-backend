@@ -79,3 +79,10 @@ jobs:
         with:
           name: console
           path: tests/Browser/console
+
+      - name: Upload Laravel Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: laravel-logs
+          path: storage/logs
