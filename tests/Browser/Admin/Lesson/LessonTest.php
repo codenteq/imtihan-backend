@@ -44,24 +44,25 @@ class LessonTest extends AdminFrontendDuskTestCase
 
             $browser->screenshot('lessons.create')
                 ->press('Kaydet')
-                ->pause(1000)
+                ->pause(3000)
                 ->assertSeeIn('table', $lesson->name)
                 ->storeConsoleLog('lessons.last')
                 ->screenshot('lessons.create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
+                ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated ' . $lesson->name)
                 ->press('Kaydet')
                 ->screenshot("lessons.edit")
                 ->clickLink('Dersler')
-                ->pause(1000)
+                ->pause(3000)
                 ->assertSeeIn('table', 'Updated ' . $lesson->name)
                 ->storeConsoleLog('lessons.edit')
                 ->screenshot('lessons.edit.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
-                ->pause(1000)
+                ->pause(3000)
                 ->assertDontSeeIn('table', 'Updated ' . $lesson->name)
                 ->storeConsoleLog('lessons.delete')
                 ->screenshot('lessons.delete');
