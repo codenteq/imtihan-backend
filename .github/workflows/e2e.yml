@@ -14,6 +14,7 @@ env:
   ADMIN_FRONTEND_URL: "http://localhost:3000"
   DB_CONNECTION: sqlite
   DB_DATABASE: database/database.sqlite
+  NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
 
 jobs:
   dusk-php:
@@ -57,7 +58,7 @@ jobs:
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Admin Frontend
-        run: docker run -d --rm --name admin-frontend -p 3000:3000 ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/admin-frontend:latest
+        run: docker run -d --rm --name admin-frontend -p 3000:3000 ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
 
       - name: Run Dusk Tests
         run: php artisan dusk
