@@ -28,6 +28,7 @@ services:
             - minio
             - meilisearch
             - pgsql
+            - selenium
     pgsql:
         image: 'postgres:15'
         ports:
@@ -100,6 +101,18 @@ services:
                 - 'http://localhost:7700/health'
             retries: 3
             timeout: 5s
+    selenium:
+        image: 'seleniarm/standalone-chromium'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '4444:4444'
+        environment:
+            VNC_NO_PASSWORD: 1
+        volumes:
+            - '/dev/shm:/dev/shm'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
