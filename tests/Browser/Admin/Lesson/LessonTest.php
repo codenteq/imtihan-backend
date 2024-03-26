@@ -50,10 +50,11 @@ class LessonTest extends AdminFrontendDuskTestCase
                 ->screenshot('lessons/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->waitForText('Düzenle')
                 /*->waitFor('input[name="name"]', 10)*/
                 /*->waitForLocation('/lessons/' . $lesson->id, 15)*/
+                ->screenshot("lessons/edit.load")
                 ->type('input[name="name"]', 'Updated ' . $lesson->name)
+                ->screenshot("lessons/edit.input")
                 ->press('Kaydet')
                 ->screenshot("lessons/edit")
                 ->back()
