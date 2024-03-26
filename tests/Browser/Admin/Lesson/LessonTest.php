@@ -52,7 +52,7 @@ class LessonTest extends AdminFrontendDuskTestCase
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 /*->waitFor('input[name="name"]', 10)*/
                 /*->waitForLocation('/lessons/' . $lesson->id, 15)*/
-                ->waitFor('input[name="name"',  1500)
+                ->waitFor('input[name="name"',  5)
                 ->type('input[name="name"]', 'Updated ' . $lesson->name)
                 /*->screenshot("lessons/edit.input")*/
                 ->press('Kaydet')
