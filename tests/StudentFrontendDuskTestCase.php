@@ -1,8 +1,8 @@
 <?php
 
+namespace Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTruncation;
-use Tests\DuskTestCase;
 
 abstract class StudentFrontendDuskTestCase extends DuskTestCase
 {
@@ -13,7 +13,7 @@ abstract class StudentFrontendDuskTestCase extends DuskTestCase
      *
      * @return string
      */
-    protected function baseUrl()
+    protected function baseUrl(): string
     {
         return env('FRONTEND_URL', 'http://localhost');
     }
