@@ -36,6 +36,21 @@ class QuestionCatergoryController extends ApiController
         return $this->successResponse($this->questionCategoryService->paginate(['children']));
     }
 
+
+    /*
+     * Get all categories in tree structure
+     */
+    public function getTreeCategories(): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('admin.question.category.list'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        $questionCategory = $this->questionCategoryService->getTreeCategories();
+
+        return $this->successResponse($questionCategory);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

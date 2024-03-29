@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\Difficulty;
+use App\Enums\QuestionStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +13,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        $questionStatus = [
+            QuestionStatus::Draft->value,
+            QuestionStatus::Pending->value,
+            QuestionStatus::Published->value,
+        ];
+
+        $difficulty = [
+            Difficulty::Easy->value,
+            Difficulty::Medium->value,
+            Difficulty::Hard->value,
+        ];
+
+        Schema::create('questions', function (Blueprint $table) use ($questionStatus, $difficulty) {
             $table->id();
             $table->string('name');
             $table->text('description');
@@ -19,8 +33,8 @@ return new class extends Migration
             $table->boolean('is_image_option')->default(false);
             $table->string('src')->nullable();
             $table->foreignId('language_id')->index();
-            $table->tinyInteger('difficulty');
-            $table->tinyInteger('status')->default(\App\Enums\QuestionStatus::Draft->value);
+            $table->enum('difficulty', $difficulty);
+            $table->enum('status', $questionStatus)->default(QuestionStatus::Draft->value);
             $table->timestamps();
             $table->softDeletes();
         });

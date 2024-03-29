@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum EducationLevel: int
+enum EducationLevel: string
 {
-    case Primary = 1;
-    case Middle = 2;
-    case High = 3;
-    case University = 4;
+    case Primary = 'primary';
+    case Middle = 'middle';
+    case High = 'high';
+    case University = 'university';
 }

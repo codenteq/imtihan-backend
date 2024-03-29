@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Account;
 
+use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAccountRequest extends FormRequest
 {
@@ -26,7 +28,10 @@ class UpdateAccountRequest extends FormRequest
             'phone' => 'string|max:12',
             'address' => 'string|max:255',
             'avatar' => 'file',
-            'gender' => 'numeric|in:1,2',
+            'gender' => [
+                Rule::enum(Gender::class)
+            ],
+            'birth_date' => 'date',
         ];
     }
 }
