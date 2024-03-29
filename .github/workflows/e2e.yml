@@ -1,0 +1,88 @@
+name: E2E Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  REGISTRY: ghcr.io
+  REPO_OWNER: ${{ github.repository_owner }}
+  APP_URL: "http://localhost:8000"
+  FRONTEND_URL: "http://localhost:3001"
+  ADMIN_FRONTEND_URL: "http://localhost:3000"
+  DB_CONNECTION: sqlite
+  DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+  NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
+
+jobs:
+  dusk-php:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - uses: actions/checkout@v4
+      - name: Prepare The Environment
+        run: cp .env.example .env
+
+      - name: Create Database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Install Composer Dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Upgrade Chrome Driver
+        run: php artisan dusk:chrome-driver --detect
+
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+      - name: Run Laravel Server
+        run: php artisan serve --no-reload &
+
+      - name: Log in to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      - name: Admin Frontend
+        run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
+
+      - name: Sleep
+        run: sleep 20
+
+      - name: Run Dusk Tests
+        run: php artisan dusk
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots
+
+      - name: Upload Console Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: console
+          path: tests/Browser/console
+
+      - name: Upload Laravel Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: laravel-logs
+          path: storage/logs

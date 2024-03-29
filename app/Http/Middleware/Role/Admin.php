@@ -16,7 +16,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (env('APP_ENV') != 'testing' && auth()->user()->role !== Role::Admin->value) {
+        if (env('APP_ENV') != 'testing' && auth()->user()->role != Role::Admin->value) {
             abort(403);
         }
 

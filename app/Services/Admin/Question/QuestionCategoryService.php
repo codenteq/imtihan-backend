@@ -11,4 +11,14 @@ class QuestionCategoryService extends BaseService
     {
         parent::__construct(QuestionCategory::class);
     }
+
+    /*
+     * Get all categories in tree structure
+     */
+    public function getTreeCategories()
+    {
+        $questionCategory = $this->model::whereNull('parent_id')->get();
+
+        return $questionCategory->load('childrenTree');
+    }
 }
