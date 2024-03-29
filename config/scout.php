@@ -133,12 +133,42 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY', null),
         'index-settings' => [
+            \App\Models\Announcement::class => [
+                'filterableAttributes' => ['id', 'name', 'content'],
+            ],
+            \App\Models\Condition::class => [
+                'filterableAttributes' => ['id', 'name', 'exam_type_id', 'exam_type_category_id', 'condition_category', 'value', 'is_active'],
+            ],
+            \App\Models\ExamType::class => [
+                'filterableAttributes' => ['id', 'name', 'language_id'],
+            ],
+            \App\Models\Language::class => [
+                'filterableAttributes' => ['id', 'name', 'code', 'is_active'],
+            ],
+            \App\Models\Lesson::class => [
+                'filterableAttributes' => ['id', 'name', 'content', 'category_id', 'language_id'],
+            ],
+            \App\Models\Note::class => [
+                'filterableAttributes' => ['id', 'name', 'content', 'is_everyone', 'user_id'],
+            ],
+            \App\Models\PaymentCoupon::class => [
+                'filterableAttributes' => ['id', 'code', 'discount', 'start_date', 'end_date'],
+            ],
+            \App\Models\PaymentSetting::class => [
+                'filterableAttributes' => ['id', 'price', 'is_default'],
+            ],
+            \App\Models\QuestionCategory::class => [
+                'filterableAttributes' => ['id', 'name', 'description', 'parent_id', 'language_id'],
+            ],
+            \App\Models\StaticPage::class => [
+                'filterableAttributes' => ['id', 'name', 'content'],
+            ],
             \App\Models\Support::class => [
                 'filterableAttributes' => ['id', 'subject', 'message', 'is_active', 'user_id'],
             ],
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
+            \App\Models\User::class => [
+                'filterableAttributes' => ['id', 'full_name', 'email', 'phone', 'address', 'birth_date', 'country_id', 'city_id', 'state_id', 'language_id', 'gender', 'education_level', 'is_active', 'role'],
+            ],
         ],
     ],
 
