@@ -52,15 +52,14 @@ class CategoryTest extends AdminFrontendDuskTestCase
                 ->storeConsoleLog('categories.last')
                 ->screenshot('categories/create.index');
 
-            $browser->click('table > tbody > tr:first-child > td > div > button')
+            $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated ' . $category->name)
-                ->pause(1000)
                 ->press('Kaydet')
                 ->waitForText('Updated ' . $category->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $category->name)
                 ->storeConsoleLog('categories.edit')
-                ->screenshot("categories/edit");
+                ->screenshot('categories/edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
