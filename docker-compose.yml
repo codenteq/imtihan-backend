@@ -117,6 +117,10 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+        environment:
+            VNC_NO_PASSWORD: 1
+        ports:
+            - '4444:4444'
 networks:
     sail:
         driver: bridge

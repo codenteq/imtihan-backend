@@ -1,8 +1,9 @@
 <?php
 
+namespace Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTruncation;
-use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
 
 abstract class StudentFrontendDuskTestCase extends DuskTestCase
 {
@@ -13,8 +14,17 @@ abstract class StudentFrontendDuskTestCase extends DuskTestCase
      *
      * @return string
      */
-    protected function baseUrl()
+    protected function baseUrl(): string
     {
         return env('FRONTEND_URL', 'http://localhost');
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->browse(function (Browser $browser) {
+            $browser->deleteCookie(config('session.cookie'));
+            $browser->deleteCookie('XSRF-TOKEN');
+        });
     }
 }

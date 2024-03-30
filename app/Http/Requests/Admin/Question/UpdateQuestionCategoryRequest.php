@@ -26,7 +26,7 @@ class UpdateQuestionCategoryRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'description' => 'string|max:255',
-            'parent_id' => 'numeric|exists:question_categories,id',
+            'parent_id' => 'numeric|exists:question_categories,id|nullable',
             'language_id' => 'numeric|exists:languages,id',
             'status' => [
                 Rule::enum(QuestionStatus::class)
