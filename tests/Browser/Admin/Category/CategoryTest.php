@@ -54,6 +54,8 @@ class CategoryTest extends AdminFrontendDuskTestCase
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
+                ->pause(1000)
+                ->screenshot('categories/edit.input')
                 ->type('input[name="name"]', 'Updated ' . $category->name)
                 ->press('Kaydet')
                 ->waitForText('Updated ' . $category->name, 10)
