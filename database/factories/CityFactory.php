@@ -19,7 +19,6 @@ class CityFactory extends Factory
     {
         return [
             'name' => $this->faker->city,
-            'plate_code' => rand(1, 81),
             'country_id' => Country::factory(),
         ];
     }
