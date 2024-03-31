@@ -42,7 +42,7 @@ return new class extends Migration
             $table->foreignId('city_id')->index()->nullable();
             $table->foreignId('state_id')->index()->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('language_id')->index()->default(true);
+            $table->foreignId('language_id')->index()->nullable();
             $table->string('avatar')->nullable();
             $table->enum('gender', $gender)->nullable();
             $table->enum('education_level', $educationLevel)->nullable();
