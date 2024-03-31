@@ -28,8 +28,5 @@ class DatabaseSeeder extends Seeder
             ->state(['role' => Role::Student])
             ->state(['education_level' => EducationLevel::High->value])
             ->create();
-        Country::factory(1)->create();
-        City::factory(1)->create();
-        State::factory(1)->create();
     }
 }
