@@ -50,7 +50,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
             $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$announcement->content."';");
 
             $browser->screenshot('announcements/admin/create')
-                ->pressAndWaitFor('Kaydet')
+                ->press('Kaydet')
                 ->waitForLocation('/announcements')
                 ->pause(1000)
                 ->assertSeeIn('table', $announcement->name)
@@ -60,7 +60,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->pause('1000')
                 ->type('input[name="name"]', 'Updated '.$announcement->name)
-                ->press('Kaydet')
+                ->pressAndWaitFor('Kaydet')
                 ->screenshot('announcements/admin/edit')
                 ->back()
                 ->waitForText('Updated '.$announcement->name, 10)
