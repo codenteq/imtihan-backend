@@ -8,10 +8,8 @@ use App\Models\Condition;
 use App\Models\ExamType;
 use App\Models\ExamTypeCategory;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 class ConditionTest extends AdminFrontendDuskTestCase
 {
@@ -24,7 +22,6 @@ class ConditionTest extends AdminFrontendDuskTestCase
             ->state(['email' => 'admin@imtihan.tech'])
             ->state(['role' => Role::Admin])
             ->create();
-
 
         $examType = ExamType::factory()->create();
         $examTypeCategory = ExamTypeCategory::factory()
@@ -69,17 +66,17 @@ class ConditionTest extends AdminFrontendDuskTestCase
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
-                ->type('input[name="name"]', 'Updated ' . $condition->name)
+                ->type('input[name="name"]', 'Updated '.$condition->name)
                 ->press('Kaydet')
-                ->waitForText('Updated ' . $condition->name, 10)
-                ->assertSeeIn('table', 'Updated ' . $condition->name)
+                ->waitForText('Updated '.$condition->name, 10)
+                ->assertSeeIn('table', 'Updated '.$condition->name)
                 ->storeConsoleLog('conditions.edit')
                 ->screenshot('conditions/edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
                 ->pause(1000)
-                ->assertDontSeeIn('table', 'Updated ' . $condition->name)
+                ->assertDontSeeIn('table', 'Updated '.$condition->name)
                 ->storeConsoleLog('conditions.delete')
                 ->screenshot('conditions/delete');
 

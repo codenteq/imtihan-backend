@@ -29,7 +29,7 @@ class UpdateAccountRequest extends FormRequest
             'address' => 'string|max:255',
             'avatar' => 'file',
             'gender' => [
-                Rule::enum(Gender::class)
+                Rule::enum(Gender::class),
             ],
             'birth_date' => 'date',
         ];

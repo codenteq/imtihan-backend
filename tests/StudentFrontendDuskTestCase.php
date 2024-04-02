@@ -11,8 +11,6 @@ abstract class StudentFrontendDuskTestCase extends DuskTestCase
 
     /**
      * Get the base URL for Dusk's default driver.
-     *
-     * @return string
      */
     protected function baseUrl(): string
     {

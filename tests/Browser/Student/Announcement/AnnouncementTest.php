@@ -36,9 +36,9 @@ class AnnouncementTest extends StudentFrontendDuskTestCase
                 ->screenshot('announcements/index');
 
             $browser->click('.announcement-card svg')
-                ->screenshot("announcements/view")
+                ->screenshot('announcements/view')
                 ->click('#view')
-                ->pause("1000")
+                ->pause('1000')
                 ->assertSeeIn('h1', $announcement->name)
                 ->storeConsoleLog('announcements.view')
                 ->screenshot('announcements/view.index');

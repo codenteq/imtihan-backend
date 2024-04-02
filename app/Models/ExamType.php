@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class ExamType extends Model
 {
-    use SoftDeletes, Searchable, HasFactory;
+    use HasFactory, Searchable, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -26,7 +26,6 @@ class ExamType extends Model
     {
         return $this->belongsToMany(ExamTypeCategory::class, 'exam_type_categories', 'exam_type_id', 'question_category_id');
     }
-
 
     /**
      * Get the name of the index associated with the model.

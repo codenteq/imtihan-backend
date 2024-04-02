@@ -6,10 +6,8 @@ use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\Admin\ExamType\StoreExamTypeRequest;
 use App\Http\Requests\Admin\ExamType\UpdateExamTypeRequest;
 use App\Http\Resources\Admin\ExamType\ExamTypeResource;
-use App\Models\ExamType;
 use App\Services\Admin\ExamType\ExamTypeService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExamTypeController extends ApiController

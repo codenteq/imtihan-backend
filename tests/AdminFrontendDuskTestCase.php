@@ -4,7 +4,6 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 
 abstract class AdminFrontendDuskTestCase extends DuskTestCase
 {

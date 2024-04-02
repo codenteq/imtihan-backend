@@ -29,8 +29,8 @@ class UpdateQuestionCategoryRequest extends FormRequest
             'parent_id' => 'numeric|exists:question_categories,id|nullable',
             'language_id' => 'numeric|exists:languages,id',
             'status' => [
-                Rule::enum(QuestionStatus::class)
-            ]
+                Rule::enum(QuestionStatus::class),
+            ],
         ];
     }
 }

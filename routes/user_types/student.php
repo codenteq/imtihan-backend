@@ -10,7 +10,6 @@ use App\Http\Controllers\API\Student\Note\NoteController;
 use App\Http\Controllers\API\Student\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Student\Support\SupportController;
 
-
 Route::prefix('accounts')->group(function () {
     Route::get('/', [AccountController::class, 'show']);
     Route::put('/', [AccountController::class, 'update']);
