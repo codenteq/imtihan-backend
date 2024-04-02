@@ -47,7 +47,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->type('input[name="name"]', $announcement->name)
                 ->pause(1000);
 
-            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$announcement->content."';");
+            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '" . $announcement->content . "';");
 
             $browser->screenshot('announcements/admin/create')
                 ->press('Kaydet')
@@ -59,19 +59,20 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->waitFor('input[name="name"]')
-                ->type('input[name="name"]', 'Updated '.$announcement->name)
+                ->type('input[name="name"]', 'Updated ' . $announcement->name)
                 ->press('Kaydet')
                 ->screenshot('announcements/admin/edit')
                 ->back()
-                ->waitForText('Updated '.$announcement->name, 10)
-                ->assertSeeIn('table', 'Updated '.$announcement->name)
+                ->pause(1000)
+                ->waitForText('Updated ' . $announcement->name, 10)
+                ->assertSeeIn('table', 'Updated ' . $announcement->name)
                 ->screenshot('announcements/admin/edit.index')
                 ->storeConsoleLog('announcements.edit');
 
             $browser->click('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated '.$announcement->name)
+                ->assertDontSeeIn('table', 'Updated ' . $announcement->name)
                 ->storeConsoleLog('announcements.delete')
                 ->screenshot('announcements/admin/delete');
         });
