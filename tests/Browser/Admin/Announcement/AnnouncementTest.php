@@ -8,6 +8,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
+/**
+ * @group admin
+ */
 class AnnouncementTest extends AdminFrontendDuskTestCase
 {
     /**
@@ -55,7 +58,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->screenshot('announcements/admin/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->waitFor('input[name="name"]')
+                ->pause('1000')
                 ->type('input[name="name"]', 'Updated '.$announcement->name)
                 ->press('Kaydet')
                 ->screenshot('announcements/admin/edit')
