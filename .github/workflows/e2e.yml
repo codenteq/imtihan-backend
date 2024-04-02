@@ -64,11 +64,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GH_TOKEN }}
 
-      - name: Admin Frontend
-        run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
-
-      - name: Student Frontend
-        run: docker run -d -p 3001:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-student-frontend:latest
+      - name: ${{ matrix.group }} Frontend
+        run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-${{ matrix.group }}-frontend:latest
 
       - name: Sleep
         run: sleep 20
