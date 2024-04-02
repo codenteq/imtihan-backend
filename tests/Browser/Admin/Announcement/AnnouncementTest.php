@@ -34,7 +34,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
 
             $browser->clickLink('Duyurular')
                 ->storeConsoleLog('announcements.index')
-                ->screenshot('announcements/index')
+                ->screenshot('announcements/admin/index')
                 ->waitForLocation('/announcements');
 
             $browser->pressAndWaitFor('Oluştur')
@@ -45,18 +45,18 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
 
             $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$announcement->content."';");
 
-            $browser->screenshot('announcements/create')
+            $browser->screenshot('announcements/admin/create')
                 ->pressAndWaitFor('Kaydet')
                 ->waitForLocation('/announcements')
                 ->assertSeeIn('table', $announcement->name)
                 ->storeConsoleLog('announcements.last')
-                ->screenshot('announcements/create.index');
+                ->screenshot('announcements/admin/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->pause(1000)
                 ->type('input[name="name"]', 'Updated '.$announcement->name)
                 ->press('Kaydet')
-                ->screenshot('announcements/edit')
+                ->screenshot('announcements/admin/edit')
                 ->back()
                 ->waitForText('Updated '.$announcement->name, 10)
                 ->assertSeeIn('table', 'Updated '.$announcement->name)
@@ -67,7 +67,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->pause(3000)
                 ->assertDontSeeIn('table', 'Updated '.$announcement->name)
                 ->storeConsoleLog('announcements.delete')
-                ->screenshot('announcements/delete');
+                ->screenshot('announcements/admin/delete');
         });
     }
 }
