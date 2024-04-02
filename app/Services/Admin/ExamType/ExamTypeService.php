@@ -53,4 +53,12 @@ class ExamTypeService extends BaseService
 
         return $examType;
     }
+
+    public function getCategories(int $exam_type): array
+    {
+        return ExamTypeCategory::where('exam_type_id', $exam_type)
+            ->with('questionCategory')
+            ->get()
+            ->toArray();
+    }
 }

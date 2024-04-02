@@ -51,3 +51,4 @@ Route::apiResources([
 ]);
 
 Route::apiResource('exam-types', ExamTypeController::class);
+Route::get('exam-type-categories/{exam_type}', [ExamTypeController::class, 'getCategories']);

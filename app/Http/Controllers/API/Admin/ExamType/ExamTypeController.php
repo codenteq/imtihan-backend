@@ -36,6 +36,15 @@ class ExamTypeController extends ApiController
         return $this->successResponse($this->examTypeService->paginate());
     }
 
+    public function getCategories(int $exam_type): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('admin.exam-type.list'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        return $this->successResponse($this->examTypeService->getCategories($exam_type));
+    }
+
     /**
      * Store a newly created resource in storage.
      */

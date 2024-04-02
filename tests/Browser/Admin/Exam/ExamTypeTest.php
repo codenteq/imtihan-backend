@@ -55,7 +55,7 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
                 ->screenshot('exam-types/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->pause("1000")
+                ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated ' . $examType->name)
                 ->check('input[id="category-' . $questionCategory->last()->id . '"]')
                 ->press('Kaydet')
