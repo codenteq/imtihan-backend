@@ -60,11 +60,13 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->pause('1000')
                 ->type('input[name="name"]', 'Updated '.$announcement->name)
-                ->pressAndWaitFor('Kaydet')
+                ->press('Kaydet')
+                ->pause(1000)
                 ->screenshot('announcements/admin/edit')
                 ->back()
                 ->waitForText('Updated '.$announcement->name, 10)
                 ->assertSeeIn('table', 'Updated '.$announcement->name)
+                ->screenshot('announcements/admin/edit.index')
                 ->storeConsoleLog('announcements.edit');
 
             $browser->click('table > tbody > tr:first-child > td > div > button:nth-child(3)')
