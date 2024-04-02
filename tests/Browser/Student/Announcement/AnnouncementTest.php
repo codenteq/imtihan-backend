@@ -8,6 +8,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\StudentFrontendDuskTestCase;
 
+/**
+ * @group student
+ */
 class AnnouncementTest extends StudentFrontendDuskTestCase
 {
     public function testAnnouncement(): void

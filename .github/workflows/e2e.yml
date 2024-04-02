@@ -20,6 +20,12 @@ env:
 jobs:
   dusk-php:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - admin
+          - student
     steps:
 
       - name: Setup PHP
@@ -68,7 +74,7 @@ jobs:
         run: sleep 20
 
       - name: Run Dusk Tests
-        run: php artisan dusk
+        run: php artisan dusk --group ${{ matrix.group }}
 
       - name: Upload Screenshots
         if: failure()
