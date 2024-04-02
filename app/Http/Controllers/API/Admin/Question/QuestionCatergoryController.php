@@ -36,7 +36,6 @@ class QuestionCatergoryController extends ApiController
         return $this->successResponse($this->questionCategoryService->paginate(['children']));
     }
 
-
     /*
      * Get all categories in tree structure
      */

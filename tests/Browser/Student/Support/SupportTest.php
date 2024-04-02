@@ -48,7 +48,7 @@ class SupportTest extends StudentFrontendDuskTestCase
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('', 'Updated ' . $support->subject)
+                ->assertDontSeeIn('', 'Updated '.$support->subject)
                 ->storeConsoleLog('supports.delete')
                 ->screenshot('supports/delete');
         });

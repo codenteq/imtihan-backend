@@ -6,10 +6,8 @@ use App\Enums\EducationLevel;
 use App\Enums\Gender;
 use App\Enums\Role;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 class UserTest extends AdminFrontendDuskTestCase
 {
@@ -61,19 +59,19 @@ class UserTest extends AdminFrontendDuskTestCase
                 ->screenshot('users/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->pause("1000")
-                ->type('input[name="full_name"]', 'Updated ' . $user->full_name)
+                ->pause('1000')
+                ->type('input[name="full_name"]', 'Updated '.$user->full_name)
                 ->press('Kaydet')
-                ->screenshot("users/edit")
+                ->screenshot('users/edit')
                 ->back()
-                ->waitForText('Updated ' . $user->full_name, 10)
-                ->assertSeeIn('table', 'Updated ' . $user->full_name)
+                ->waitForText('Updated '.$user->full_name, 10)
+                ->assertSeeIn('table', 'Updated '.$user->full_name)
                 ->storeConsoleLog('users.edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated ' . $user->full_name)
+                ->assertDontSeeIn('table', 'Updated '.$user->full_name)
                 ->storeConsoleLog('users.delete')
                 ->screenshot('users/delete');
 

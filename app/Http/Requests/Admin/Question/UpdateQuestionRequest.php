@@ -32,7 +32,7 @@ class UpdateQuestionRequest extends FormRequest
             'language_id' => 'numeric|exists:languages,id',
             'options' => 'array',
             'difficulty' => [
-                Rule::enum(Difficulty::class)
+                Rule::enum(Difficulty::class),
             ],
         ];
     }

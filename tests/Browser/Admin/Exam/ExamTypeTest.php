@@ -6,10 +6,8 @@ use App\Enums\Role;
 use App\Models\ExamType;
 use App\Models\QuestionCategory;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 class ExamTypeTest extends AdminFrontendDuskTestCase
 {
@@ -45,8 +43,8 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
                 ->waitFor('input[name="name"]', 3)
                 ->type('input[name="name"]', $examType->name)
                 ->select('select[name="language_id"]', $examType->language_id)
-                ->check('input[id="category-' . $questionCategory->first()->id . '"]')
-                ->check('input[id="category-' . $questionCategory->last()->id . '"]')
+                ->check('input[id="category-'.$questionCategory->first()->id.'"]')
+                ->check('input[id="category-'.$questionCategory->last()->id.'"]')
                 ->screenshot('exam-types/create')
                 ->press('Kaydet')
                 ->pause(3000)
@@ -56,20 +54,20 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->waitFor('input[name="name"]')
-                ->type('input[name="name"]', 'Updated ' . $examType->name)
-                ->check('input[id="category-' . $questionCategory->last()->id . '"]')
+                ->type('input[name="name"]', 'Updated '.$examType->name)
+                ->check('input[id="category-'.$questionCategory->last()->id.'"]')
                 ->press('Kaydet')
-                ->screenshot("exam-types/edit")
+                ->screenshot('exam-types/edit')
                 ->back()
-                ->waitForText('Updated ' . $examType->name, 10)
-                ->assertSeeIn('table', 'Updated ' . $examType->name)
+                ->waitForText('Updated '.$examType->name, 10)
+                ->assertSeeIn('table', 'Updated '.$examType->name)
                 ->storeConsoleLog('exam-types.edit')
                 ->screenshot('exam-types/edit.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()
                 ->pause(1000)
-                ->assertDontSeeIn('table', 'Updated ' . $examType->name)
+                ->assertDontSeeIn('table', 'Updated '.$examType->name)
                 ->storeConsoleLog('exam-types.delete')
                 ->screenshot('exam-types/delete.index');
         });

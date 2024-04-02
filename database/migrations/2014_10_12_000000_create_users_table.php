@@ -26,10 +26,10 @@ return new class extends Migration
             Role::Admin->value,
         ];
 
-       $gender = [
-           Gender::Male->value,
-           Gender::Female->value,
-       ];
+        $gender = [
+            Gender::Male->value,
+            Gender::Female->value,
+        ];
 
         Schema::create('users', function (Blueprint $table) use ($educationLevel, $role, $gender) {
             $table->id();

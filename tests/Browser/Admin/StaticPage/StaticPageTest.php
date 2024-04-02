@@ -5,10 +5,8 @@ namespace Tests\Browser\Admin\StaticPage;
 use App\Enums\Role;
 use App\Models\StaticPage;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 class StaticPageTest extends AdminFrontendDuskTestCase
 {
@@ -44,7 +42,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->type('input[name="name"]', $staticPage->name)
                 ->pause(1000);
 
-            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '" . $staticPage->content . "';");
+            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$staticPage->content."';");
 
             $browser->screenshot('static-pages/create')
                 ->press('Kaydet')
@@ -55,18 +53,18 @@ class StaticPageTest extends AdminFrontendDuskTestCase
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->waitFor('input[name="name"]')
-                ->type('input[name="name"]', 'Updated ' . $staticPage->name)
+                ->type('input[name="name"]', 'Updated '.$staticPage->name)
                 ->press('Kaydet')
                 ->screenshot('static-pages/edit')
                 ->back()
-                ->waitForText('Updated ' . $staticPage->name, 10)
-                ->assertSeeIn('table', 'Updated ' . $staticPage->name)
+                ->waitForText('Updated '.$staticPage->name, 10)
+                ->assertSeeIn('table', 'Updated '.$staticPage->name)
                 ->storeConsoleLog('static-pages.edit');
 
             $browser->click('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated ' . $staticPage->name)
+                ->assertDontSeeIn('table', 'Updated '.$staticPage->name)
                 ->storeConsoleLog('static-pages.delete')
                 ->screenshot('static-pages/delete');
 

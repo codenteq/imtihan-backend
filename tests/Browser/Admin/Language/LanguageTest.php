@@ -7,7 +7,6 @@ use App\Models\Language;
 use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 class LanguageTest extends AdminFrontendDuskTestCase
 {
@@ -49,17 +48,17 @@ class LanguageTest extends AdminFrontendDuskTestCase
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
-                ->type('input[name="name"]', 'Updated ' . $language->name)
+                ->type('input[name="name"]', 'Updated '.$language->name)
                 ->press('Kaydet')
-                ->waitForText('Updated ' . $language->name, 10)
-                ->assertSeeIn('table', 'Updated ' . $language->name)
+                ->waitForText('Updated '.$language->name, 10)
+                ->assertSeeIn('table', 'Updated '.$language->name)
                 ->storeConsoleLog('languages.edit')
                 ->screenshot('languages/edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated ' . $language->name)
+                ->assertDontSeeIn('table', 'Updated '.$language->name)
                 ->storeConsoleLog('languages.delete')
                 ->screenshot('languages/delete');
         });

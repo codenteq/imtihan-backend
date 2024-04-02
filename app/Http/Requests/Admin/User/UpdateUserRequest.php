@@ -32,7 +32,7 @@ class UpdateUserRequest extends FormRequest
                 Rule::enum(Gender::class),
             ],
             'education_level' => [
-                Rule::enum(EducationLevel::class)
+                Rule::enum(EducationLevel::class),
             ],
             'birth_date' => 'date',
             'is_active' => 'boolean',
