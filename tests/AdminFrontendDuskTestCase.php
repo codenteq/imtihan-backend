@@ -23,6 +23,7 @@ abstract class AdminFrontendDuskTestCase extends DuskTestCase
     {
         parent::setUp();
         $this->browse(function (Browser $browser) {
+            $browser->pause(5000);
             $browser->deleteCookie(config('session.cookie'));
             $browser->deleteCookie('XSRF-TOKEN');
         });
