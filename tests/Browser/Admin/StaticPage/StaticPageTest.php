@@ -37,7 +37,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->screenshot('static-pages/index')
                 ->waitForLocation('/static-pages');
 
-            $browser->pressAndWaitFor('Oluştur')
+            $browser->press('Oluştur')
                 ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', $staticPage->name)
                 ->pause(1000);

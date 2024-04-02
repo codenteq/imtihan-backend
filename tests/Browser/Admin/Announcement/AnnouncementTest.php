@@ -38,7 +38,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->screenshot('announcements/admin/index')
                 ->waitForLocation('/announcements');
 
-            $browser->pressAndWaitFor('Oluştur')
+            $browser->press('Oluştur')
                 ->waitFor('input[name="name"]')
                 ->attach('input[name="src"]', $announcement->src)
                 ->type('input[name="name"]', $announcement->name)
