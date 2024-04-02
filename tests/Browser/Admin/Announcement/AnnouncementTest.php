@@ -33,6 +33,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->waitForLocation('/');
 
             $browser->clickLink('Duyurular')
+                ->pause(1000)
                 ->storeConsoleLog('announcements.index')
                 ->screenshot('announcements/admin/index')
                 ->waitForLocation('/announcements');
@@ -48,12 +49,13 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
             $browser->screenshot('announcements/admin/create')
                 ->pressAndWaitFor('Kaydet')
                 ->waitForLocation('/announcements')
+                ->pause(1000)
                 ->assertSeeIn('table', $announcement->name)
                 ->storeConsoleLog('announcements.last')
                 ->screenshot('announcements/admin/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->pause(1000)
+                ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated '.$announcement->name)
                 ->press('Kaydet')
                 ->screenshot('announcements/admin/edit')

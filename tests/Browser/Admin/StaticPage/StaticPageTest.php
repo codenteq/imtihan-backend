@@ -47,6 +47,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
             $browser->screenshot('static-pages/create')
                 ->press('Kaydet')
                 ->waitForLocation('/static-pages')
+                ->pause(1000)
                 ->assertSeeIn('table', $staticPage->name)
                 ->storeConsoleLog('static-pages.last')
                 ->screenshot('static-pages/create.index');
