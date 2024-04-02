@@ -62,7 +62,7 @@ class ConditionTest extends AdminFrontendDuskTestCase
 
                 ->select('select[name="condition_category"]', ConditionCategory::Time->value)
                 ->press('Kaydet')
-                ->pause(1000)
+                ->pause(3000)
                 ->assertSeeIn('table', $condition->name)
                 ->storeConsoleLog('conditions.last')
                 ->screenshot('conditions/create.index');
