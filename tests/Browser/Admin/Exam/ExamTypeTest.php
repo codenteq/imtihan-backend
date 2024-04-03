@@ -9,7 +9,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
-
+/**
+ * @group admin
+ */
 class ExamTypeTest extends AdminFrontendDuskTestCase
 {
 
