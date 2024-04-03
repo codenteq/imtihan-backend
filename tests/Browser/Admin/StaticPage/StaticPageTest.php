@@ -8,14 +8,10 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
-/**
- * @group admin
- */
+
 class StaticPageTest extends AdminFrontendDuskTestCase
 {
-    /**
-     * A Dusk test example.
-     */
+
     public function testStaticPage(): void
     {
         User::factory(1)
