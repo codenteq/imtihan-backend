@@ -62,6 +62,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->pause(1500)
                 ->screenshot('announcements/admin/edit')
                 ->back()
+                ->screenshot('announcements/admin/edit.back')
                 ->waitForText('Updated ' . $announcement->name, 10)
                 ->assertSeeIn('table', 'Updated ' . $announcement->name)
                 ->screenshot('announcements/admin/edit.index')
