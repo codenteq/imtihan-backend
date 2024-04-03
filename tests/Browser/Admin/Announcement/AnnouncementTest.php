@@ -56,7 +56,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
                 ->screenshot('announcements/admin/create.index');
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->waitFor('input[name="name"]')
+                ->pause(5000)
                 ->type('input[name="name"]', 'Updated ' . $announcement->name)
                 ->press('Kaydet')
                 ->screenshot('announcements/admin/edit')
