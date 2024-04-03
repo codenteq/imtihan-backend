@@ -8,9 +8,7 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
-/**
- * @group admin
- */
+
 class LanguageTest extends AdminFrontendDuskTestCase
 {
     public function testLanguage(): void

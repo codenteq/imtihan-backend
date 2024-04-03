@@ -9,9 +9,7 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
-/**
- * @group admin
- */
+
 class CategoryTest extends AdminFrontendDuskTestCase
 {
     /**

@@ -13,9 +13,7 @@ use Tests\AdminFrontendDuskTestCase;
  */
 class AnnouncementTest extends AdminFrontendDuskTestCase
 {
-    /**
-     * A Dusk test announcement.
-     */
+
     public function testAdminAnnouncement(): void
     {
         User::factory(1)
