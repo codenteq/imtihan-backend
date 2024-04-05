@@ -11,6 +11,9 @@ use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 use Tests\DuskTestCase;
 
+/**
+ * @group admin
+ */
 class AccountTest extends AdminFrontendDuskTestCase
 {
     public function testAdminAccount(): void
