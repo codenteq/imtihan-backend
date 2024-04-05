@@ -74,7 +74,8 @@ class AccountTest extends AdminFrontendDuskTestCase
                 ->waitForLocation('/auth/login', 10)
                 ->screenshot('account/admin/logout');
 
-            $browser->type('#email', 'admin@imtihan.tech')
+            $browser->waitFor('#email')
+                ->type('#email', 'admin@imtihan.tech')
                 ->type('#password', '12345678')
                 ->pressAndWaitFor('Giriş yap', 10)
                 ->waitForLocation('/')
