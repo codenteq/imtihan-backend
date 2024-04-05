@@ -22,6 +22,11 @@ class ExamResult extends Model
         'user_id',
     ];
 
+    public function exam(): HasOne
+    {
+        return $this->hasOne(Exam::class, 'id', 'exam_id');
+    }
+
     public function category(): HasMany
     {
         return $this->hasMany(ExamResultCategory::class, 'exam_id', 'exam_id');

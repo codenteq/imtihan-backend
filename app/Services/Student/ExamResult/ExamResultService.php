@@ -27,6 +27,8 @@ class ExamResultService
         $inCorrectAnswer = $totalQuestions - $correctAnswer - $blankAnswer;
         $point = $this->calculateConditionPoint($correctAnswer, $inCorrectAnswer, $blankAnswer);
 
+        info(['env' => env('QUEUE_CONNECTION')]);
+
         Log::info('Exam Result', [
             'total_questions' => $totalQuestions,
             'correct' => $correctAnswer,

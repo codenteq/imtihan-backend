@@ -8,6 +8,7 @@ use App\Jobs\ExamResultJob;
 use App\Models\Condition;
 use App\Models\Exam;
 use App\Models\ExamQuestion;
+use App\Models\ExamResult;
 use App\Models\ExamUserAnswer;
 use App\Models\Question;
 use App\Services\Base\BaseService;
@@ -99,6 +100,27 @@ class ExamService extends BaseService
         ExamResultJob::dispatch($exam)->onQueue('exam_result');
 
         return $answers;
+    }
+
+    public function getExamResultAll(): mixed
+    {
+        return ExamResult::query()->whereUserId(auth()->id())->with([
+            'exam.examType' => fn($query) => $query->select(['id', 'name']),
+        ])->latest()->paginate();
+    }
+
+    public function getExamResult(int $exam)
+    {
+        $examResult = ExamResult::query()->whereExamId($exam)->whereUserId(auth()->id())->with([
+            'exam.examType' => fn($query) => $query->select(['id', 'name']),
+        ])->first();
+
+        $condition = Condition::query()->where('exam_type_id', $examResult->exam->exam_type_id)->pluck('value', 'condition_category');
+
+        return [
+            ...$examResult->toArray(),
+            ...$condition
+        ];
     }
 
     public function destroy(int $id, array $where = []): mixed
