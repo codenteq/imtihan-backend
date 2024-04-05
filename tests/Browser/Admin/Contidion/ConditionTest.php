@@ -56,9 +56,9 @@ class ConditionTest extends AdminFrontendDuskTestCase
                 ->type('input[name="value"]', $condition->value)
 
                 ->select('select[name="exam_type_id"]', $condition->exam_type_id)
-                ->waitForInput('exam_type_id')
+                ->pause(500)
                 ->select('select[name="exam_type_category_id"]', $condition->exam_type_category_id)
-                ->waitForInput('exam_type_category_id')
+                ->assertSelected('select[name="exam_type_category_id"]', $condition->exam_type_category_id)
 
                 ->select('select[name="condition_category"]', ConditionCategory::Time->value)
                 ->press('Kaydet')
