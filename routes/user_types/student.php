@@ -18,6 +18,8 @@ Route::prefix('accounts')->group(function () {
 });
 
 Route::post('exams/{exam}/answer', [ExamController::class, 'storeAnswer']);
+Route::get('exams/results', [ExamController::class, 'getExamResultAll']);
+Route::get('exams/results/{exam}', [ExamController::class, 'getExamResult']);
 Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'destroy']);
 Route::get('exam-types', [ExamTypeController::class, 'index']);
 

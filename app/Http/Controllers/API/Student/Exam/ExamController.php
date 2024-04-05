@@ -57,6 +57,24 @@ class ExamController extends ApiController
         return $this->successResponse($answer, Response::HTTP_CREATED);
     }
 
+    public function getExamResultAll(): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('student.exam.results'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        return $this->successResponse($this->examService->getExamResultAll());
+    }
+
+    public function getExamResult(int $exam): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('student.exam.results'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        return $this->successResponse($this->examService->getExamResult($exam));
+    }
+
     /**
      * Delete the exam
      */
