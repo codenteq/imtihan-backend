@@ -64,6 +64,7 @@ class QuestionService extends BaseService
         }
 
         $options = [];
+        $requestOptions = $request->options ?? [];
 
         if ($request->is_image_option) {
             foreach ($request->options as $key => $option) {
@@ -72,7 +73,7 @@ class QuestionService extends BaseService
                 $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
         } else {
-            foreach ($request->options as $key => $option) {
+            foreach ($requestOptions as $key => $option) {
                 $options[$key]['description'] = $option['description'];
                 $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
