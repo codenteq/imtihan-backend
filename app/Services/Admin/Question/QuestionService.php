@@ -54,6 +54,8 @@ class QuestionService extends BaseService
     {
         $question = $this->model::findOrFail($id);
 
+        Log::info($request->options);
+
         $data = $request;
 
         if ($request->hasFile('src')) {
