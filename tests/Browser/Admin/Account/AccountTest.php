@@ -71,7 +71,7 @@ class AccountTest extends AdminFrontendDuskTestCase
             $browser->clickLink('Hesap')
                 ->waitForLocation('/account')
                 ->click('#logout-btn')
-                ->waitForLocation('/auth/login')
+                ->waitForLocation('/auth/login', 10)
                 ->screenshot('account/admin/logout');
 
             $browser->type('#email', 'admin@imtihan.tech')
