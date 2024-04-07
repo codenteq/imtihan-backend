@@ -56,6 +56,8 @@ class NoteTest extends StudentFrontendDuskTestCase
                 ->pause('1000')
                 ->type('input[name="name"]', 'Updated '.$note->name)
                 ->press('Kaydet')
+                ->back()
+                ->pause(3000)
                 ->screenshot('notes/edit')
                 ->waitForText('Updated '.$note->name, 10)
                 ->assertSeeIn('.note-card', 'Updated '.$note->name)
