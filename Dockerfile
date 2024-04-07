@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.3-alpine
 LABEL authors="karabayyazilim"
 
 RUN apt-get update && apt-get install -y \
