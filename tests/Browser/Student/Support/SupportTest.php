@@ -8,6 +8,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\StudentFrontendDuskTestCase;
 
+/**
+ * @group student
+ */
 class SupportTest extends StudentFrontendDuskTestCase
 {
     public function testSupport(): void
@@ -48,7 +51,7 @@ class SupportTest extends StudentFrontendDuskTestCase
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('', 'Updated ' . $support->subject)
+                ->assertDontSeeIn('', 'Updated '.$support->subject)
                 ->storeConsoleLog('supports.delete')
                 ->screenshot('supports/delete');
         });

@@ -8,6 +8,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\StudentFrontendDuskTestCase;
 
+/**
+ * @group student
+ */
 class NoteTest extends StudentFrontendDuskTestCase
 {
     public function testNote(): void
@@ -39,7 +42,7 @@ class NoteTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/note/create', 3)
                 ->type('input[name="name"]', $note->name);
 
-            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '" . $note->content . "';");
+            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$note->content."';");
 
             $browser->screenshot('notes/create')
                 ->press('Kaydet')
@@ -50,12 +53,14 @@ class NoteTest extends StudentFrontendDuskTestCase
 
             $browser->click('.note-card svg')
                 ->click('#edit')
-                ->pause("1000")
-                ->type('input[name="name"]', 'Updated ' . $note->name)
+                ->pause('1000')
+                ->type('input[name="name"]', 'Updated '.$note->name)
                 ->press('Kaydet')
-                ->screenshot("notes/edit")
-                ->waitForText('Updated ' . $note->name, 10)
-                ->assertSeeIn('.note-card', 'Updated ' . $note->name)
+                ->back()
+                ->pause(3000)
+                ->screenshot('notes/edit')
+                ->waitForText('Updated '.$note->name, 10)
+                ->assertSeeIn('.note-card', 'Updated '.$note->name)
                 ->storeConsoleLog('notes.edit')
                 ->screenshot('notes/edit.index');
 
@@ -63,7 +68,7 @@ class NoteTest extends StudentFrontendDuskTestCase
                 ->click('#remove')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('', 'Updated ' . $note->name)
+                ->assertDontSeeIn('', 'Updated '.$note->name)
                 ->storeConsoleLog('notes.delete')
                 ->screenshot('notes/delete');
         });

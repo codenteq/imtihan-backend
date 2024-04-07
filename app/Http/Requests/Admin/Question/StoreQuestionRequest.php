@@ -34,11 +34,11 @@ class StoreQuestionRequest extends FormRequest
             'options' => 'required|array',
             'difficulty' => [
                 'required',
-                Rule::enum(Difficulty::class)
+                Rule::enum(Difficulty::class),
             ],
             'status' => [
                 'required',
-                Rule::enum(QuestionStatus::class)
+                Rule::enum(QuestionStatus::class),
             ],
         ];
     }

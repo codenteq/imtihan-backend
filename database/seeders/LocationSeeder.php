@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -21,7 +20,7 @@ class LocationSeeder extends Seeder
         $cities = File::json(base_path('/database/dump-data/cities.json'));
         $states = File::json(base_path('/database/dump-data/states.json'));
 
-       DB::transaction(function () use ($countries, $cities, $states) {
+        DB::transaction(function () use ($countries, $cities, $states) {
             foreach ($countries as $country) {
                 Country::create($country);
             }

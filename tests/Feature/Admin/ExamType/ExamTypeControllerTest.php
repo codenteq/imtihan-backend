@@ -6,8 +6,6 @@ use App\Models\ExamType;
 use App\Models\QuestionCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -59,7 +57,7 @@ class ExamTypeControllerTest extends TestCase
 
         Sanctum::actingAs($user, ['admin.exam-type.show']);
 
-        $response = $this->get($this->apiUrl . '/' . $examType->id);
+        $response = $this->get($this->apiUrl.'/'.$examType->id);
 
         $response->assertJsonFragment(['id' => $examType->id]);
     }
@@ -71,7 +69,7 @@ class ExamTypeControllerTest extends TestCase
 
         Sanctum::actingAs($user, ['admin.exam-type.update']);
 
-        $response = $this->putJson($this->apiUrl . '/' . $examType->id, [
+        $response = $this->putJson($this->apiUrl.'/'.$examType->id, [
             'name' => 'Test',
         ]);
 
@@ -85,7 +83,7 @@ class ExamTypeControllerTest extends TestCase
 
         Sanctum::actingAs($user, ['admin.exam-type.delete']);
 
-        $response = $this->delete($this->apiUrl . '/' . $examType->id);
+        $response = $this->delete($this->apiUrl.'/'.$examType->id);
         $response->assertStatus(200);
     }
 }

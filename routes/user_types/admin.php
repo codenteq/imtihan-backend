@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\API\Admin\Account\AccountController;
 use App\Http\Controllers\API\Admin\Announcement\AnnouncementController;
 use App\Http\Controllers\API\Admin\Condition\ConditionController;
@@ -15,8 +14,6 @@ use App\Http\Controllers\API\Admin\Question\QuestionController;
 use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Admin\User\UserController;
-
-
 
 Route::apiResource('users', UserController::class);
 
@@ -51,3 +48,4 @@ Route::apiResources([
 ]);
 
 Route::apiResource('exam-types', ExamTypeController::class);
+Route::get('exam-type-categories/{exam_type}', [ExamTypeController::class, 'getCategories']);

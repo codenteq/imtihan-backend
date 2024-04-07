@@ -27,12 +27,12 @@ class UpdateQuestionRequest extends FormRequest
             'name' => 'string|max:255',
             'description' => 'string',
             'category_id' => 'numeric|exists:question_categories,id',
-            'is_image_option' => 'numeric',
+            'is_image_option' => 'boolean',
             'src' => 'file',
             'language_id' => 'numeric|exists:languages,id',
             'options' => 'array',
             'difficulty' => [
-                Rule::enum(Difficulty::class)
+                Rule::enum(Difficulty::class),
             ],
         ];
     }

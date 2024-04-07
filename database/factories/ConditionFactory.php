@@ -25,7 +25,7 @@ class ConditionFactory extends Factory
             'exam_type_id' => ExamType::factory(),
             'exam_type_category_id' => ExamTypeCategory::factory(),
             'condition_category' => ConditionCategory::Time,
-            'value' => $this->faker->randomFloat(1, 0, 100),
+            'value' => $this->faker->randomDigit(),
             'is_active' => Status::Active,
         ];
     }

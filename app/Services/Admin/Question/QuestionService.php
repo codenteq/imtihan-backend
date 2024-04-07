@@ -54,6 +54,8 @@ class QuestionService extends BaseService
     {
         $question = $this->model::findOrFail($id);
 
+        Log::info($request->options);
+
         $data = $request;
 
         if ($request->hasFile('src')) {
@@ -62,15 +64,18 @@ class QuestionService extends BaseService
         }
 
         $options = [];
+        $requestOptions = $request->options ?? [];
 
         if ($request->is_image_option) {
             foreach ($request->options as $key => $option) {
                 $path = $option['src']->store('options');
+                $options[$key]['id'] = $option['id'] ?? null;
                 $options[$key]['src'] = $path;
                 $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
         } else {
-            foreach ($request->options as $key => $option) {
+            foreach ($requestOptions as $key => $option) {
+                $options[$key]['id'] = $option['id'] ?? null;
                 $options[$key]['description'] = $option['description'];
                 $options[$key]['is_correct'] = $option['is_correct'] ?? false;
             }
@@ -79,9 +84,24 @@ class QuestionService extends BaseService
         DB::transaction(function () use ($data, $question, $options) {
             $question->update($data->all());
 
-            $question->options()->delete();
+            $currentOptionIds = $question->options()->pluck('id')->toArray();
+            info($currentOptionIds);
 
-            $question->options()->createMany($options);
+            $newOptionIds = [];
+            foreach ($options as $option) {
+                info(['option-id' => $option['id']]);
+
+                if (isset($option['id'])) {
+                    $question->options()->where('id', $option['id'])->update($option);
+                    $newOptionIds[] = $option['id'];
+                } else {
+                    $newOption = $question->options()->create($option);
+                    $newOptionIds[] = $newOption->id;
+                }
+            }
+
+            $optionsToDelete = array_diff($currentOptionIds, $newOptionIds);
+            $question->options()->whereIn('id', $optionsToDelete)->delete();
         });
 
         return $question;

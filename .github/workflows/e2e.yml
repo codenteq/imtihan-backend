@@ -10,9 +10,9 @@ env:
   REGISTRY: ghcr.io
   REPO_OWNER: ${{ github.repository_owner }}
   APP_URL: "http://localhost:8000"
-  FRONTEND_URL: "http://localhost:3001"
+  FRONTEND_URL: "http://localhost:3000"
   ADMIN_FRONTEND_URL: "http://localhost:3000"
-  SANCTUM_STATEFUL_DOMAINS: "localhost:3000,localhost:3001"
+  SANCTUM_STATEFUL_DOMAINS: "localhost:3000"
   DB_CONNECTION: sqlite
   DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
   NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
@@ -20,6 +20,12 @@ env:
 jobs:
   dusk-php:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - admin
+          - student
     steps:
 
       - name: Setup PHP
@@ -58,17 +64,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GH_TOKEN }}
 
-      - name: Admin Frontend
-        run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-admin-frontend:latest
-
-      - name: Student Frontend
-        run: docker run -d -p 3001:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-student-frontend:latest
+      - name: ${{ matrix.group }} Frontend
+        run: docker run -d -p 3000:3000 -e NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/imtihan-${{ matrix.group }}-frontend:latest
 
       - name: Sleep
-        run: sleep 20
+        run: sleep 30
 
       - name: Run Dusk Tests
-        run: php artisan dusk
+        run: php artisan dusk --group ${{ matrix.group }}
 
       - name: Upload Screenshots
         if: failure()

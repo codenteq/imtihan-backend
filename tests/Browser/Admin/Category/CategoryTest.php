@@ -6,11 +6,12 @@ use App\Enums\Role;
 use App\Models\Language;
 use App\Models\QuestionCategory;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
+/**
+ * @group admin
+ */
 class CategoryTest extends AdminFrontendDuskTestCase
 {
     /**
@@ -56,17 +57,17 @@ class CategoryTest extends AdminFrontendDuskTestCase
                 ->waitFor('input[name="name"]')
                 ->pause(1000)
                 ->screenshot('categories/edit.input')
-                ->type('input[name="name"]', 'Updated ' . $category->name)
+                ->type('input[name="name"]', 'Updated '.$category->name)
                 ->press('Kaydet')
-                ->waitForText('Updated ' . $category->name, 10)
-                ->assertSeeIn('table', 'Updated ' . $category->name)
+                ->waitForText('Updated '.$category->name, 10)
+                ->assertSeeIn('table', 'Updated '.$category->name)
                 ->storeConsoleLog('categories.edit')
                 ->screenshot('categories/edit');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated ' . $category->name)
+                ->assertDontSeeIn('table', 'Updated '.$category->name)
                 ->storeConsoleLog('categories.delete')
                 ->screenshot('categories/delete');
 

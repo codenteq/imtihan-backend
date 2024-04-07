@@ -29,10 +29,10 @@ class UpdateAccountRequest extends FormRequest
             'phone' => 'string|max:12',
             'address' => 'string|max:255',
             'education_level' => [
-                Rule::enum(EducationLevel::class)
+                Rule::enum(EducationLevel::class),
             ],
             'gender' => [
-                Rule::enum(Gender::class)
+                Rule::enum(Gender::class),
             ],
             'avatar' => 'file',
             'country_id' => 'numeric|exists:countries,id',

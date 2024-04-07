@@ -1,23 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\Admin\Account\AccountController;
-use App\Http\Controllers\API\Admin\Announcement\AnnouncementController;
-use App\Http\Controllers\API\Admin\Condition\ConditionController;
-use App\Http\Controllers\API\Admin\Language\LanguageController;
-use App\Http\Controllers\API\Admin\Lesson\LessonController;
-use App\Http\Controllers\API\Admin\Payment\PaymentCouponController;
-use App\Http\Controllers\API\Admin\Payment\PaymentMethodController;
-use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
-use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
-use App\Http\Controllers\API\Admin\Question\QuestionController;
-use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
-use App\Http\Controllers\API\Admin\Support\SupportController;
-use App\Http\Controllers\API\Admin\User\UserController;
-use App\Http\Controllers\API\Student\ClassSchedule\ClassScheduleController;
-use App\Http\Controllers\API\Student\Exam\ExamController;
-use App\Http\Controllers\API\Student\ExamType\ExamTypeController;
-use App\Http\Controllers\API\Student\Location\LocationController;
-use App\Http\Controllers\API\Student\Note\NoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
