@@ -56,6 +56,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', 'Updated '.$staticPage->name)
+                ->pause(500)
                 ->assertInputValue('input[name="name"]', 'Updated '.$staticPage->name)
                 ->pause(500)
                 ->press('Kaydet')
