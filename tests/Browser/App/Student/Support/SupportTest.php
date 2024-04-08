@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Student\Support;
+namespace Tests\Browser\App\Student\Support;
 
 use App\Enums\Role;
 use App\Models\Support;

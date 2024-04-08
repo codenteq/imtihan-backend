@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\User;
+namespace Tests\Browser\App\Admin\User;
 
 use App\Enums\EducationLevel;
 use App\Enums\Gender;

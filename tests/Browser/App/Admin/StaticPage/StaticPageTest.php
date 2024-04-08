@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\StaticPage;
+namespace Tests\Browser\App\Admin\StaticPage;
 
 use App\Enums\Role;
 use App\Models\StaticPage;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Browser\Admin\Lesson;
+namespace Tests\Browser\App\Admin\Lesson;
 
 use App\Enums\Role;
 use App\Models\Lesson;
