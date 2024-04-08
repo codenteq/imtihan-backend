@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\Category;
+namespace Tests\Browser\App\Admin\Category;
 
 use App\Enums\Role;
 use App\Models\Language;

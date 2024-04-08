@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\Exam;
+namespace Tests\Browser\App\Admin\Exam;
 
 use App\Enums\Role;
 use App\Models\ExamType;

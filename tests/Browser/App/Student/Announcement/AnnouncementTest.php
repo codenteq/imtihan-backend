@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Student\Announcement;
+namespace Tests\Browser\App\Student\Announcement;
 
 use App\Enums\Role;
 use App\Models\Announcement;

@@ -1,15 +1,12 @@
 <?php
 
-namespace Tests\Browser\Admin\Account;
+namespace Tests\Browser\App\Admin\Account;
 
 use App\Enums\Gender;
 use App\Enums\Role;
 use App\Models\User;
-use Database\Factories\UserFactory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 /**
  * @group admin

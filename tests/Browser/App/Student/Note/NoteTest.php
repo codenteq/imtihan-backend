@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Student\Note;
+namespace Tests\Browser\App\Student\Note;
 
 use App\Enums\Role;
 use App\Models\Note;

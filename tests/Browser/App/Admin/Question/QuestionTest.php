@@ -1,17 +1,14 @@
 <?php
 
-namespace Tests\Browser\Admin\Question;
+namespace Tests\Browser\App\Admin\Question;
 
 use App\Enums\QuestionStatus;
 use App\Enums\Role;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
-use PhpOption\Option;
 use Tests\AdminFrontendDuskTestCase;
-use Tests\DuskTestCase;
 
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\Contidion;
+namespace Tests\Browser\App\Admin\Contidion;
 
 use App\Enums\ConditionCategory;
 use App\Enums\Role;
