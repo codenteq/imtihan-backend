@@ -40,7 +40,7 @@ class SendNewRegisteredUserEmailNotification extends Notification
             ->line("Şu an için, İmtihan'ı denemeye başlamak için bir davetiye beklemek durumundasınız. Ancak merak etmeyin, beklerken şunları yapabilirsiniz:")
             ->line("- İmtihan'ın resmi web sitesini ziyaret ederek projelerimiz, özelliklerimiz ve geliştirdiğimiz eğitim araçları hakkında daha fazla bilgi edinebilirsiniz.")
             ->line('- Eğitim teknolojileri dünyasındaki en son gelişmeleri ve İmtihan ile ilgili güncellemeleri öğrenmek için bizi sosyal medya platformlarında takip edebilirsiniz.')
-            ->action('imtihan.tech', url('https://imtihan.tech'))
+            ->action('imtihantech.com', url(config('app.url')))
             ->line('İmtihan Ekibi 😉');
     }
 
