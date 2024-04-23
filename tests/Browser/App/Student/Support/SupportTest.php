@@ -48,7 +48,8 @@ class SupportTest extends StudentFrontendDuskTestCase
                 ->storeConsoleLog('supports.last')
                 ->screenshot('supports/create.index');
 
-            $browser->press('table > tbody > tr:first-child > td > div > button')
+            $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
+                ->waitForDialog()
                 ->acceptDialog()
                 ->pause(3000)
                 ->assertDontSeeIn('', 'Updated '.$support->subject)
