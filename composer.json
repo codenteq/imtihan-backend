@@ -6,9 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "codenteq/azure-mailer-driver": "^1.0",
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
-        "hafael/azure-mailer-driver": "^0.2.1",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^10.0",
         "laravel/horizon": "^5.21",
@@ -21,7 +21,7 @@
         "meilisearch/meilisearch-php": "^1.0",
         "predis/predis": "^2.1",
         "sentry/sentry-laravel": "^4.1",
-        "symfony/http-client": "6.0"
+        "symfony/http-client": "^6.4"
     },
     "require-dev": {
         "brianium/paratest": "^7.2",
