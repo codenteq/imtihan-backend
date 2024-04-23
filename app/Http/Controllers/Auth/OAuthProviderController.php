@@ -26,7 +26,7 @@ class OAuthProviderController extends Controller
     {
         $socialite = Socialite::driver($provider->value)->user();
 
-        $user = User::firstOrCreate([
+        $user = User::query()->firstOrCreate([
             'email' => $socialite->getEmail(),
         ], [
             'full_name' => $socialite->getName(),
