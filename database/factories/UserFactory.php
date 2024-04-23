@@ -36,7 +36,7 @@ class UserFactory extends Factory
             'language_id' => Language::factory(),
             'avatar' => $this->faker->imageUrl,
             'gender' => Gender::Male->value,
-            'birth_date' => now()->format('d-m-Y'),
+            'birth_date' => now()->format('Y-m-d'),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => Role::Admin,
