@@ -15,13 +15,15 @@ class AuthenticatedSessionController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(LoginRequest $request): \Illuminate\Http\Response
+    public function store(LoginRequest $request): \Illuminate\Http\JsonResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        return response()->json(
+            auth()->user()
+        );
     }
 
     /**

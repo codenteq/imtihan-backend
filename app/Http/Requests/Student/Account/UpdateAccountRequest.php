@@ -38,6 +38,7 @@ class UpdateAccountRequest extends FormRequest
             'country_id' => 'numeric|exists:countries,id',
             'city_id' => 'numeric|exists:cities,id',
             'state_id' => 'numeric|exists:states,id',
+            'birth_date' => 'date',
         ];
     }
 }

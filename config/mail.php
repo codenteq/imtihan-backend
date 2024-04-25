@@ -51,6 +51,10 @@ return [
             'access_key' => env('AZURE_MAIL_KEY'),
             'api_version' => env('AZURE_MAIL_API_VERSION', '2023-03-31'),
             'disable_user_tracking' => env('AZURE_MAIL_DISABLE_TRACKING', false),
+            'client' => [
+                'max_host_connections' => 10,
+                'max_pending_pushes' => 100,
+            ]
         ],
 
         'ses' => [
