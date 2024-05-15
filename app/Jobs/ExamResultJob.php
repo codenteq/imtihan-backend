@@ -4,11 +4,12 @@ namespace App\Jobs;
 
 use App\Services\Student\ExamResult\ExamResultService;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ExamResultJob
+class ExamResultJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -17,7 +18,7 @@ class ExamResultJob
      *
      * @return void
      */
-    public function __construct(protected int $exam_id)
+    public function __construct(protected int $exam_id, protected int $user_id)
     {
     }
 
@@ -26,6 +27,6 @@ class ExamResultJob
      */
     public function handle(): void
     {
-        new ExamResultService($this->exam_id);
+        new ExamResultService($this->exam_id, $this->user_id);
     }
 }
