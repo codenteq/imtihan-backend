@@ -15,6 +15,9 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\StudentFrontendDuskTestCase;
 
+/**
+ * @group student
+ */
 class ExamTest extends StudentFrontendDuskTestCase
 {
     public function normalExamSetup(): void
@@ -102,7 +105,7 @@ class ExamTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/');
 
             $browser->clickLink('İmtihanlar')
-                ->pause(500)
+                ->pause(1500)
                 ->storeConsoleLog('exams')
                 ->screenshot('exams/index')
                 ->click('.exam')

@@ -53,7 +53,7 @@ class NoteTest extends StudentFrontendDuskTestCase
 
             $browser->click('.note-card svg')
                 ->click('#edit')
-                ->pause('1000')
+                ->pause(1500)
                 ->type('input[name="name"]', 'Updated '.$note->name)
                 ->press('Kaydet')
                 ->back()
