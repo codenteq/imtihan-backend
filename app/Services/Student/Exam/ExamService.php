@@ -42,7 +42,7 @@ class ExamService extends BaseService
                 $conditions->each(function ($condition) use ($exam, &$questionData) {
                     $questions = Question::where('category_id', $condition->examTypeCategory->question_category_id)
                         ->with(['options', 'category'])
-                        ->limit($condition->id)
+                        ->limit($condition->value)
                         ->inRandomOrder()->get();
 
                     $questions->each(function ($question) use ($exam, &$questionData) {
