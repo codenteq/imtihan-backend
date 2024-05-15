@@ -97,7 +97,7 @@ class ExamService extends BaseService
             ]);
         }
 
-        ExamResultJob::dispatch($exam)->onQueue('exam_result');
+        ExamResultJob::dispatch($exam, auth()->id());
 
         return $answers;
     }

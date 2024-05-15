@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class ExamResultService
 {
-    public function __construct(private readonly int $exam_id)
+    public function __construct(private readonly int $exam_id, private readonly int $user_id)
     {
         $this->handle();
     }
@@ -36,10 +36,14 @@ class ExamResultService
             'blank' => $blankAnswer,
             'point' => $point,
             'exam_id' => $this->exam_id,
-            'user_id' => auth()->id(),
+            'user_id' => $this->user_id,
         ]);
 
         DB::transaction(function () use ($totalQuestions, $point, $correctAnswer, $inCorrectAnswer, $blankAnswer) {
+            info([
+                'exam_result' => ExamResult::all()
+            ]);
+
             ExamResult::create([
                 'total_questions' => $totalQuestions,
                 'correct' => $correctAnswer,
@@ -47,7 +51,7 @@ class ExamResultService
                 'blank' => $blankAnswer,
                 'point' => $point,
                 'exam_id' => $this->exam_id,
-                'user_id' => auth()->id(),
+                'user_id' => $this->user_id,
             ]);
         });
     }
