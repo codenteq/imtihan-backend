@@ -27,9 +27,7 @@ class ExamResultService
         $inCorrectAnswer = $totalQuestions - $correctAnswer - $blankAnswer;
         $point = $this->calculateConditionPoint($correctAnswer, $inCorrectAnswer, $blankAnswer);
 
-        info(['env' => env('QUEUE_CONNECTION')]);
-
-        Log::info('Exam Result', [
+        info('Exam Result', [
             'total_questions' => $totalQuestions,
             'correct' => $correctAnswer,
             'in_correct' => $inCorrectAnswer,
@@ -40,10 +38,6 @@ class ExamResultService
         ]);
 
         DB::transaction(function () use ($totalQuestions, $point, $correctAnswer, $inCorrectAnswer, $blankAnswer) {
-            info([
-                'exam_result' => ExamResult::all()
-            ]);
-
             ExamResult::create([
                 'total_questions' => $totalQuestions,
                 'correct' => $correctAnswer,

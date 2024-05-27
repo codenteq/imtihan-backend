@@ -5,7 +5,6 @@ namespace Tests\Browser\App\Student\Exam;
 use App\Enums\Role;
 use App\Models\Condition;
 use App\Models\Exam;
-use App\Models\ExamQuestion;
 use App\Models\ExamType;
 use App\Models\ExamTypeCategory;
 use App\Models\Question;
@@ -26,7 +25,7 @@ class ExamTest extends StudentFrontendDuskTestCase
             ->state(['parent_id' => null])
             ->create();
 
-        $examType = ExamType::factory()->state(['name' => 'TYT'])->create();
+        $examType = ExamType::factory()->state(['name' => 'Custom'])->create();
 
         $examTypeCategory = ExamTypeCategory::factory()->state([
             'exam_type_id' => $examType->id,
@@ -135,6 +134,91 @@ class ExamTest extends StudentFrontendDuskTestCase
                 ->storeConsoleLog('exams.finish')
                 ->screenshot('exams/exam.finish')
                 ->assertSee('150');
+        });
+    }
+
+
+    public function testCustomExam()
+    {
+        User::factory(1)
+            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['role' => Role::Student])
+            ->create();
+
+        $category = QuestionCategory::factory()
+            ->state(['parent_id' => null])
+            ->state(['name' => 'Sayısal'])
+            ->create();
+
+        $category2 = QuestionCategory::factory()
+            ->state(['parent_id' => $category->id])
+            ->state(['name' => 'Matematik'])
+            ->create();
+
+        $category3 = QuestionCategory::factory()
+            ->state(['parent_id' => $category2->id])
+            ->state(['name' => 'Geometri'])
+            ->create();
+
+        for ($i = 0; $i < 20; $i++) {
+            $question = Question::factory()->state(['category_id' => $category3->id])->create();
+
+            for ($j = 0; $j < 4; $j++) {
+                $isCorrect = $j === 0;
+                QuestionOption::factory()
+                    ->state(['is_correct' => $isCorrect])
+                    ->for($question)->create();
+            }
+        }
+
+        $this->browse(function (Browser $browser) use ($category3){
+            $browser->visit('/auth/login')
+                ->waitFor('#email')
+                ->type('#email', 'student@imtihan.tech')
+                ->type('#password', 'password')
+                ->storeConsoleLog('auth')
+                ->screenshot('auth')
+                ->pressAndWaitFor('Giriş yap', 10)
+                ->waitForLocation('/');
+
+            $browser->clickLink('İmtihanlar')
+                ->pause(1500)
+                ->storeConsoleLog('exams')
+                ->screenshot('exams/index')
+                ->press('#custom-exam-btn')
+                ->pause(2000)
+                ->screenshot('exams/custom.show');
+
+            $browser->select('select[name="category_id"]', $category3->id)
+                ->pause(1000)
+                ->screenshot('exams/category.select')
+                ->press('Sınavı Başlat')
+                ->pause(2000)
+                ->screenshot('exams/custom.exam.start');
+
+            for ($i = 0; $i <= 2; $i++) {
+                $browser->click('#answers > li:first-child > span')
+                    ->press('Sonraki')
+                    ->pause(500);
+            }
+
+            for ($i = 0; $i <= 2; $i++) {
+                $browser->click('#answers > li:nth-child(3) > span')
+                    ->press('Sonraki')
+                    ->pause(500);
+            }
+
+            for ($i = 0; $i <= 2; $i++) {
+                $browser->press('Sonraki')
+                    ->pause(500);
+            }
+
+            $browser->screenshot('exams/finish.answer')
+                ->press('Sınavı Bitir')
+                ->pause(1500)
+                ->storeConsoleLog('exams.finish')
+                ->screenshot('exams/exam.finish')
+                ->assertSee('30');
         });
     }
 }
