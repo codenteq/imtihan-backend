@@ -72,7 +72,7 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->type('input[name="name"]', 'Updated '.$question->name)
                 ->press('Kaydet')
                 ->screenshot('questions/admin/edit')
-                ->pause(3000)
+                ->pause(5000)
                 ->screenshot('questions/admin/edit.index')
                 ->waitForText('Updated '.$question->name, 10)
                 ->assertSeeIn('table', 'Updated '.$question->name)
