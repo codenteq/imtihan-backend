@@ -7,6 +7,7 @@ use App\Http\Controllers\API\Student\Exam\ExamController;
 use App\Http\Controllers\API\Student\ExamType\ExamTypeController;
 use App\Http\Controllers\API\Student\Location\LocationController;
 use App\Http\Controllers\API\Student\Note\NoteController;
+use App\Http\Controllers\API\Student\QuestionCategory\QuestionCategoryController;
 use App\Http\Controllers\API\Student\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Student\Support\SupportController;
 
@@ -23,6 +24,7 @@ Route::get('exams/results/{exam}', [ExamController::class, 'getExamResult']);
 Route::apiResource('exams', ExamController::class)->only(['index', 'store', 'destroy']);
 Route::get('exam-types', [ExamTypeController::class, 'index']);
 
+Route::apiResource('question-categories', QuestionCategoryController::class)->only(['index']);
 Route::apiResource('supports', SupportController::class)->only(['index', 'store', 'destroy']);
 Route::apiResource('notes', NoteController::class);
 Route::apiResource('static-pages', StaticPageController::class)->only(['index', 'show']);

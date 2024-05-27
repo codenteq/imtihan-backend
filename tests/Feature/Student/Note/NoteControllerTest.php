@@ -15,7 +15,7 @@ class NoteControllerTest extends TestCase
 
     protected string $apiUrl = '/api/student/notes/';
 
-    public function test_student_list()
+    public function test_note_list()
     {
         $user = User::factory()->state(['role' => Role::Student])->create();
         Note::factory(20)->state(['user_id' => $user->id])->create();
