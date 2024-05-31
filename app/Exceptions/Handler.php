@@ -7,7 +7,9 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Sentry\Laravel\Integration;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,9 +53,10 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+
         $this->reportable(function (Throwable $e) {
-            if (app()->bound('sentry') && app()->environment('production')) {
-                app('sentry')->captureException($e);
+            if (app()->environment('production')) {
+                Integration::captureUnhandledException($e);
             }
         });
 
