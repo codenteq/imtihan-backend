@@ -69,11 +69,10 @@ class QuestionTest extends AdminFrontendDuskTestCase
 
             $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->screenshot('questions/admin/show.edit')
-                ->pause(1500)
+                ->pause(4000)
                 ->type('input[name="name"]', 'Updated '.$question->name)
                 ->press('Kaydet')
                 ->screenshot('questions/admin/edit')
-                ->pause(5000)
                 ->screenshot('questions/admin/edit.index')
                 ->pause(5000)
                 ->waitForText('Updated '.$question->name, 10)
