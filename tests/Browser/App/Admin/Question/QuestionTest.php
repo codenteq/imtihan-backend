@@ -71,6 +71,8 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->screenshot('questions/admin/show.edit')
                 ->pause(4000)
                 ->type('input[name="name"]', 'Updated '.$question->name)
+                ->assertInputValue('input[name="name"]', 'Updated '.$question->name)
+                ->pause(1500)
                 ->press('Kaydet')
                 ->screenshot('questions/admin/edit')
                 ->screenshot('questions/admin/edit.index')
