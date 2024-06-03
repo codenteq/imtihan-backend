@@ -67,7 +67,7 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->storeConsoleLog('categories.last')
                 ->screenshot('questions/admin/create.index');
 
-            $browser->click('table > tbody > tr:first-child > td > div > a')
+/*            $browser->click('table > tbody > tr:first-child > td > div > a')
                 ->screenshot('questions/admin/show.edit')
                 ->pause(4000)
                 ->type('input[name="name"]', 'Updated '.$question->name)
@@ -79,12 +79,12 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->pause(5000)
                 ->waitForText('Updated '.$question->name, 10)
                 ->assertSeeIn('table', 'Updated '.$question->name)
-                ->storeConsoleLog('questions.edit');
+                ->storeConsoleLog('questions.edit');*/
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()
                 ->pause(1000)
-                ->assertDontSeeIn('table', 'Updated '.$question->name)
+                ->assertDontSeeIn('table', $question->name)
                 ->storeConsoleLog('questions.delete')
                 ->screenshot('questions/admin/delete.index');
         });

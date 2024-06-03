@@ -7,6 +7,10 @@
          stopOnFailure="false"
          cacheDirectory=".phpunit.cache"
          backupStaticProperties="false">
+    <php>
+        <ini name="display_errors" value="on" />
+        <ini name="display_startup_errors" value="on" />
+    </php>
     <testsuites>
         <testsuite name="Browser Test Suite">
             <directory suffix="Test.php">./tests/Browser</directory>

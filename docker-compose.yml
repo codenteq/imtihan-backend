@@ -6,7 +6,7 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: sail-8.3/app
+        image: imtihan-backend
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -110,7 +110,7 @@ services:
             retries: 3
             timeout: 5s
     selenium:
-        image: seleniarm/standalone-chromium
+        image: 'seleniarm/standalone-chromium'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         volumes:
