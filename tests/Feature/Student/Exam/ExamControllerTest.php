@@ -97,8 +97,17 @@ class ExamControllerTest extends TestCase
         $user = User::factory()->state(['role' => Role::Student])->create();
 
         $category = QuestionCategory::factory()->create();
-        $question = Question::factory()->state(['category_id' => $category->id])->create();
-        QuestionOption::factory(4)->for($question)->create();
+
+        for ($i = 0; $i < 20; $i++) {
+            $question = Question::factory()->state(['category_id' => $category->id])->create();
+
+            for ($j = 0; $j < 4; $j++) {
+                $isCorrect = $j === 0;
+                QuestionOption::factory()
+                    ->state(['is_correct' => $isCorrect])
+                    ->for($question)->create();
+            }
+        }
 
         Sanctum::actingAs($user, ['student.exam.create']);
 

@@ -14,6 +14,9 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Tests\StudentFrontendDuskTestCase;
 
+/**
+ * @group student
+ */
 class AccountTest extends StudentFrontendDuskTestCase
 {
     public function testStudentAccount(): void

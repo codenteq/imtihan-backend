@@ -12,7 +12,9 @@ use App\Models\ExamResult;
 use App\Models\ExamUserAnswer;
 use App\Models\Question;
 use App\Services\Base\BaseService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ItemNotFoundException;
 
 class ExamService extends BaseService
 {
@@ -21,7 +23,7 @@ class ExamService extends BaseService
         parent::__construct(Exam::class);
     }
 
-    public function create(object $request): array
+    public function create(object $request): array|JsonResponse
     {
         return DB::transaction(function () use ($request) {
             $exam = $this->model::create([
@@ -42,8 +44,12 @@ class ExamService extends BaseService
                 $conditions->each(function ($condition) use ($exam, &$questionData) {
                     $questions = Question::where('category_id', $condition->examTypeCategory->question_category_id)
                         ->with(['options', 'category'])
-                        ->limit($condition->id)
+                        ->limit($condition->value)
                         ->inRandomOrder()->get();
+
+                    if ($questions->count() < $condition->value) {
+                        throw new ItemNotFoundException('Not enough questions in the category');
+                    }
 
                     $questions->each(function ($question) use ($exam, &$questionData) {
 
@@ -57,7 +63,12 @@ class ExamService extends BaseService
                 });
             } else {
                 $questions = Question::where('category_id', $request->id)
+                    ->with(['options', 'category'])
                     ->limit(CustomExam::ExamQuestionLength->value)->inRandomOrder()->get();
+
+                if ($questions->count() < CustomExam::ExamQuestionLength->value) {
+                    throw new ItemNotFoundException('Not enough questions in the category');
+                }
 
                 $questions->each(function ($question) use ($exam, &$questionData) {
                     $questionData->push($question);
@@ -97,7 +108,7 @@ class ExamService extends BaseService
             ]);
         }
 
-        ExamResultJob::dispatch($exam)->onQueue('exam_result');
+        ExamResultJob::dispatch($exam, auth()->id());
 
         return $answers;
     }
@@ -109,7 +120,7 @@ class ExamService extends BaseService
         ])->latest()->paginate();
     }
 
-    public function getExamResult(int $exam)
+    public function getExamResult(int $exam): array
     {
         $examResult = ExamResult::query()->whereExamId($exam)->whereUserId(auth()->id())->with([
             'exam.examType' => fn($query) => $query->select(['id', 'name']),

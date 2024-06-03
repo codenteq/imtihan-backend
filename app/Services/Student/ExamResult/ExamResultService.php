@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class ExamResultService
 {
-    public function __construct(private readonly int $exam_id)
+    public function __construct(private readonly int $exam_id, private readonly int $user_id)
     {
         $this->handle();
     }
@@ -27,16 +27,14 @@ class ExamResultService
         $inCorrectAnswer = $totalQuestions - $correctAnswer - $blankAnswer;
         $point = $this->calculateConditionPoint($correctAnswer, $inCorrectAnswer, $blankAnswer);
 
-        info(['env' => env('QUEUE_CONNECTION')]);
-
-        Log::info('Exam Result', [
+        info('Exam Result', [
             'total_questions' => $totalQuestions,
             'correct' => $correctAnswer,
             'in_correct' => $inCorrectAnswer,
             'blank' => $blankAnswer,
             'point' => $point,
             'exam_id' => $this->exam_id,
-            'user_id' => auth()->id(),
+            'user_id' => $this->user_id,
         ]);
 
         DB::transaction(function () use ($totalQuestions, $point, $correctAnswer, $inCorrectAnswer, $blankAnswer) {
@@ -47,7 +45,7 @@ class ExamResultService
                 'blank' => $blankAnswer,
                 'point' => $point,
                 'exam_id' => $this->exam_id,
-                'user_id' => auth()->id(),
+                'user_id' => $this->user_id,
             ]);
         });
     }
