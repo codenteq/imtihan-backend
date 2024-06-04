@@ -28,6 +28,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'full_name' => 'string|max:255',
             'phone' => 'string|max:255',
+            'email' => 'email',
             'gender' => [
                 Rule::enum(Gender::class),
             ],

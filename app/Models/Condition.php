@@ -30,6 +30,11 @@ class Condition extends Model
         return $this->belongsTo(ExamTypeCategory::class, 'exam_type_category_id', 'id');
     }
 
+    public function examType(): BelongsTo
+    {
+        return $this->belongsTo(ExamType::class, 'exam_type', 'id');
+    }
+
     /**
      * Get the name of the index associated with the model.
      */

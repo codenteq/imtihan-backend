@@ -34,7 +34,7 @@ class ConditionController extends ApiController
             return $this->successResponse($this->conditionService->search($query));
         }
 
-        return $this->successResponse($this->conditionService->paginate());
+        return $this->successResponse($this->conditionService->paginate(with: ['examType', 'examTypeCategory']));
     }
 
     /**
