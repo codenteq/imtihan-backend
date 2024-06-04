@@ -28,6 +28,7 @@ class UpdateAccountRequest extends FormRequest
             'full_name' => 'string|max:255',
             'phone' => 'string|max:12',
             'address' => 'string|max:255',
+            'email' => 'email',
             'education_level' => [
                 Rule::enum(EducationLevel::class),
             ],
