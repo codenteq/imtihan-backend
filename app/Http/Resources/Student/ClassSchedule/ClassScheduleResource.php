@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Student\ClassSchedule;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,9 +11,9 @@ class ClassScheduleResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @param  Request  $request
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [
             'id' => $this->id,
