@@ -29,7 +29,13 @@ class ClassScheduleController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse(ClassScheduleResource::collection($this->classScheduleService->list([], ['user_id' => auth()->id()])));
+        $query = request()->query('query');
+
+        if ($query) {
+            return $this->successResponse($this->classScheduleService->search($query, 10, ['user_id' => auth()->id()]));
+        }
+
+        return $this->successResponse($this->classScheduleService->paginate([], ['user_id' => auth()->id()]));
     }
 
     /**
