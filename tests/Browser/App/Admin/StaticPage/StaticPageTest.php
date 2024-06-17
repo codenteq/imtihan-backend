@@ -7,6 +7,7 @@ use App\Models\StaticPage;
 use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
+use function Laravel\Prompts\pause;
 
 /**
  * @group admin
@@ -62,6 +63,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('static-pages/edit')
                 ->back()
+                ->pause(2000)
                 ->waitForText('Updated '.$staticPage->name, 10)
                 ->assertSeeIn('table', 'Updated '.$staticPage->name)
                 ->storeConsoleLog('static-pages.edit');
