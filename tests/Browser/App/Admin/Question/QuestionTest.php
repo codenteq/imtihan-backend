@@ -43,6 +43,7 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->waitForLocation('/questions');
 
             $browser->press('Oluştur')
+                ->pause(1000)
                 ->waitFor('input[name="name"]')
                 ->type('input[name="name"]', $question->name)
                 ->select('select[name="difficulty"]', $question->difficulty)
