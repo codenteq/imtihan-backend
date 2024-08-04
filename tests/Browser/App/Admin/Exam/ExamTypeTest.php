@@ -60,6 +60,7 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('exam-types/edit')
                 ->back()
+                ->pause(3000)
                 ->waitForText('Updated '.$examType->name, 10)
                 ->assertSeeIn('table', 'Updated '.$examType->name)
                 ->storeConsoleLog('exam-types.edit')

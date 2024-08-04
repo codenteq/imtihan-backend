@@ -63,7 +63,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('static-pages/edit')
                 ->back()
-                ->pause(2000)
+                ->pause(3000)
                 ->waitForText('Updated '.$staticPage->name, 10)
                 ->assertSeeIn('table', 'Updated '.$staticPage->name)
                 ->storeConsoleLog('static-pages.edit');
