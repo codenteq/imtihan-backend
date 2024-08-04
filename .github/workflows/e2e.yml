@@ -49,7 +49,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Upgrade Chrome Driver
-        run: php artisan dusk:chrome-driver --detect
+        run: php artisan dusk:chrome-driver 126
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
