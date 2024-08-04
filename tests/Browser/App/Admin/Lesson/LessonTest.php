@@ -58,7 +58,7 @@ class LessonTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('lessons/edit')
                 ->back()
-                ->pause(2000)
+                ->pause(3000)
                 ->waitForText('Updated '.$lesson->name, 10)
                 ->assertSeeIn('table', 'Updated '.$lesson->name)
                 ->storeConsoleLog('lessons.edit')
