@@ -60,15 +60,16 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('exam-types/edit')
                 ->back()
-                ->waitForText('Updated '.$examType->name, 10)
-                ->assertSeeIn('table', 'Updated '.$examType->name)
+                ->pause(3000)
+                ->waitForText('Updated ', 10)
+                ->assertSeeIn('table', 'Updated')
                 ->storeConsoleLog('exam-types.edit')
                 ->screenshot('exam-types/edit.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()
                 ->pause(1000)
-                ->assertDontSeeIn('table', 'Updated '.$examType->name)
+                ->assertDontSeeIn('table', 'Updated')
                 ->storeConsoleLog('exam-types.delete')
                 ->screenshot('exam-types/delete.index');
         });

@@ -24,9 +24,9 @@ class UpdateClassScheduleRequest extends FormRequest
         return [
             'name' => 'string',
             'description' => 'string',
-            'start_date' => 'datetime',
-            'end_date' => 'datetime',
-            'user_id' => 'numeric|exists:users,id',
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'user_id' => 'numeric',
         ];
     }
 }

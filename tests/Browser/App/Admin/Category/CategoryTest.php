@@ -55,10 +55,11 @@ class CategoryTest extends AdminFrontendDuskTestCase
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->waitFor('input[name="name"]')
-                ->pause(1000)
+                ->pause(2000)
                 ->screenshot('categories/edit.input')
                 ->type('input[name="name"]', 'Updated '.$category->name)
                 ->press('Kaydet')
+                ->pause(3000)
                 ->waitForText('Updated '.$category->name, 10)
                 ->assertSeeIn('table', 'Updated '.$category->name)
                 ->storeConsoleLog('categories.edit')

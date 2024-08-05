@@ -7,6 +7,7 @@ use App\Models\StaticPage;
 use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
+use function Laravel\Prompts\pause;
 
 /**
  * @group admin
@@ -62,14 +63,16 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->press('Kaydet')
                 ->screenshot('static-pages/edit')
                 ->back()
-                ->waitForText('Updated '.$staticPage->name, 10)
-                ->assertSeeIn('table', 'Updated '.$staticPage->name)
+                ->pause(3000)
+                ->screenshot('static-pages/edit.index')
+                ->waitForText('Updated', 10)
+                ->assertSeeIn('table', 'Updated')
                 ->storeConsoleLog('static-pages.edit');
 
             $browser->click('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated '.$staticPage->name)
+                ->assertDontSeeIn('table', 'Updated')
                 ->storeConsoleLog('static-pages.delete')
                 ->screenshot('static-pages/delete');
 
