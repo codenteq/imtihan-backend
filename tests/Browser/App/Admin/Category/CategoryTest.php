@@ -59,6 +59,7 @@ class CategoryTest extends AdminFrontendDuskTestCase
                 ->screenshot('categories/edit.input')
                 ->type('input[name="name"]', 'Updated '.$category->name)
                 ->press('Kaydet')
+                ->pause(3000)
                 ->waitForText('Updated '.$category->name, 10)
                 ->assertSeeIn('table', 'Updated '.$category->name)
                 ->storeConsoleLog('categories.edit')
