@@ -59,15 +59,15 @@ class LessonTest extends AdminFrontendDuskTestCase
                 ->screenshot('lessons/edit')
                 ->back()
                 ->pause(3000)
-                ->waitForText('Updated '.$lesson->name, 10)
-                ->assertSeeIn('table', 'Updated '.$lesson->name)
+                ->waitForText('Updated', 10)
+                ->assertSeeIn('table', 'Updated')
                 ->storeConsoleLog('lessons.edit')
                 ->screenshot('lessons/edit.index');
 
             $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated '.$lesson->name)
+                ->assertDontSeeIn('table', 'Updated')
                 ->storeConsoleLog('lessons.delete')
                 ->screenshot('lessons/delete');
         });

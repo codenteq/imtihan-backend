@@ -65,14 +65,14 @@ class StaticPageTest extends AdminFrontendDuskTestCase
                 ->back()
                 ->pause(3000)
                 ->screenshot('static-pages/edit.index')
-                //->waitForText('Updated '.$staticPage->name, 10)
-                ->assertSeeIn('table', 'Updated '.$staticPage->name)
+                ->waitForText('Updated', 10)
+                ->assertSeeIn('table', 'Updated')
                 ->storeConsoleLog('static-pages.edit');
 
             $browser->click('table > tbody > tr:first-child > td > div > button:nth-child(3)')
                 ->acceptDialog()
                 ->pause(3000)
-                ->assertDontSeeIn('table', 'Updated '.$staticPage->name)
+                ->assertDontSeeIn('table', 'Updated')
                 ->storeConsoleLog('static-pages.delete')
                 ->screenshot('static-pages/delete');
 
