@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin\Question;
 
 use App\Models\Question;
+use App\Models\QuestionBug;
 use App\Models\QuestionOption;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -58,6 +59,32 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl.$question->id);
         $response->assertJsonFragment(['id' => $question->id]);
+    }
+
+    public function test_question_bug_list()
+    {
+        QuestionBug::factory(5)->create();
+
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user, ['admin.question.show']);
+
+        $response = $this->get($this->apiUrl.'bugs');
+
+        $response->assertJsonCount(5, 'data');
+    }
+
+    public function test_question_bug_resolve()
+    {
+        $questionBug = QuestionBug::factory()->create();
+
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user, ['admin.question.delete']);
+
+        $response = $this->delete($this->apiUrl.'bugs/resolve/'.$questionBug->id);
+
+        $response->assertStatus(200);
     }
 
     public function test_question_update()

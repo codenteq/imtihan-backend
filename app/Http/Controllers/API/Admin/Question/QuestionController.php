@@ -70,6 +70,33 @@ class QuestionController extends ApiController
     }
 
     /**
+     * Display the bug questions.
+     */
+    public function getBugs(): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('admin.question.show'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        return $this->successResponse($this->questionService->getBugs());
+    }
+
+    /*
+     * Resolved the bugs question
+     */
+    public function resolveBug(int $id): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('admin.question.delete'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        $resolvedQuestion = $this->questionService->resolveBug($id);
+
+        return $this->successResponse($resolvedQuestion);
+    }
+
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateQuestionRequest $request, int $question): JsonResponse
