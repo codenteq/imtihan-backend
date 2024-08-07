@@ -23,6 +23,8 @@ class StoreExamTypeRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'description' => 'string',
+            'src' => 'file',
             'language_id' => 'required|numeric|exists:languages,id',
             'question_categories' => 'required|array',
         ];
