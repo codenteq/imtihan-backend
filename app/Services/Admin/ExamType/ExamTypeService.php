@@ -5,6 +5,7 @@ namespace App\Services\Admin\ExamType;
 use App\Models\ExamType;
 use App\Models\ExamTypeCategory;
 use App\Services\Base\BaseService;
+use Illuminate\Support\Facades\Storage;
 
 class ExamTypeService extends BaseService
 {
@@ -15,9 +16,13 @@ class ExamTypeService extends BaseService
 
     public function create(object $request): object|array
     {
+        $path = $request->file('src')->store('exam-types');
+
         $examType = $this->model::create([
             'name' => $request->name,
             'language_id' => $request->language_id,
+            'description' => $request->description,
+            'src' => $path,
         ]);
 
         $examType->questionCategories()->attach($request->question_categories);
@@ -29,7 +34,14 @@ class ExamTypeService extends BaseService
     {
         $examType = parent::show($id);
 
-        $examType->update($request->validated());
+        if ($request->hasFile('src')) {
+            $path = $request->file('src')->store('exam-types');
+            $data = $request->safe()->merge(['src' => $path]);
+        } else {
+            $data = $request->safe();
+        }
+
+        $examType->update($data->all());
 
         $examType->questionCategories()->sync($request->question_categories);
 
@@ -48,6 +60,11 @@ class ExamTypeService extends BaseService
     public function destroy(int $id, array $where = []): mixed
     {
         $examType = parent::show($id, $where);
+
+        if (Storage::exists($examType->src)) {
+            Storage::delete($examType->src);
+        }
+
         $examType->questionCategories()->detach();
         $examType->delete();
 

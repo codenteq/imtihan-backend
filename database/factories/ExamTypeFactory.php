@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Language;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -19,6 +20,8 @@ class ExamTypeFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'description' => $this->faker->name,
+            'src' => UploadedFile::fake()->image('exam-type.png'),
             'language_id' => Language::factory(),
         ];
     }
