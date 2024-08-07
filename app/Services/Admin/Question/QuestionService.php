@@ -3,7 +3,9 @@
 namespace App\Services\Admin\Question;
 
 use App\Models\Question;
+use App\Models\QuestionBug;
 use App\Services\Base\BaseService;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -105,6 +107,16 @@ class QuestionService extends BaseService
         });
 
         return $question;
+    }
+
+    public function getBugs(): LengthAwarePaginator
+    {
+        return QuestionBug::query()->with(['question'])->paginate();
+    }
+
+    public function resolveBug(int $id): ?bool
+    {
+        return QuestionBug::query()->findOrFail($id)->delete();
     }
 
     public function destroy(int $id, array $where = []): mixed
