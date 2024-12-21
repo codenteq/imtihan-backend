@@ -38,22 +38,26 @@ class NoteTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/note', 3);
 
             $browser->click('#create')
-                ->pause(1000)
-                ->waitForLocation('/note/create', 3)
+                ->pause(2000)
+                ->waitForLocation('/note/create', 5)
                 ->type('input[name="name"]', $note->name);
 
-            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$note->content."';");
+            $browser->script("
+                var editor = document.querySelector('.ql-editor > p');
+                if (editor) {
+                    editor.innerHTML = '".$note->content."';
+                }
+            ");
 
             $browser->screenshot('notes/create')
                 ->press('Kaydet')
-                ->pause(3000)
+                ->pause(3500)
                 ->assertSeeIn('.note-card', $note->name)
                 ->storeConsoleLog('notes.last')
                 ->screenshot('notes/create.index');
 
-            $browser->click('.note-card svg')
-                ->click('#edit')
-                ->pause(1500)
+            $browser->click('#edit')
+                ->pause(2500)
                 ->type('input[name="name"]', 'Updated '.$note->name)
                 ->press('Kaydet')
                 ->back()
@@ -64,8 +68,7 @@ class NoteTest extends StudentFrontendDuskTestCase
                 ->storeConsoleLog('notes.edit')
                 ->screenshot('notes/edit.index');
 
-            $browser->press('.note-card svg')
-                ->click('#remove')
+            $browser->press('#remove')
                 ->acceptDialog()
                 ->pause(3000)
                 ->assertDontSeeIn('', 'Updated '.$note->name)

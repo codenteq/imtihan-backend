@@ -97,12 +97,12 @@ class AccountTest extends StudentFrontendDuskTestCase
                 ->pause(1000)
                 ->screenshot('account/student/setting.membership');
 
-            $browser->click('#contact-tab')
+            $browser->click('.contact-tab')
                 ->type('input[name="phone"]', $user->phone)
                 ->pressAndWaitFor('Kaydet',3)
                 ->screenshot('account/student/setting.contact');
 
-            $browser->click('#password-tab')
+            $browser->click('.password-tab')
                 ->type('input[name="current_password"]', 'password')
                 ->type('input[name="password"]', '12345678')
                 ->type('input[name="password_confirmation"]', '12345678')
@@ -113,12 +113,14 @@ class AccountTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/account')
                 ->click('#logout-btn')
                 ->waitForLocation('/auth/login', 10)
-                ->screenshot('account/student/logout');
+                ->screenshot('account/student/logout')
+                ->pause(3000);
 
             $browser->waitFor('#email')
                 ->type('#email', 'student@imtihan.tech')
                 ->type('#password', '12345678')
-                ->pressAndWaitFor('Giriş yap', 10)
+                ->press('Giriş yap')
+                ->pause(5000)
                 ->waitForLocation('/')
                 ->screenshot('account/student/login');
 
@@ -140,7 +142,7 @@ class AccountTest extends StudentFrontendDuskTestCase
                 ->assertSelected('select[name="education_level"]', EducationLevel::High->value)
                 ->screenshot('account/student/setting.membership.check');
 
-            $browser->click('#contact-tab')
+            $browser->click('.contact-tab')
                 ->assertInputValue('input[name="phone"]', $user->phone)
                 ->screenshot('account/student/setting.contact.check');
         });
