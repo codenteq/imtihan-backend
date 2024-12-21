@@ -38,9 +38,8 @@ class AnnouncementTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/announcement', 3)
                 ->screenshot('announcements/index');
 
-            $browser->click('.announcement-card svg')
+            $browser->click('#view')
                 ->screenshot('announcements/view')
-                ->click('#view')
                 ->pause('1000')
                 ->assertSeeIn('h1', $announcement->name)
                 ->storeConsoleLog('announcements.view')

@@ -193,7 +193,7 @@ class ExamTest extends StudentFrontendDuskTestCase
                 ->pause(1000)
                 ->screenshot('exams/category.select')
                 ->press('Sınavı Başlat')
-                ->pause(2000)
+                ->pause(3000)
                 ->screenshot('exams/custom.exam.start');
 
             for ($i = 0; $i <= 2; $i++) {

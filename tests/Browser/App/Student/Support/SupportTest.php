@@ -33,6 +33,7 @@ class SupportTest extends StudentFrontendDuskTestCase
                 ->waitForLocation('/');
 
             $browser->clickLink('Destek')
+                ->pause(2000)
                 ->storeConsoleLog('supports.index')
                 ->screenshot('supports/index')
                 ->waitForLocation('/support', 3);
@@ -48,7 +49,7 @@ class SupportTest extends StudentFrontendDuskTestCase
                 ->storeConsoleLog('supports.last')
                 ->screenshot('supports/create.index');
 
-            $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(2)')
+            $browser->press('table > tbody > tr:first-child > td > div > button:nth-child(1)')
                 ->waitForDialog()
                 ->acceptDialog()
                 ->pause(3000)
