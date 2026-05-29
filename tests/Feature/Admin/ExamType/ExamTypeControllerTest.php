@@ -43,6 +43,8 @@ class ExamTypeControllerTest extends TestCase
 
         $response = $this->postJson($this->apiUrl, [
             'name' => $examType->name,
+            'description' => $examType->description,
+            'src' => $examType->src,
             'language_id' => $examType->language_id,
             'question_categories' => $examTypeCategory,
         ]);

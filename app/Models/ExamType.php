@@ -14,6 +14,8 @@ class ExamType extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'src',
         'language_id',
     ];
 

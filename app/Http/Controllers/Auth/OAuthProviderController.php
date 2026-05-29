@@ -39,7 +39,9 @@ class OAuthProviderController extends Controller
             'provider_id' => $socialite->getId(),
         ]);
 
-        event(new Registered($user));
+        if ($user->wasRecentlyCreated) {
+            event(new Registered($user));
+        }
 
         Auth::login($user);
 
