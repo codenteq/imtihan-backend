@@ -1,12 +1,12 @@
 {
-    "name": "codenteq/imtihan",
+    "name": "codenteq/imtihan-backend",
     "type": "project",
     "description": "The Laravel E-Exam.",
     "keywords": ["laravel", "nextjs", "framework", "e-exam"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codenteq/azure-mailer-driver": "^1.0",
+        "codenteq/cashier-iyzico": "^1.0",
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",

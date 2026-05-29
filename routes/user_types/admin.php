@@ -12,6 +12,9 @@ use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
 use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
 use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
+use App\Http\Controllers\API\Admin\Subscription\SubscriptionController;
+use App\Http\Controllers\API\Admin\Subscription\SubscriptionPlanController;
+use App\Http\Controllers\API\Admin\Subscription\SubscriptionProductController;
 use App\Http\Controllers\API\Admin\Support\SupportController;
 use App\Http\Controllers\API\Admin\User\UserController;
 
@@ -49,3 +52,13 @@ Route::apiResources([
 
 Route::apiResource('exam-types', ExamTypeController::class);
 Route::get('exam-type-categories/{exam_type}', [ExamTypeController::class, 'getCategories']);
+
+Route::prefix('subscription')->group(function () {
+    Route::apiResource('products', SubscriptionProductController::class);
+    Route::get('products/{productReferenceCode}/plans', [SubscriptionPlanController::class, 'index']);
+    Route::apiResource('plans', SubscriptionPlanController::class)->except(['index']);
+    Route::get('subscriptions', [SubscriptionController::class, 'index']);
+    Route::get('subscriptions/{subscription}', [SubscriptionController::class, 'show']);
+    Route::put('subscriptions/{subscription}/cancel', [SubscriptionController::class, 'cancel']);
+});
+
