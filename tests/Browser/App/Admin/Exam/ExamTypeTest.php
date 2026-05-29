@@ -18,7 +18,7 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
     public function testExamType(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -28,7 +28,7 @@ class ExamTypeTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($examType, $questionCategory) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

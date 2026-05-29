@@ -1,7 +1,7 @@
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>
-<x-mail::header url="https://imtihan.tech">
+<x-mail::header url="https://codenteq.com">
 {{ config('app.name') }}
 </x-mail::header>
 </x-slot:header>

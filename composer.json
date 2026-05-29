@@ -4,7 +4,6 @@
     "description": "The Laravel E-Exam.",
     "keywords": [
         "laravel",
-        "nextjs",
         "framework",
         "e-exam"
     ],
@@ -15,7 +14,7 @@
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
         "http-interop/http-factory-guzzle": "^1.2",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/horizon": "^5.21",
         "laravel/octane": "^2.3",
         "laravel/sanctum": "^4.0",
@@ -38,7 +37,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^11.5.3",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
@@ -83,5 +82,10 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/codenteq/imtihan-backend/issues",
+        "source": "https://github.com/codenteq/imtihan-backend",
+        "docs": "https://docs.codenteq.com"
+    }
 }

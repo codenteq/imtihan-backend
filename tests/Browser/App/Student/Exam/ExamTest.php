@@ -87,7 +87,7 @@ class ExamTest extends StudentFrontendDuskTestCase
     public function testNormalExam(): void
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -96,7 +96,7 @@ class ExamTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')
@@ -141,7 +141,7 @@ class ExamTest extends StudentFrontendDuskTestCase
     public function testCustomExam()
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -174,7 +174,7 @@ class ExamTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($category3){
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

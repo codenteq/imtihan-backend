@@ -16,7 +16,7 @@ class SupportTest extends StudentFrontendDuskTestCase
     public function testSupport(): void
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -25,7 +25,7 @@ class SupportTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($support) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

@@ -16,7 +16,7 @@ class LessonTest extends AdminFrontendDuskTestCase
     public function testLesson(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -25,7 +25,7 @@ class LessonTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($lesson) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

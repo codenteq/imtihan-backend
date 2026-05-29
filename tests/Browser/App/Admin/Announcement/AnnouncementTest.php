@@ -17,7 +17,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
     public function testAdminAnnouncement(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -26,7 +26,7 @@ class AnnouncementTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($announcement) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

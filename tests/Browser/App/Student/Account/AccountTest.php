@@ -22,7 +22,7 @@ class AccountTest extends StudentFrontendDuskTestCase
     public function testStudentAccount(): void
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -63,7 +63,7 @@ class AccountTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')
@@ -117,7 +117,7 @@ class AccountTest extends StudentFrontendDuskTestCase
                 ->pause(3000);
 
             $browser->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', '12345678')
                 ->press('Giriş yap')
                 ->pause(5000)

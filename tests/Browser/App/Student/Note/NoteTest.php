@@ -16,7 +16,7 @@ class NoteTest extends StudentFrontendDuskTestCase
     public function testNote(): void
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -25,7 +25,7 @@ class NoteTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($note) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

@@ -16,7 +16,7 @@ class LanguageTest extends AdminFrontendDuskTestCase
     public function testLanguage(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -26,7 +26,7 @@ class LanguageTest extends AdminFrontendDuskTestCase
 
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

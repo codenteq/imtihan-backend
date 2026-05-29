@@ -22,7 +22,7 @@ class ConditionTest extends AdminFrontendDuskTestCase
     public function testCondition(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -38,7 +38,7 @@ class ConditionTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($condition) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

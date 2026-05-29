@@ -7,14 +7,31 @@
 /tests/reports
 /vendor
 .env
-.env.backup
-.env.dusk.local
+.env.*
+!.env.example
+!.env.dusk.local.example
 .phpunit.result.cache
 .phpunit.cache
+.phpstan.cache
 Homestead.json
 Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
-.idea
-/.vscode
+yarn-debug.log
+pnpm-debug.log
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*~
+
+# Laravel IDE Helper
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+# Docker
+docker-compose.override.yml

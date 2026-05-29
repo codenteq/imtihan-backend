@@ -67,7 +67,6 @@ class LessonControllerTest extends TestCase
 
     public function test_lesson_delete()
     {
-        /*$category = QuestionCategory::factory()->create();*/
         $lesson = Lesson::factory()->create();
         $user = User::factory()->create();
 

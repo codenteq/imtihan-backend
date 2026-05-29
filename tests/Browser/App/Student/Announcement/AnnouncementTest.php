@@ -16,7 +16,7 @@ class AnnouncementTest extends StudentFrontendDuskTestCase
     public function testAnnouncement(): void
     {
         User::factory(1)
-            ->state(['email' => 'student@imtihan.tech'])
+            ->state(['email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->create();
 
@@ -25,7 +25,7 @@ class AnnouncementTest extends StudentFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($announcement) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'student@imtihan.tech')
+                ->type('#email', 'student@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

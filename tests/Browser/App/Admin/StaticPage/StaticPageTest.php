@@ -18,7 +18,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
     public function testStaticPage(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -27,7 +27,7 @@ class StaticPageTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($staticPage) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')

@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: api.imtihan.tech
+    - host: api.imtihan.codenteq.com
       http:
         paths:
           - path: /

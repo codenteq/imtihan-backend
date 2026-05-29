@@ -60,22 +60,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'education_level' => EducationLevel::class,
     ];
 
-    /*protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            $user->password = Hash::make($user->password);
-        });
-
-        static::updating(function ($user) {
-            if ($user->password) {
-                $user->password = Hash::make($user->password);
-            }
-        });
-    }*/
-    // TODO: uncomment this code
-
     /**
      * Get the name of the index associated with the model.
      */

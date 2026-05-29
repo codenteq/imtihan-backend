@@ -16,7 +16,7 @@ class AccountTest extends AdminFrontendDuskTestCase
     public function testAdminAccount(): void
     {
         User::factory(1)
-            ->state(['email' => 'admin@imtihan.tech'])
+            ->state(['email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
 
@@ -29,7 +29,7 @@ class AccountTest extends AdminFrontendDuskTestCase
         $this->browse(function (Browser $browser) use ($user){
             $browser->visit('/auth/login')
                 ->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', 'password')
                 ->storeConsoleLog('auth')
                 ->screenshot('auth')
@@ -72,7 +72,7 @@ class AccountTest extends AdminFrontendDuskTestCase
                 ->screenshot('account/admin/logout');
 
             $browser->waitFor('#email')
-                ->type('#email', 'admin@imtihan.tech')
+                ->type('#email', 'admin@codenteq.com')
                 ->type('#password', '12345678')
                 ->pressAndWaitFor('Giriş yap', 10)
                 ->waitForLocation('/')
