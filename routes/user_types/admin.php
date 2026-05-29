@@ -41,6 +41,8 @@ Route::prefix('condition')->group(function () {
 });
 
 Route::get('question/categories/tree', [QuestionCatergoryController::class, 'getTreeCategories']);
+Route::get('questions/bugs', [QuestionController::class, 'getBugs']);
+Route::delete('questions/bugs/resolve/{id}', [QuestionController::class, 'resolveBug']);
 
 Route::apiResources([
     'questions' => QuestionController::class,

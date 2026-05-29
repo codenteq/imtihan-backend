@@ -23,6 +23,8 @@ class UpdateExamTypeRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
+            'description' => 'string',
+            'src' => 'file',
             'language_id' => 'numeric|exists:languages,id',
             'question_categories' => 'array',
         ];
