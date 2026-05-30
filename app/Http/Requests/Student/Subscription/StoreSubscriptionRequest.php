@@ -22,15 +22,8 @@ class StoreSubscriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|max:255',
             'pricing_plan_reference_code' => 'required|string',
             'status' => 'nullable|string|in:ACTIVE,PENDING',
-            'gsm_number' => 'required|string',
-            'identity_number' => 'required|string|size:11',
-            'billing_city' => 'required|string|max:255',
-            'billing_country' => 'required|string|max:255',
-            'billing_address' => 'required|string|max:500',
-            'billing_zip_code' => 'required|string|max:10',
             'card_holder_name' => 'required|string|max:255',
             'card_number' => 'required|string',
             'expire_month' => 'required|string|size:2',

@@ -27,12 +27,13 @@ class SubscriptionProductController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $params = [
-            'page' => request()->query('page', 1),
-            'count' => request()->query('count', 10),
-        ];
+        $query = request()->query('query');
 
-        return $this->successResponse($this->productService->list($params));
+        if ($query) {
+            return $this->successResponse($this->productService->search($query));
+        }
+
+        return $this->successResponse($this->productService->paginate());
     }
 
     /**
@@ -52,40 +53,40 @@ class SubscriptionProductController extends ApiController
     /**
      * Display the specified product.
      */
-    public function show(string $referenceCode): JsonResponse
+    public function show(int $product): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.product.show'),
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse($this->productService->show($referenceCode));
+        return $this->successResponse($this->productService->show($product));
     }
 
     /**
      * Update the specified product.
      */
-    public function update(UpdateSubscriptionProductRequest $request, string $referenceCode): JsonResponse
+    public function update(UpdateSubscriptionProductRequest $request, int $product): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.product.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $product = $this->productService->update($request, $referenceCode);
+        $updatedProduct = $this->productService->update($request, $product);
 
-        return $this->successResponse($product);
+        return $this->successResponse($updatedProduct);
     }
 
     /**
      * Remove the specified product.
      */
-    public function destroy(string $referenceCode): JsonResponse
+    public function destroy(int $product): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.product.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $product = $this->productService->destroy($referenceCode);
+        $deletedProduct = $this->productService->destroy($product);
 
-        return $this->successResponse($product);
+        return $this->successResponse($deletedProduct);
     }
 }

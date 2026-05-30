@@ -2,54 +2,66 @@
 
 namespace App\Services\Admin\Subscription;
 
+use App\Models\SubscriptionProduct;
+use App\Services\Base\BaseService;
 use Codenteq\Iyzico\Services\ProductService;
 
-class SubscriptionProductService
+class SubscriptionProductService extends BaseService
 {
     private ProductService $productService;
 
-    public function __construct()
+    public function __construct(ProductService $productService)
     {
-        $this->productService = new ProductService();
-    }
-
-    /**
-     * Display a listing of the products.
-     */
-    public function list(array $params): mixed
-    {
-        return $this->productService->list($params);
+        parent::__construct(SubscriptionProduct::class);
+        $this->productService = $productService;
     }
 
     /**
      * Store a newly created product.
      */
-    public function create(object $request): mixed
+    public function create(object $request): object|array
     {
-        return $this->productService->create($request->validated());
-    }
+        $iyzicoProduct = $this->productService->create($request->validated());
 
-    /**
-     * Display the specified product.
-     */
-    public function show(string $referenceCode): mixed
-    {
-        return $this->productService->retrieve($referenceCode);
+        if ($iyzicoProduct->getStatus() !== 'success') {
+            throw new \Exception($iyzicoProduct->getErrorMessage() ?? 'Product creation failed');
+        }
+
+        return $this->model::create([
+            'referenceCode' => $iyzicoProduct->getReferenceCode(),
+            'name' => $iyzicoProduct->getName(),
+            'description' => $iyzicoProduct->getDescription(),
+            'status' => $iyzicoProduct->getStatus(),
+        ]);
     }
 
     /**
      * Update the specified product.
      */
-    public function update(object $request, string $referenceCode): mixed
+    public function update(object $request, int $id, array $where = []): object
     {
-        return $this->productService->update($referenceCode, $request->validated());
+        $product = $this->model::where($where)->findOrFail($id);
+        
+        $iyzicoProduct = $this->productService->update($product->referenceCode, $request->validated());
+
+        $product->update([
+            'name' => $iyzicoProduct->getName() ?? $request->name,
+            'description' => $iyzicoProduct->getDescription() ?? $request->description,
+        ]);
+
+        return $product;
     }
 
     /**
      * Remove the specified product.
      */
-    public function destroy(string $referenceCode): mixed
+    public function destroy(int $id, array $where = []): mixed
     {
-        return $this->productService->delete($referenceCode);
+        $product = $this->model::where($where)->findOrFail($id);
+        
+        $this->productService->delete($product->referenceCode);
+        $product->delete();
+
+        return response()->json(['message' => 'Product deleted successfully']);
     }
 }

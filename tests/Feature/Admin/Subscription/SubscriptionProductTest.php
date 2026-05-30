@@ -28,6 +28,16 @@ class SubscriptionProductTest extends TestCase
         $admin = User::factory()->create();
         Sanctum::actingAs($admin, ['admin.subscription.product.create']);
 
+        $mockResponse = new \Iyzipay\Model\Subscription\SubscriptionProduct();
+        $mockResponse->setStatus('success');
+        $mockResponse->setReferenceCode('mock-ref-code');
+        $mockResponse->setName('Test Product');
+        $mockResponse->setDescription('Test product description');
+
+        $this->mock(\Codenteq\Iyzico\Services\ProductService::class, function ($mock) use ($mockResponse) {
+            $mock->shouldReceive('create')->once()->andReturn($mockResponse);
+        });
+
         $response = $this->postJson($this->apiUrl, [
             'name' => 'Test Product',
             'description' => 'Test product description',

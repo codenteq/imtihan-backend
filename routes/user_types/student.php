@@ -10,6 +10,7 @@ use App\Http\Controllers\API\Student\Note\NoteController;
 use App\Http\Controllers\API\Student\QuestionCategory\QuestionCategoryController;
 use App\Http\Controllers\API\Student\StaticPage\StaticPageController;
 use App\Http\Controllers\API\Student\Subscription\SubscriptionController;
+use App\Http\Controllers\API\Student\Subscription\SubscriptionPlanController;
 use App\Http\Controllers\API\Student\Support\SupportController;
 
 Route::prefix('accounts')->group(function () {
@@ -34,6 +35,8 @@ Route::apiResource('announcements', AnnouncementController::class)->only(['index
 Route::get('countries', [LocationController::class, 'getCountry'])->name('country.list');
 Route::get('cities/{countryId?}', [LocationController::class, 'getCity'])->name('city.list');
 Route::get('states/{cityId?}', [LocationController::class, 'getState'])->name('state.list');
+
+Route::get('subscription-plans', [SubscriptionPlanController::class, 'index']);
 
 Route::prefix('subscriptions')->group(function () {
     Route::get('/', [SubscriptionController::class, 'index']);

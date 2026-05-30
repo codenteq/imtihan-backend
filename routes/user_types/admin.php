@@ -33,11 +33,7 @@ Route::apiResource('static-pages', StaticPageController::class);
 Route::apiResource('announcements', AnnouncementController::class);
 Route::apiResource('supports', SupportController::class)->only(['index', 'show', 'update', 'destroy']);
 
-Route::prefix('payment')->group(function () {
-    Route::apiResource('coupons', PaymentCouponController::class);
-    Route::apiResource('methods', PaymentMethodController::class);
-    Route::apiResource('settings', PaymentSettingController::class);
-});
+
 
 Route::prefix('condition')->group(function () {
     Route::apiResource('conditions', ConditionController::class);
@@ -57,8 +53,8 @@ Route::get('exam-type-categories/{exam_type}', [ExamTypeController::class, 'getC
 
 Route::prefix('subscription')->group(function () {
     Route::apiResource('products', SubscriptionProductController::class);
-    Route::get('products/{productReferenceCode}/plans', [SubscriptionPlanController::class, 'index']);
-    Route::apiResource('plans', SubscriptionPlanController::class)->except(['index']);
+    Route::get('products/{productReferenceCode}/plans', [SubscriptionPlanController::class, 'indexByProduct']);
+    Route::apiResource('plans', SubscriptionPlanController::class);
     Route::get('subscriptions', [SubscriptionController::class, 'index']);
     Route::get('subscriptions/{subscription}', [SubscriptionController::class, 'show']);
     Route::put('subscriptions/{subscription}/cancel', [SubscriptionController::class, 'cancel']);

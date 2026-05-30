@@ -112,11 +112,9 @@ class SubscriptionTest extends TestCase
 
         $response = $this->postJson($this->apiUrl, [
             'pricing_plan_reference_code' => 'test-ref',
-            'gsm_number' => '+905551234567',
-            'identity_number' => '12345',
         ]);
 
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['identity_number', 'billing_city', 'card_holder_name']);
+        $response->assertJsonValidationErrors(['card_holder_name', 'card_number', 'expire_month', 'expire_year', 'cvc']);
     }
 }

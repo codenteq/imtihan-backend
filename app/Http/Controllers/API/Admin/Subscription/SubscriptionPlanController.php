@@ -19,20 +19,40 @@ class SubscriptionPlanController extends ApiController
     }
 
     /**
-     * Display a listing of the plans for a product.
+     * Display a listing of all plans.
      */
-    public function index(string $productReferenceCode): JsonResponse
+    public function index(): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.plan.list'),
             Response::HTTP_FORBIDDEN
         );
 
-        $params = [
-            'page' => request()->query('page', 1),
-            'count' => request()->query('count', 10),
-        ];
+        $query = request()->query('query');
 
-        return $this->successResponse($this->planService->list($productReferenceCode, $params));
+        if ($query) {
+            return $this->successResponse($this->planService->search($query));
+        }
+
+        return $this->successResponse($this->planService->paginate());
+    }
+
+    /**
+     * Display a listing of the plans for a product.
+     */
+    public function indexByProduct(int $product): JsonResponse
+    {
+        abort_unless(auth()->user()->tokenCan('admin.subscription.plan.list'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        $productModel = \App\Models\SubscriptionProduct::findOrFail($product);
+
+        $query = request()->query('query');
+        if ($query) {
+            return $this->successResponse($this->planService->search($query, 10, ['productReferenceCode' => $productModel->referenceCode]));
+        }
+
+        return $this->successResponse($this->planService->paginate([], ['productReferenceCode' => $productModel->referenceCode]));
     }
 
     /**
@@ -52,40 +72,40 @@ class SubscriptionPlanController extends ApiController
     /**
      * Display the specified plan.
      */
-    public function show(string $referenceCode): JsonResponse
+    public function show(int $plan): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.plan.show'),
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse($this->planService->show($referenceCode));
+        return $this->successResponse($this->planService->show($plan));
     }
 
     /**
      * Update the specified plan.
      */
-    public function update(UpdateSubscriptionPlanRequest $request, string $referenceCode): JsonResponse
+    public function update(UpdateSubscriptionPlanRequest $request, int $plan): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.plan.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $plan = $this->planService->update($request, $referenceCode);
+        $updatedPlan = $this->planService->update($request, $plan);
 
-        return $this->successResponse($plan);
+        return $this->successResponse($updatedPlan);
     }
 
     /**
      * Remove the specified plan.
      */
-    public function destroy(string $referenceCode): JsonResponse
+    public function destroy(int $plan): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.subscription.plan.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $plan = $this->planService->destroy($referenceCode);
+        $deletedPlan = $this->planService->destroy($plan);
 
-        return $this->successResponse($plan);
+        return $this->successResponse($deletedPlan);
     }
 }

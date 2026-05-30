@@ -104,7 +104,7 @@ class SubscriptionController extends ApiController
         $user = auth()->user();
         $sub = $this->subscriptionService->show($user, $subscription);
 
-        return $user->downloadInvoice([
+        $data = [
             'name' => config('app.name'),
             'street' => '',
             'city' => '',
@@ -114,6 +114,23 @@ class SubscriptionController extends ApiController
             'email' => $user->email,
             'website' => config('app.url'),
             'vatId' => '',
+            'accountTaxId' => '',
+            'customerTaxId' => '',
+        ];
+
+        $invoice = new \Codenteq\Iyzico\Invoice($user, $sub);
+
+        $filename = $sub->name ?? \Illuminate\Support\Str::slug(config('app.name'));
+        $subscriptionMonth = $sub->created_at->month;
+        $subscriptionYear = $sub->created_at->year;
+        $filename .= '_' . $subscriptionMonth . '_' . $subscriptionYear;
+
+        return new \Illuminate\Http\Response($invoice->pdf($data), 200, [
+            'Content-Description' => 'File Transfer',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '.pdf"',
+            'Content-Transfer-Encoding' => 'binary',
+            'Content-Type' => 'application/pdf',
+            'X-Vapor-Base64-Encode' => 'True',
         ]);
     }
 }

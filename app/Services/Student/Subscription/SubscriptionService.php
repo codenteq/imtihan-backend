@@ -11,9 +11,9 @@ class SubscriptionService
 {
     private CashierSubscriptionService $subscriptionService;
 
-    public function __construct()
+    public function __construct(CashierSubscriptionService $subscriptionService)
     {
-        $this->subscriptionService = new CashierSubscriptionService();
+        $this->subscriptionService = $subscriptionService;
     }
 
     /**
@@ -31,25 +31,29 @@ class SubscriptionService
     {
         $data = $request->validated();
 
+        $cityName = $user->city_id ? \App\Models\City::find($user->city_id)?->name ?? 'Istanbul' : 'Istanbul';
+        $countryName = $user->country_id ? \App\Models\Country::find($user->country_id)?->name ?? 'Türkiye' : 'Türkiye';
+        $address = $user->address ?? 'Imtihan App Default Address';
+
         $data['customer'] = [
             'name' => $user->full_name,
             'surname' => $user->full_name,
-            'gsmNumber' => $data['gsm_number'],
+            'gsmNumber' => $user->phone,
             'email' => $user->email,
-            'identityNumber' => $data['identity_number'],
+            'identityNumber' => '11111111111',
             'billingAddress' => [
                 'contactName' => $user->full_name,
-                'city' => $data['billing_city'],
-                'country' => $data['billing_country'],
-                'address' => $data['billing_address'],
-                'zipCode' => $data['billing_zip_code'],
+                'city' => $cityName,
+                'country' => $countryName,
+                'address' => $address,
+                'zipCode' => '34000',
             ],
             'shippingAddress' => [
                 'contactName' => $user->full_name,
-                'city' => $data['billing_city'],
-                'country' => $data['billing_country'],
-                'address' => $data['billing_address'],
-                'zipCode' => $data['billing_zip_code'],
+                'city' => $cityName,
+                'country' => $countryName,
+                'address' => $address,
+                'zipCode' => '34000',
             ],
         ];
 
@@ -68,17 +72,39 @@ class SubscriptionService
             'card' => $data['card'],
         ]);
 
-        if ($response->getStatus() === 'success') {
-            return Subscription::create([
-                'user_id' => $user->id,
-                'name' => $data['name'] ?? 'default',
-                'iyzico_id' => $response->getReferenceCode(),
-                'iyzico_plan' => $data['pricing_plan_reference_code'],
-                'iyzico_status' => 'ACTIVE',
-            ]);
+        if ($response->getStatus() !== 'success') {
+            throw new \Exception($response->getErrorMessage() ?? 'Subscription creation failed');
         }
 
-        return $response;
+        $plan = \App\Models\SubscriptionPlan::where('referenceCode', $data['pricing_plan_reference_code'])->first();
+        $totalPrice = (float) ($plan ? $plan->price : '0');
+        $taxRate = 20;
+        $basePrice = $totalPrice / (1 + ($taxRate / 100));
+        $taxPrice = $totalPrice - $basePrice;
+
+        $trialDays = (int) ($plan ? $plan->trialPeriodDays : 0);
+        $trialEndsAt = $trialDays > 0 ? now()->addDays($trialDays) : null;
+
+        $cardNumber = str_replace(' ', '', $data['card_number']);
+        $pmLastFour = substr($cardNumber, -4);
+
+        $user->iyzico_id = $response->getReferenceCode();
+        $user->pm_last_four = $pmLastFour;
+        $user->trial_ends_at = $trialEndsAt;
+        $user->save();
+
+        return Subscription::create([
+            'user_id' => $user->id,
+            'name' => $data['name'] ?? ($plan ? $plan->name : 'default'),
+            'iyzico_id' => $response->getReferenceCode(),
+            'iyzico_plan' => $data['pricing_plan_reference_code'],
+            'iyzico_price' => (string) round($totalPrice, 2),
+            'base_price' => (string) round($basePrice, 2),
+            'tax_price' => (string) round($taxPrice, 2),
+            'tax_rate' => (string) $taxRate,
+            'trial_ends_at' => $trialEndsAt,
+            'iyzico_status' => $trialEndsAt ? 'TRIAL' : 'ACTIVE',
+        ]);
     }
 
     /**
