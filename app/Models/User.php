@@ -15,7 +15,7 @@ use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Billable, HasFactory, Notifiable, Searchable, SoftDeletes;
+    use Billable, HasApiTokens, HasFactory, Notifiable, Searchable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'full_name',
+        'username',
         'email',
         'phone',
         'address',

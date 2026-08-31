@@ -3,14 +3,16 @@
 namespace Tests\Feature\Student\QuestionCategory;
 
 use App\Enums\Role;
-use App\Models\Note;
 use App\Models\QuestionCategory;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class QuestionCategoryControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected string $apiUrl = '/api/student/question-categories/';
 
     public function test_question_category_list(): void

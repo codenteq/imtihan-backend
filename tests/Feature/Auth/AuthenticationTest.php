@@ -23,6 +23,21 @@ class AuthenticationTest extends TestCase
         $response->assertSuccessful();
     }
 
+    public function test_users_can_authenticate_using_username()
+    {
+        $user = User::factory()->create([
+            'username' => 'customuser',
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => 'customuser',
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertSuccessful();
+    }
+
     public function test_users_can_not_authenticate_with_invalid_password()
     {
         $user = User::factory()->create();

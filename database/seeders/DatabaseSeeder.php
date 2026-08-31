@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory(1)
-            ->state(['email' => 'admin@codenteq.com'])
+            ->state(['username' => 'admin', 'email' => 'admin@codenteq.com'])
             ->state(['role' => Role::Admin])
             ->create();
         User::factory(1)
-            ->state(['email' => 'student@codenteq.com'])
+            ->state(['username' => 'student', 'email' => 'student@codenteq.com'])
             ->state(['role' => Role::Student])
             ->state(['education_level' => EducationLevel::High->value])
             ->create();
