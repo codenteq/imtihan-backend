@@ -10,13 +10,12 @@ use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
 
-
 /**
  * @group admin
  */
 class QuestionTest extends AdminFrontendDuskTestCase
 {
-    public function testAdminQuestion(): void
+    public function test_admin_question(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])
@@ -26,7 +25,7 @@ class QuestionTest extends AdminFrontendDuskTestCase
         $question = Question::factory()->make();
         $options = QuestionOption::factory(4)->make();
 
-        $this->browse(function (Browser $browser) use ($question, $options){
+        $this->browse(function (Browser $browser) use ($question, $options) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
                 ->type('#email', 'admin@codenteq.com')
@@ -49,7 +48,7 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->select('select[name="difficulty"]', $question->difficulty)
                 ->select('select[name="status"]', QuestionStatus::Draft->value);
 
-            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '" . $question->description . "';");
+            $browser->script("document.querySelector('.ql-editor > p').innerHTML = '".$question->description."';");
 
             $browser->pause(1500)
                 ->select('select[name="language_id"]', $question->language_id)
@@ -60,27 +59,27 @@ class QuestionTest extends AdminFrontendDuskTestCase
                 ->type('input[name="options.1.description"]', $options[1]->description)
                 ->type('input[name="options.2.description"]', $options[2]->description)
                 ->type('input[name="options.3.description"]', $options[3]->description)
-                ->radio('#is_correct_0',true)
-                ->press("Kaydet")
+                ->radio('#is_correct_0', true)
+                ->press('Kaydet')
                 ->pause(3000)
                 ->screenshot('questions/admin/create')
                 ->assertSeeIn('table', $question->name)
                 ->storeConsoleLog('categories.last')
                 ->screenshot('questions/admin/create.index');
 
-/*            $browser->click('table > tbody > tr:first-child > td > div > a')
-                ->screenshot('questions/admin/show.edit')
-                ->pause(4000)
-                ->type('input[name="name"]', 'Updated '.$question->name)
-                ->assertInputValue('input[name="name"]', 'Updated '.$question->name)
-                ->pause(1500)
-                ->press('Kaydet')
-                ->screenshot('questions/admin/edit')
-                ->screenshot('questions/admin/edit.index')
-                ->pause(5000)
-                ->waitForText('Updated '.$question->name, 10)
-                ->assertSeeIn('table', 'Updated '.$question->name)
-                ->storeConsoleLog('questions.edit');*/
+            /*            $browser->click('table > tbody > tr:first-child > td > div > a')
+                            ->screenshot('questions/admin/show.edit')
+                            ->pause(4000)
+                            ->type('input[name="name"]', 'Updated '.$question->name)
+                            ->assertInputValue('input[name="name"]', 'Updated '.$question->name)
+                            ->pause(1500)
+                            ->press('Kaydet')
+                            ->screenshot('questions/admin/edit')
+                            ->screenshot('questions/admin/edit.index')
+                            ->pause(5000)
+                            ->waitForText('Updated '.$question->name, 10)
+                            ->assertSeeIn('table', 'Updated '.$question->name)
+                            ->storeConsoleLog('questions.edit');*/
 
             $browser->press('table > tbody > tr:first-child > td > div > button')
                 ->acceptDialog()

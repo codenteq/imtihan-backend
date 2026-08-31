@@ -19,7 +19,7 @@ class ConditionTest extends AdminFrontendDuskTestCase
     /**
      * A Dusk test example.
      */
-    public function testCondition(): void
+    public function test_condition(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

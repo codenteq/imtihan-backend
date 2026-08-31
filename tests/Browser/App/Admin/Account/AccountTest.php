@@ -13,7 +13,7 @@ use Tests\AdminFrontendDuskTestCase;
  */
 class AccountTest extends AdminFrontendDuskTestCase
 {
-    public function testAdminAccount(): void
+    public function test_admin_account(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])
@@ -25,8 +25,7 @@ class AccountTest extends AdminFrontendDuskTestCase
             ->state(['address' => 'Admin Address'])
             ->make();
 
-
-        $this->browse(function (Browser $browser) use ($user){
+        $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
                 ->type('#email', 'admin@codenteq.com')
@@ -51,18 +50,18 @@ class AccountTest extends AdminFrontendDuskTestCase
                 ->type('input[name="address"]', $user->address)
                 ->type('input[name="birth_date"]', now()->format('d-m-Y'))
                 ->screenshot('account/admin/setting.membership')
-                ->pressAndWaitFor('Kaydet',3);
+                ->pressAndWaitFor('Kaydet', 3);
 
             $browser->click('#contact-tab')
                 ->type('input[name="phone"]', $user->phone)
-                ->pressAndWaitFor('Kaydet',3)
+                ->pressAndWaitFor('Kaydet', 3)
                 ->screenshot('account/admin/setting.contact');
 
             $browser->click('#password-tab')
                 ->type('input[name="current_password"]', 'password')
                 ->type('input[name="password"]', '12345678')
                 ->type('input[name="password_confirmation"]', '12345678')
-                ->pressAndWaitFor('Kaydet',3)
+                ->pressAndWaitFor('Kaydet', 3)
                 ->screenshot('account/admin/setting.password');
 
             $browser->clickLink('Hesap')

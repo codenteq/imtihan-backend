@@ -18,9 +18,7 @@ class ExamResultJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected int $exam_id, protected int $user_id)
-    {
-    }
+    public function __construct(protected int $exam_id, protected int $user_id) {}
 
     /**
      * Execute the job.

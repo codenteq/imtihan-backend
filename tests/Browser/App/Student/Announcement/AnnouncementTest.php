@@ -13,7 +13,7 @@ use Tests\StudentFrontendDuskTestCase;
  */
 class AnnouncementTest extends StudentFrontendDuskTestCase
 {
-    public function testAnnouncement(): void
+    public function test_announcement(): void
     {
         User::factory(1)
             ->state(['email' => 'student@codenteq.com'])

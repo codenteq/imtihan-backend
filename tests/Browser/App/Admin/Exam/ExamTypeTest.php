@@ -14,8 +14,7 @@ use Tests\AdminFrontendDuskTestCase;
  */
 class ExamTypeTest extends AdminFrontendDuskTestCase
 {
-
-    public function testExamType(): void
+    public function test_exam_type(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

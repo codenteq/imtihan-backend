@@ -7,7 +7,9 @@ use App\Http\Requests\Student\Subscription\StoreSubscriptionRequest;
 use App\Http\Requests\Student\Subscription\UpgradeSubscriptionRequest;
 use App\Http\Resources\Student\Subscription\SubscriptionResource;
 use App\Services\Student\Subscription\SubscriptionService;
+use Codenteq\Iyzico\Invoice;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class SubscriptionController extends ApiController
@@ -118,16 +120,16 @@ class SubscriptionController extends ApiController
             'customerTaxId' => '',
         ];
 
-        $invoice = new \Codenteq\Iyzico\Invoice($user, $sub);
+        $invoice = new Invoice($user, $sub);
 
-        $filename = $sub->name ?? \Illuminate\Support\Str::slug(config('app.name'));
+        $filename = $sub->name ?? Str::slug(config('app.name'));
         $subscriptionMonth = $sub->created_at->month;
         $subscriptionYear = $sub->created_at->year;
-        $filename .= '_' . $subscriptionMonth . '_' . $subscriptionYear;
+        $filename .= '_'.$subscriptionMonth.'_'.$subscriptionYear;
 
         return new \Illuminate\Http\Response($invoice->pdf($data), 200, [
             'Content-Description' => 'File Transfer',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '.pdf"',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'.pdf"',
             'Content-Transfer-Encoding' => 'binary',
             'Content-Type' => 'application/pdf',
             'X-Vapor-Base64-Encode' => 'True',

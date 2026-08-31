@@ -4,10 +4,11 @@ namespace Database\Factories;
 
 use App\Enums\Status;
 use App\Models\Question;
+use App\Models\QuestionOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\QuestionOption>
+ * @extends Factory<QuestionOption>
  */
 class QuestionOptionFactory extends Factory
 {

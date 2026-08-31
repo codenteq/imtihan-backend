@@ -5,6 +5,7 @@ namespace App\Services\Admin\Subscription;
 use App\Models\SubscriptionPlan;
 use App\Services\Base\BaseService;
 use Codenteq\Iyzico\Services\PlanService;
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionPlanService extends BaseService
 {
@@ -22,14 +23,14 @@ class SubscriptionPlanService extends BaseService
     public function create(object $request): object|array
     {
         $validatedData = $request->validated();
-        
-        $validatedData['price'] = number_format((float)$validatedData['price'], 2, '.', '');
-        
+
+        $validatedData['price'] = number_format((float) $validatedData['price'], 2, '.', '');
+
         if (empty($validatedData['trial_period_days'])) {
             $validatedData['trial_period_days'] = null;
         }
 
-        \Illuminate\Support\Facades\Log::info('Iyzico Plan Request Payload:', $validatedData);
+        Log::info('Iyzico Plan Request Payload:', $validatedData);
 
         $iyzicoPlan = $this->planService->create(
             $validatedData['product_reference_code'],
@@ -37,7 +38,7 @@ class SubscriptionPlanService extends BaseService
         );
 
         if ($iyzicoPlan->getStatus() !== 'success') {
-            \Illuminate\Support\Facades\Log::error('Iyzico Plan Creation Failed:', ['raw_result' => $iyzicoPlan->getRawResult(), 'status' => $iyzicoPlan->getStatus(), 'error' => $iyzicoPlan->getErrorMessage()]);
+            Log::error('Iyzico Plan Creation Failed:', ['raw_result' => $iyzicoPlan->getRawResult(), 'status' => $iyzicoPlan->getStatus(), 'error' => $iyzicoPlan->getErrorMessage()]);
             throw new \Exception($iyzicoPlan->getErrorMessage() ?? 'Plan creation failed');
         }
 
@@ -62,7 +63,7 @@ class SubscriptionPlanService extends BaseService
     public function update(object $request, int $id, array $where = []): object
     {
         $plan = $this->model::where($where)->findOrFail($id);
-        
+
         $iyzicoPlan = $this->planService->update($plan->referenceCode, $request->validated());
 
         $plan->update([
@@ -80,7 +81,7 @@ class SubscriptionPlanService extends BaseService
     public function destroy(int $id, array $where = []): mixed
     {
         $plan = $this->model::where($where)->findOrFail($id);
-        
+
         $this->planService->delete($plan->referenceCode);
         $plan->delete();
 

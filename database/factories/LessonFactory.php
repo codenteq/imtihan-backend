@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\Language;
+use App\Models\Lesson;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lesson>
+ * @extends Factory<Lesson>
  */
 class LessonFactory extends Factory
 {

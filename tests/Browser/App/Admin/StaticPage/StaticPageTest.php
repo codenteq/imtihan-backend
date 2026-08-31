@@ -7,15 +7,13 @@ use App\Models\StaticPage;
 use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\AdminFrontendDuskTestCase;
-use function Laravel\Prompts\pause;
 
 /**
  * @group admin
  */
 class StaticPageTest extends AdminFrontendDuskTestCase
 {
-
-    public function testStaticPage(): void
+    public function test_static_page(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

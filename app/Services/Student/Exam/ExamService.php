@@ -116,21 +116,21 @@ class ExamService extends BaseService
     public function getExamResultAll(): mixed
     {
         return ExamResult::query()->whereUserId(auth()->id())->with([
-            'exam.examType' => fn($query) => $query->select(['id', 'name']),
+            'exam.examType' => fn ($query) => $query->select(['id', 'name']),
         ])->latest()->paginate();
     }
 
     public function getExamResult(int $exam): array
     {
         $examResult = ExamResult::query()->whereExamId($exam)->whereUserId(auth()->id())->with([
-            'exam.examType' => fn($query) => $query->select(['id', 'name']),
+            'exam.examType' => fn ($query) => $query->select(['id', 'name']),
         ])->first();
 
         $condition = Condition::query()->where('exam_type_id', $examResult->exam->exam_type_id)->pluck('value', 'condition_category');
 
         return [
             ...$examResult->toArray(),
-            ...$condition
+            ...$condition,
         ];
     }
 

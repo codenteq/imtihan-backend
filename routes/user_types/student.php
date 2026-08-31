@@ -46,4 +46,3 @@ Route::prefix('subscriptions')->group(function () {
     Route::put('/{subscription}/upgrade', [SubscriptionController::class, 'upgrade']);
     Route::get('/{subscription}/invoice', [SubscriptionController::class, 'invoice']);
 });
-

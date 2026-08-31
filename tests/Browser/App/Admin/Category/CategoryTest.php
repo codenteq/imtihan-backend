@@ -17,7 +17,7 @@ class CategoryTest extends AdminFrontendDuskTestCase
     /**
      * A Dusk test example.
      */
-    public function testCategory(): void
+    public function test_category(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

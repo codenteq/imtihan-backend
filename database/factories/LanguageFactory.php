@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Enums\Status;
+use App\Models\Language;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Language>
+ * @extends Factory<Language>
  */
 class LanguageFactory extends Factory
 {

@@ -17,7 +17,7 @@ class UserTest extends AdminFrontendDuskTestCase
     /**
      * A Dusk test example.
      */
-    public function testUser(): void
+    public function test_user(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

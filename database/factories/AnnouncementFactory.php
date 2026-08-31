@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Announcement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Announcement>
+ * @extends Factory<Announcement>
  */
 class AnnouncementFactory extends Factory
 {

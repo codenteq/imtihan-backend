@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin\Subscription;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\Admin\Subscription\StoreSubscriptionPlanRequest;
 use App\Http\Requests\Admin\Subscription\UpdateSubscriptionPlanRequest;
+use App\Models\SubscriptionProduct;
 use App\Services\Admin\Subscription\SubscriptionPlanService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ class SubscriptionPlanController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $productModel = \App\Models\SubscriptionProduct::findOrFail($product);
+        $productModel = SubscriptionProduct::findOrFail($product);
 
         $query = request()->query('query');
         if ($query) {

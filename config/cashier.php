@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Codenteq\Iyzico\Services\InvoiceRendererService;
 
 return [
@@ -67,9 +68,9 @@ return [
     |
     */
 
-    'model' => env('CASHIER_MODEL', App\Models\User::class),
+    'model' => env('CASHIER_MODEL', User::class),
 
-     /*
+    /*
     |--------------------------------------------------------------------------
     | Invoice Settings
     |--------------------------------------------------------------------------

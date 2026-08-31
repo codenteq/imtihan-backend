@@ -15,9 +15,10 @@ class UserService extends BaseService
     public function paginate(array $with = [], array $where = [], int $perPage = 10)
     {
         $with = array_merge($with, ['activeSubscriptions']);
+
         return parent::paginate($with, $where, $perPage);
     }
-    
+
     public function search(string $query, int $perPage = 10, array $where = []): mixed
     {
         $search = $this->model::search($query);

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Student\Exam;
 
+use App\Enums\ConditionCategory;
 use App\Enums\Role;
 use App\Models\Condition;
 use App\Models\Exam;
@@ -62,7 +63,7 @@ class ExamControllerTest extends TestCase
             'name' => 'Exam Time',
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
-            'condition_category' => \App\Enums\ConditionCategory::Time->value,
+            'condition_category' => ConditionCategory::Time->value,
             'value' => 15,
         ])->create();
 
@@ -70,7 +71,7 @@ class ExamControllerTest extends TestCase
             'name' => 'length',
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => $examTypeCategory->id,
-            'condition_category' => \App\Enums\ConditionCategory::Length->value,
+            'condition_category' => ConditionCategory::Length->value,
             'value' => 1,
         ])->create();
 
@@ -78,7 +79,7 @@ class ExamControllerTest extends TestCase
             'name' => 'length',
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => $examTypeCategoryTwo->id,
-            'condition_category' => \App\Enums\ConditionCategory::Length->value,
+            'condition_category' => ConditionCategory::Length->value,
             'value' => 1,
         ])->create();
 
@@ -142,7 +143,7 @@ class ExamControllerTest extends TestCase
 
         Condition::factory()->state([
             'name' => 'Question Length',
-            'condition_category' => \App\Enums\ConditionCategory::Length->value,
+            'condition_category' => ConditionCategory::Length->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => $examTypeCategory->id,
             'value' => 10,
@@ -151,7 +152,7 @@ class ExamControllerTest extends TestCase
 
         Condition::factory()->state([
             'name' => 'Exam Time',
-            'condition_category' => \App\Enums\ConditionCategory::Time->value,
+            'condition_category' => ConditionCategory::Time->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 15,
@@ -160,7 +161,7 @@ class ExamControllerTest extends TestCase
 
         Condition::factory()->state([
             'name' => 'Exam Penalty Ratio',
-            'condition_category' => \App\Enums\ConditionCategory::PenaltyRatio->value,
+            'condition_category' => ConditionCategory::PenaltyRatio->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 4,
@@ -169,7 +170,7 @@ class ExamControllerTest extends TestCase
 
         Condition::factory()->state([
             'name' => 'Exam Max Score',
-            'condition_category' => \App\Enums\ConditionCategory::MaxScore->value,
+            'condition_category' => ConditionCategory::MaxScore->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 500,

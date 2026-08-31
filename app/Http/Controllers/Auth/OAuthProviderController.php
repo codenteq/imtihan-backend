@@ -6,6 +6,7 @@ use App\Enums\OAuthProviderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -14,7 +15,7 @@ class OAuthProviderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(OAuthProviderEnum $provider): \Illuminate\Http\RedirectResponse
+    public function index(OAuthProviderEnum $provider): RedirectResponse
     {
         return Socialite::driver($provider->value)->redirect();
     }
@@ -22,7 +23,7 @@ class OAuthProviderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(OAuthProviderEnum $provider): \Illuminate\Http\RedirectResponse
+    public function store(OAuthProviderEnum $provider): RedirectResponse
     {
         $socialite = Socialite::driver($provider->value)->user();
 
