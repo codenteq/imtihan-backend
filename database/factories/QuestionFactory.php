@@ -6,12 +6,13 @@ use App\Enums\Difficulty;
 use App\Enums\QuestionStatus;
 use App\Enums\Status;
 use App\Models\Language;
+use App\Models\Question;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Question>
+ * @extends Factory<Question>
  */
 class QuestionFactory extends Factory
 {

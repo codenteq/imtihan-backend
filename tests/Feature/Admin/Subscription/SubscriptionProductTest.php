@@ -3,9 +3,11 @@
 namespace Tests\Feature\Admin\Subscription;
 
 use App\Models\User;
+use Codenteq\Iyzico\Services\ProductService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Iyzipay\Model\Subscription\SubscriptionProduct;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SubscriptionProductTest extends TestCase
 {
@@ -18,7 +20,7 @@ class SubscriptionProductTest extends TestCase
         $admin = User::factory()->create();
         Sanctum::actingAs($admin, ['admin.subscription.product.list']);
 
-        $response = $this->get($this->apiUrl . '?page=1&count=10');
+        $response = $this->get($this->apiUrl.'?page=1&count=10');
 
         $response->assertStatus(200);
     }
@@ -28,13 +30,13 @@ class SubscriptionProductTest extends TestCase
         $admin = User::factory()->create();
         Sanctum::actingAs($admin, ['admin.subscription.product.create']);
 
-        $mockResponse = new \Iyzipay\Model\Subscription\SubscriptionProduct();
+        $mockResponse = new SubscriptionProduct;
         $mockResponse->setStatus('success');
         $mockResponse->setReferenceCode('mock-ref-code');
         $mockResponse->setName('Test Product');
         $mockResponse->setDescription('Test product description');
 
-        $this->mock(\Codenteq\Iyzico\Services\ProductService::class, function ($mock) use ($mockResponse) {
+        $this->mock(ProductService::class, function ($mock) use ($mockResponse) {
             $mock->shouldReceive('create')->once()->andReturn($mockResponse);
         });
 

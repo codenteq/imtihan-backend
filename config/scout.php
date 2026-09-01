@@ -1,5 +1,18 @@
 <?php
 
+use App\Models\Announcement;
+use App\Models\Condition;
+use App\Models\ExamType;
+use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\Note;
+use App\Models\PaymentCoupon;
+use App\Models\PaymentSetting;
+use App\Models\QuestionCategory;
+use App\Models\StaticPage;
+use App\Models\Support;
+use App\Models\User;
+
 return [
 
     /*
@@ -133,40 +146,40 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY', null),
         'index-settings' => [
-            \App\Models\Announcement::class => [
+            Announcement::class => [
                 'filterableAttributes' => ['id', 'name', 'content'],
             ],
-            \App\Models\Condition::class => [
+            Condition::class => [
                 'filterableAttributes' => ['id', 'name', 'exam_type_id', 'exam_type_category_id', 'condition_category', 'value', 'is_active'],
             ],
-            \App\Models\ExamType::class => [
+            ExamType::class => [
                 'filterableAttributes' => ['id', 'name', 'language_id'],
             ],
-            \App\Models\Language::class => [
+            Language::class => [
                 'filterableAttributes' => ['id', 'name', 'code', 'is_active'],
             ],
-            \App\Models\Lesson::class => [
+            Lesson::class => [
                 'filterableAttributes' => ['id', 'name', 'content', 'category_id', 'language_id'],
             ],
-            \App\Models\Note::class => [
+            Note::class => [
                 'filterableAttributes' => ['id', 'name', 'content', 'is_everyone', 'user_id'],
             ],
-            \App\Models\PaymentCoupon::class => [
+            PaymentCoupon::class => [
                 'filterableAttributes' => ['id', 'code', 'discount', 'start_date', 'end_date'],
             ],
-            \App\Models\PaymentSetting::class => [
+            PaymentSetting::class => [
                 'filterableAttributes' => ['id', 'price', 'is_default'],
             ],
-            \App\Models\QuestionCategory::class => [
+            QuestionCategory::class => [
                 'filterableAttributes' => ['id', 'name', 'description', 'parent_id', 'language_id'],
             ],
-            \App\Models\StaticPage::class => [
+            StaticPage::class => [
                 'filterableAttributes' => ['id', 'name', 'content'],
             ],
-            \App\Models\Support::class => [
+            Support::class => [
                 'filterableAttributes' => ['id', 'subject', 'message', 'is_active', 'user_id'],
             ],
-            \App\Models\User::class => [
+            User::class => [
                 'filterableAttributes' => ['id', 'full_name', 'email', 'phone', 'address', 'birth_date', 'country_id', 'city_id', 'state_id', 'language_id', 'gender', 'education_level', 'is_active', 'role'],
             ],
         ],

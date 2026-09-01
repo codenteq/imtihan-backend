@@ -54,7 +54,7 @@ return [
             'client' => [
                 'max_host_connections' => 10,
                 'max_pending_pushes' => 100,
-            ]
+            ],
         ],
 
         'ses' => [

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ConditionCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +23,7 @@ class Condition extends Model
     ];
 
     protected $casts = [
-        'condition_category' => \App\Enums\ConditionCategory::class,
+        'condition_category' => ConditionCategory::class,
     ];
 
     public function examTypeCategory(): BelongsTo

@@ -2,6 +2,9 @@
 
 namespace App\Services\Student\Subscription;
 
+use App\Models\City;
+use App\Models\Country;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
 use Codenteq\Iyzico\Enums\UpgradePeriodEnum;
 use Codenteq\Iyzico\Models\Subscription;
@@ -31,8 +34,8 @@ class SubscriptionService
     {
         $data = $request->validated();
 
-        $cityName = $user->city_id ? \App\Models\City::find($user->city_id)?->name ?? 'Istanbul' : 'Istanbul';
-        $countryName = $user->country_id ? \App\Models\Country::find($user->country_id)?->name ?? 'Türkiye' : 'Türkiye';
+        $cityName = $user->city_id ? City::find($user->city_id)?->name ?? 'Istanbul' : 'Istanbul';
+        $countryName = $user->country_id ? Country::find($user->country_id)?->name ?? 'Türkiye' : 'Türkiye';
         $address = $user->address ?? 'Imtihan App Default Address';
 
         $data['customer'] = [
@@ -76,7 +79,7 @@ class SubscriptionService
             throw new \Exception($response->getErrorMessage() ?? 'Subscription creation failed');
         }
 
-        $plan = \App\Models\SubscriptionPlan::where('referenceCode', $data['pricing_plan_reference_code'])->first();
+        $plan = SubscriptionPlan::where('referenceCode', $data['pricing_plan_reference_code'])->first();
         $totalPrice = (float) ($plan ? $plan->price : '0');
         $taxRate = 20;
         $basePrice = $totalPrice / (1 + ($taxRate / 100));

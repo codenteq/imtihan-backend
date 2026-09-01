@@ -41,7 +41,7 @@ class SubscriptionProductService extends BaseService
     public function update(object $request, int $id, array $where = []): object
     {
         $product = $this->model::where($where)->findOrFail($id);
-        
+
         $iyzicoProduct = $this->productService->update($product->referenceCode, $request->validated());
 
         $product->update([
@@ -58,7 +58,7 @@ class SubscriptionProductService extends BaseService
     public function destroy(int $id, array $where = []): mixed
     {
         $product = $this->model::where($where)->findOrFail($id);
-        
+
         $this->productService->delete($product->referenceCode);
         $product->delete();
 

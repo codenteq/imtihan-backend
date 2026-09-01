@@ -95,7 +95,6 @@ class QuestionController extends ApiController
         return $this->successResponse($resolvedQuestion);
     }
 
-
     /**
      * Update the specified resource in storage.
      */

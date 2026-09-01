@@ -12,9 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ExamTypeController extends ApiController
 {
-    public function __construct(private readonly ExamTypeService $examTypeService)
-    {
-    }
+    public function __construct(private readonly ExamTypeService $examTypeService) {}
 
     /**
      * Display a listing of the resource.

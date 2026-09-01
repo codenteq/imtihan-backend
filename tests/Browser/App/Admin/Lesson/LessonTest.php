@@ -13,7 +13,7 @@ use Tests\AdminFrontendDuskTestCase;
  */
 class LessonTest extends AdminFrontendDuskTestCase
 {
-    public function testLesson(): void
+    public function test_lesson(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

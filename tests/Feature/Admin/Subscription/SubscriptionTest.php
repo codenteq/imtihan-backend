@@ -5,9 +5,9 @@ namespace Tests\Feature\Admin\Subscription;
 use App\Models\User;
 use Codenteq\Iyzico\Models\Subscription;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Illuminate\Support\Str;
 
 class SubscriptionTest extends TestCase
 {
@@ -22,7 +22,7 @@ class SubscriptionTest extends TestCase
         Subscription::create([
             'user_id' => $owner->id,
             'name' => 'default',
-            'iyzico_id' => 'test-ref-' . uniqid(),
+            'iyzico_id' => 'test-ref-'.uniqid(),
             'iyzico_plan' => 'test-plan-ref',
             'iyzico_status' => 'ACTIVE',
             'iyzico_price' => 99.99,
@@ -46,7 +46,7 @@ class SubscriptionTest extends TestCase
         $subscription = Subscription::create([
             'user_id' => $owner->id,
             'name' => 'default',
-            'iyzico_id' => 'test-ref-' . uniqid(),
+            'iyzico_id' => 'test-ref-'.uniqid(),
             'iyzico_plan' => 'test-plan-ref',
             'iyzico_status' => 'ACTIVE',
             'iyzico_price' => 99.99,
@@ -58,7 +58,7 @@ class SubscriptionTest extends TestCase
         $admin = User::factory()->create();
         Sanctum::actingAs($admin, ['admin.subscription.show']);
 
-        $response = $this->get($this->apiUrl . $subscription->id);
+        $response = $this->get($this->apiUrl.$subscription->id);
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['name' => 'default']);
@@ -79,7 +79,7 @@ class SubscriptionTest extends TestCase
         $admin = User::factory()->create();
         Sanctum::actingAs($admin, ['admin.subscription.show']);
 
-        $response = $this->get($this->apiUrl . Str::uuid());
+        $response = $this->get($this->apiUrl.Str::uuid());
 
         $response->assertStatus(404);
     }

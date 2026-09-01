@@ -3,9 +3,9 @@
 namespace Tests\Feature\Admin\Subscription;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SubscriptionPlanTest extends TestCase
 {

@@ -5,6 +5,9 @@ namespace App\Providers;
 use App\Models\ClassSchedule;
 use App\Models\Note;
 use App\Models\Support;
+use App\Policies\Student\ClassSchedule\ClassSchedulePolicy;
+use App\Policies\Student\Note\NotePolicy;
+use App\Policies\Student\Support\SupportPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -17,9 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Support::class => \App\Policies\Student\Support\SupportPolicy::class,
-        Note::class => \App\Policies\Student\Note\NotePolicy::class,
-        ClassSchedule::class => \App\Policies\Student\ClassSchedule\ClassSchedulePolicy::class,
+        Support::class => SupportPolicy::class,
+        Note::class => NotePolicy::class,
+        ClassSchedule::class => ClassSchedulePolicy::class,
     ];
 
     /**

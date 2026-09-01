@@ -9,11 +9,12 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Language;
 use App\Models\State;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -26,6 +27,7 @@ class UserFactory extends Factory
     {
         return [
             'full_name' => $this->faker->name,
+            'username' => $this->faker->unique()->userName,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,

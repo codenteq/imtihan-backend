@@ -2,9 +2,9 @@
 
 namespace Tests\Browser\App\Student\Exam;
 
+use App\Enums\ConditionCategory;
 use App\Enums\Role;
 use App\Models\Condition;
-use App\Models\Exam;
 use App\Models\ExamType;
 use App\Models\ExamTypeCategory;
 use App\Models\Question;
@@ -34,7 +34,7 @@ class ExamTest extends StudentFrontendDuskTestCase
 
         Condition::factory()->state([
             'name' => 'Question Length',
-            'condition_category' => \App\Enums\ConditionCategory::Length->value,
+            'condition_category' => ConditionCategory::Length->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => $examTypeCategory->id,
             'value' => 10,
@@ -43,7 +43,7 @@ class ExamTest extends StudentFrontendDuskTestCase
 
         Condition::factory()->state([
             'name' => 'Exam Time',
-            'condition_category' => \App\Enums\ConditionCategory::Time->value,
+            'condition_category' => ConditionCategory::Time->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 15,
@@ -52,7 +52,7 @@ class ExamTest extends StudentFrontendDuskTestCase
 
         Condition::factory()->state([
             'name' => 'Exam Penalty Ratio',
-            'condition_category' => \App\Enums\ConditionCategory::PenaltyRatio->value,
+            'condition_category' => ConditionCategory::PenaltyRatio->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 4,
@@ -61,7 +61,7 @@ class ExamTest extends StudentFrontendDuskTestCase
 
         Condition::factory()->state([
             'name' => 'Exam Max Score',
-            'condition_category' => \App\Enums\ConditionCategory::MaxScore->value,
+            'condition_category' => ConditionCategory::MaxScore->value,
             'exam_type_id' => $examType->id,
             'exam_type_category_id' => null,
             'value' => 500,
@@ -80,11 +80,10 @@ class ExamTest extends StudentFrontendDuskTestCase
         }
     }
 
-
     /**
      * A Dusk test example.
      */
-    public function testNormalExam(): void
+    public function test_normal_exam(): void
     {
         User::factory(1)
             ->state(['email' => 'student@codenteq.com'])
@@ -137,8 +136,7 @@ class ExamTest extends StudentFrontendDuskTestCase
         });
     }
 
-
-    public function testCustomExam()
+    public function test_custom_exam()
     {
         User::factory(1)
             ->state(['email' => 'student@codenteq.com'])
@@ -171,7 +169,7 @@ class ExamTest extends StudentFrontendDuskTestCase
             }
         }
 
-        $this->browse(function (Browser $browser) use ($category3){
+        $this->browse(function (Browser $browser) use ($category3) {
             $browser->visit('/auth/login')
                 ->waitFor('#email')
                 ->type('#email', 'student@codenteq.com')

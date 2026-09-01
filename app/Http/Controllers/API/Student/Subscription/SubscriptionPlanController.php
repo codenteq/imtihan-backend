@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Student\Subscription;
 use App\Http\Controllers\API\ApiController;
 use App\Models\SubscriptionPlan;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class SubscriptionPlanController extends ApiController
 {

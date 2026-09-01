@@ -13,7 +13,7 @@ use Tests\AdminFrontendDuskTestCase;
  */
 class LanguageTest extends AdminFrontendDuskTestCase
 {
-    public function testLanguage(): void
+    public function test_language(): void
     {
         User::factory(1)
             ->state(['email' => 'admin@codenteq.com'])

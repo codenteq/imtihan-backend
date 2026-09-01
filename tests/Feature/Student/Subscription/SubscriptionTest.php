@@ -21,7 +21,7 @@ class SubscriptionTest extends TestCase
         Subscription::create([
             'user_id' => $student->id,
             'name' => 'default',
-            'iyzico_id' => 'test-ref-' . uniqid(),
+            'iyzico_id' => 'test-ref-'.uniqid(),
             'iyzico_plan' => 'test-plan-ref',
             'iyzico_status' => 'ACTIVE',
             'iyzico_price' => 99.99,
@@ -44,7 +44,7 @@ class SubscriptionTest extends TestCase
         $subscription = Subscription::create([
             'user_id' => $student->id,
             'name' => 'default',
-            'iyzico_id' => 'test-ref-' . uniqid(),
+            'iyzico_id' => 'test-ref-'.uniqid(),
             'iyzico_plan' => 'test-plan-ref',
             'iyzico_status' => 'ACTIVE',
             'iyzico_price' => 99.99,
@@ -55,7 +55,7 @@ class SubscriptionTest extends TestCase
 
         Sanctum::actingAs($student, ['student.subscription.show']);
 
-        $response = $this->get($this->apiUrl . $subscription->id);
+        $response = $this->get($this->apiUrl.$subscription->id);
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['name' => 'default']);
@@ -89,7 +89,7 @@ class SubscriptionTest extends TestCase
         $subscription = Subscription::create([
             'user_id' => $owner->id,
             'name' => 'default',
-            'iyzico_id' => 'test-ref-' . uniqid(),
+            'iyzico_id' => 'test-ref-'.uniqid(),
             'iyzico_plan' => 'test-plan-ref',
             'iyzico_status' => 'ACTIVE',
             'iyzico_price' => 99.99,
@@ -100,7 +100,7 @@ class SubscriptionTest extends TestCase
 
         Sanctum::actingAs($otherStudent, ['student.subscription.show']);
 
-        $response = $this->get($this->apiUrl . $subscription->id);
+        $response = $this->get($this->apiUrl.$subscription->id);
 
         $response->assertStatus(404);
     }

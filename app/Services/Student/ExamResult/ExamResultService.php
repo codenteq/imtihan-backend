@@ -10,7 +10,6 @@ use App\Models\ExamResult;
 use App\Models\ExamUserAnswer;
 use App\Models\QuestionOption;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ExamResultService
 {

@@ -9,9 +9,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 use Tests\StudentFrontendDuskTestCase;
 
 /**
@@ -19,7 +17,7 @@ use Tests\StudentFrontendDuskTestCase;
  */
 class AccountTest extends StudentFrontendDuskTestCase
 {
-    public function testStudentAccount(): void
+    public function test_student_account(): void
     {
         User::factory(1)
             ->state(['email' => 'student@codenteq.com'])
@@ -50,7 +48,6 @@ class AccountTest extends StudentFrontendDuskTestCase
             'name' => 'Florya',
             'city_id' => $city->id,
         ]);
-
 
         $user = User::factory()
             ->state(['phone' => '905555555555'])
@@ -99,14 +96,14 @@ class AccountTest extends StudentFrontendDuskTestCase
 
             $browser->click('.contact-tab')
                 ->type('input[name="phone"]', $user->phone)
-                ->pressAndWaitFor('Kaydet',3)
+                ->pressAndWaitFor('Kaydet', 3)
                 ->screenshot('account/student/setting.contact');
 
             $browser->click('.password-tab')
                 ->type('input[name="current_password"]', 'password')
                 ->type('input[name="password"]', '12345678')
                 ->type('input[name="password_confirmation"]', '12345678')
-                ->pressAndWaitFor('Kaydet',3)
+                ->pressAndWaitFor('Kaydet', 3)
                 ->screenshot('account/student/setting.password');
 
             $browser->clickLink('Hesap')

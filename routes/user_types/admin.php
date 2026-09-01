@@ -6,9 +6,6 @@ use App\Http\Controllers\API\Admin\Condition\ConditionController;
 use App\Http\Controllers\API\Admin\ExamType\ExamTypeController;
 use App\Http\Controllers\API\Admin\Language\LanguageController;
 use App\Http\Controllers\API\Admin\Lesson\LessonController;
-use App\Http\Controllers\API\Admin\Payment\PaymentCouponController;
-use App\Http\Controllers\API\Admin\Payment\PaymentMethodController;
-use App\Http\Controllers\API\Admin\Payment\PaymentSettingController;
 use App\Http\Controllers\API\Admin\Question\QuestionCatergoryController;
 use App\Http\Controllers\API\Admin\Question\QuestionController;
 use App\Http\Controllers\API\Admin\StaticPage\StaticPageController;
@@ -32,8 +29,6 @@ Route::apiResource('lessons', LessonController::class);
 Route::apiResource('static-pages', StaticPageController::class);
 Route::apiResource('announcements', AnnouncementController::class);
 Route::apiResource('supports', SupportController::class)->only(['index', 'show', 'update', 'destroy']);
-
-
 
 Route::prefix('condition')->group(function () {
     Route::apiResource('conditions', ConditionController::class);
@@ -59,4 +54,3 @@ Route::prefix('subscription')->group(function () {
     Route::get('subscriptions/{subscription}', [SubscriptionController::class, 'show']);
     Route::put('subscriptions/{subscription}/cancel', [SubscriptionController::class, 'cancel']);
 });
-

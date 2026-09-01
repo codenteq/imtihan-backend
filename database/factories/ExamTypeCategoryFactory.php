@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\ExamType;
+use App\Models\ExamTypeCategory;
 use App\Models\QuestionCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ExamTypeCategory>
+ * @extends Factory<ExamTypeCategory>
  */
 class ExamTypeCategoryFactory extends Factory
 {
