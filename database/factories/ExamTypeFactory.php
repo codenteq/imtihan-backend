@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\ExamType;
 use App\Models\Language;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 
 /**
- * @extends Factory<Model>
+ * @extends Factory<ExamType>
  */
 class ExamTypeFactory extends Factory
 {

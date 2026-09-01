@@ -10,7 +10,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_authenticate_using_the_login_screen()
+    public function test_users_can_authenticate_using_the_login_screen(): void
     {
         $user = User::factory()->create();
 
@@ -23,7 +23,7 @@ class AuthenticationTest extends TestCase
         $response->assertSuccessful();
     }
 
-    public function test_users_can_authenticate_using_username()
+    public function test_users_can_authenticate_using_username(): void
     {
         $user = User::factory()->create([
             'username' => 'customuser',
@@ -38,7 +38,22 @@ class AuthenticationTest extends TestCase
         $response->assertSuccessful();
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password()
+    public function test_users_can_authenticate_using_username_with_whitespace(): void
+    {
+        $user = User::factory()->create([
+            'username' => 'customuser',
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => '  customuser  ',
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertSuccessful();
+    }
+
+    public function test_users_can_not_authenticate_with_invalid_password(): void
     {
         $user = User::factory()->create();
 
@@ -48,5 +63,16 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertGuest();
+    }
+
+    public function test_users_can_not_authenticate_with_overlong_login_string(): void
+    {
+        $response = $this->postJson('/login', [
+            'email' => str_repeat('a', 256),
+            'password' => 'password',
+        ]);
+
+        $response->assertUnprocessable();
+        $response->assertJsonValidationErrors(['email']);
     }
 }
